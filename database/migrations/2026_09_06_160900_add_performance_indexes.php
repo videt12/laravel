@@ -13,6 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         $hasIndex = function (string $table, string $indexName): bool {
+            if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+                return \Illuminate\Support\Facades\Schema::hasIndex($table, $indexName);
+            }
+
             return count(DB::select('
                 SELECT INDEX_NAME 
                 FROM information_schema.STATISTICS 
@@ -71,6 +75,10 @@ return new class extends Migration
     public function down(): void
     {
         $hasIndex = function (string $table, string $indexName): bool {
+            if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+                return \Illuminate\Support\Facades\Schema::hasIndex($table, $indexName);
+            }
+
             return count(DB::select('
                 SELECT INDEX_NAME 
                 FROM information_schema.STATISTICS 

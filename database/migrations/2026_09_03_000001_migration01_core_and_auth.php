@@ -266,6 +266,17 @@ return new class extends Migration
 
     private function addIndexIfMissing(string $table, string $indexName, string $column): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            try {
+                if (Schema::hasColumn($table, $column) && !Schema::hasIndex($table, $indexName)) {
+                    Schema::table($table, function (Blueprint $tbl) use ($column, $indexName) {
+                        $tbl->index($column, $indexName);
+                    });
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt
             FROM information_schema.STATISTICS
@@ -274,7 +285,7 @@ return new class extends Migration
               AND INDEX_NAME = ?
         ', [$table, $indexName]);
 
-        if ($exists[0]->cnt == 0 && Schema::hasColumn($table, $column)) {
+        if (($exists[0]->cnt ?? 0) == 0 && Schema::hasColumn($table, $column)) {
             Schema::table($table, function (Blueprint $tbl) use ($column, $indexName) {
                 $tbl->index($column, $indexName);
             });

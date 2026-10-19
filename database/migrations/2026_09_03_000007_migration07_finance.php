@@ -174,8 +174,17 @@ return new class extends Migration
 
     public function down(): void {}
 
-    private function addIndexIfMissing(string $table, string $indexName, string $column): void
+        private function addIndexIfMissing(string $table, string $indexName, string $column): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                if (\Illuminate\Support\Facades\Schema::hasColumn($table, $column) && !\Illuminate\Support\Facades\Schema::hasIndex($table, $indexName)) {
+                    \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->index($column, $indexName));
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?

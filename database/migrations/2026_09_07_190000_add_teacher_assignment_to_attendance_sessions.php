@@ -77,8 +77,17 @@ return new class extends Migration
     |  Helper Methods
     ───────────────────────────────────────────────────────────── */
 
-    private function addIndexIfMissing(string $table, string $indexName, string $column): void
+        private function addIndexIfMissing(string $table, string $indexName, string $column): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                if (\Illuminate\Support\Facades\Schema::hasColumn($table, $column) && !\Illuminate\Support\Facades\Schema::hasIndex($table, $indexName)) {
+                    \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->index($column, $indexName));
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?
@@ -89,8 +98,17 @@ return new class extends Migration
         }
     }
 
-    private function addCompositeUniqueIfMissing(string $table, string $indexName, array $columns): void
+        private function addCompositeUniqueIfMissing(string $table, string $indexName, array $columns): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                if (!\Illuminate\Support\Facades\Schema::hasIndex($table, $indexName)) {
+                    \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->unique($columns, $indexName));
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?
@@ -105,10 +123,19 @@ return new class extends Migration
         }
     }
 
-    private function addForeignKeyIfMissing(
-        string $table, string $fkName, string $column,
-        string $refTable, string $refColumn
-    ): void {
+        private function addForeignKeyIfMissing(string $table, string $fkName, string $column, string $refTable, string $refColumn): void
+    {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                if (\Illuminate\Support\Facades\Schema::hasColumn($table, $column)) {
+                    \Illuminate\Support\Facades\Schema::table($table, function (\Illuminate\Database\Schema\Blueprint $t) use ($fkName, $column, $refTable, $refColumn) {
+                        $t->foreign($column, $fkName)->references($refColumn)->on($refTable)->nullOnDelete();
+                    });
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.KEY_COLUMN_USAGE
             WHERE TABLE_SCHEMA = DATABASE()
@@ -126,8 +153,15 @@ return new class extends Migration
         }
     }
 
-    private function dropIndexIfExists(string $table, string $indexName): void
+        private function dropIndexIfExists(string $table, string $indexName): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->dropIndex($indexName));
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?
@@ -138,8 +172,15 @@ return new class extends Migration
         }
     }
 
-    private function dropForeignIfExists(string $table, string $fkName): void
+        private function dropForeignIfExists(string $table, string $fkName): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->dropForeign($fkName));
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.TABLE_CONSTRAINTS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND CONSTRAINT_NAME = ?

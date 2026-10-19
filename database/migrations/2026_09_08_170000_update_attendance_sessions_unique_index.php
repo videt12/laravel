@@ -45,8 +45,17 @@ return new class extends Migration
         $this->dropIndexIfExists('attendance_sessions', 'as_unique_year_class_date_period_assignment');
     }
 
-    private function addCompositeUniqueIfMissing(string $table, string $indexName, array $columns): void
+        private function addCompositeUniqueIfMissing(string $table, string $indexName, array $columns): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                if (!\Illuminate\Support\Facades\Schema::hasIndex($table, $indexName)) {
+                    \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->unique($columns, $indexName));
+                }
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?
@@ -60,8 +69,15 @@ return new class extends Migration
         }
     }
 
-    private function dropIndexIfExists(string $table, string $indexName): void
+        private function dropIndexIfExists(string $table, string $indexName): void
     {
+        if (\Illuminate\Support\Facades\DB::getDriverName() !== 'mysql') {
+            try {
+                \Illuminate\Support\Facades\Schema::table($table, fn ($tbl) => $tbl->dropIndex($indexName));
+            } catch (\Throwable $e) {}
+            return;
+        }
+
         $exists = DB::select('
             SELECT COUNT(*) as cnt FROM information_schema.STATISTICS
             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?
