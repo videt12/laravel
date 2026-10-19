@@ -7,21 +7,19 @@ ENV AUTORUN_ENABLED=true \
 
 WORKDIR /var/www/html
 
-# Switch to root to configure permissions
 USER root
 
 # Copy application files (including pre-bundled public/build)
-COPY --chown=webuser:webuser . /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
 
 # Setup storage and database directories
 RUN mkdir -p storage/framework/{sessions,views,cache/data} \
     && mkdir -p database \
     && touch database/database.sqlite \
-    && chown -R webuser:webuser /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
-# Switch back to webuser to install dependencies
-USER webuser
+USER www-data
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
@@ -35,5 +33,4 @@ RUN cp .env.example .env \
 
 USER root
 
-# Expose Render default port (8080 is default for serversideup)
 EXPOSE 8080
