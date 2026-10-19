@@ -24,9 +24,11 @@ USER www-data
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Setup Laravel environment and caches
+# Setup Laravel environment, run migrations, seeders and caches
 RUN cp .env.example .env \
     && php artisan key:generate \
+    && php artisan migrate --force \
+    && php artisan db:seed --force \
     && php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
