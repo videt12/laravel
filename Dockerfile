@@ -1,12 +1,3 @@
-FROM node:22-alpine AS node-build
-
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-# ---- PHP + Nginx stage ----
 FROM php:8.3-fpm-alpine
 
 # Install system dependencies
@@ -46,11 +37,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy app files
+# Copy application files (including pre-built public/build)
 COPY . .
-
-# Copy built frontend assets from node stage
-COPY --from=node-build /app/public/build public/build
 
 # Install PHP dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
