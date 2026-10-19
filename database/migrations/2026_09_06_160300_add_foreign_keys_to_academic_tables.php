@@ -13,6 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         $hasConstraint = function (string $table, string $constraint): bool {
+            if (DB::getDriverName() !== 'mysql') {
+                return false;
+            }
             return count(DB::select('
                 SELECT CONSTRAINT_NAME 
                 FROM information_schema.TABLE_CONSTRAINTS 
@@ -108,6 +111,9 @@ return new class extends Migration
     public function down(): void
     {
         $hasConstraint = function (string $table, string $constraint): bool {
+            if (DB::getDriverName() !== 'mysql') {
+                return false;
+            }
             return count(DB::select('
                 SELECT CONSTRAINT_NAME 
                 FROM information_schema.TABLE_CONSTRAINTS 
