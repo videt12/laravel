@@ -21,12 +21,23 @@ return new class extends Migration
         });
 
         if (Schema::hasTable('class_subjects') && Schema::hasColumn('teacher_assignments', 'class_id')) {
-            DB::statement('
-                UPDATE teacher_assignments ta
-                JOIN class_subjects cs ON ta.class_subject_id = cs.id
-                SET ta.class_id = cs.class_id
-                WHERE ta.class_id IS NULL AND ta.class_subject_id IS NOT NULL
-            ');
+            if (DB::getDriverName() === 'mysql') {
+                DB::statement('
+                    UPDATE teacher_assignments ta
+                    JOIN class_subjects cs ON ta.class_subject_id = cs.id
+                    SET ta.class_id = cs.class_id
+                    WHERE ta.class_id IS NULL AND ta.class_subject_id IS NOT NULL
+                ');
+            } else {
+                DB::statement('
+                    UPDATE teacher_assignments
+                    SET class_id = (
+                        SELECT class_id FROM class_subjects
+                        WHERE class_subjects.id = teacher_assignments.class_subject_id
+                    )
+                    WHERE class_id IS NULL AND class_subject_id IS NOT NULL
+                ');
+            }
         }
 
         Schema::table('teacher_assignments', function (Blueprint $table) {
