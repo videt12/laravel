@@ -1,78 +1,39 @@
-FROM php:8.3-fpm-alpine
+FROM serversideup/php:8.3-fpm-nginx
 
-# Install system dependencies
-RUN apk add --no-cache \
-    nginx \
-    sqlite \
-    sqlite-dev \
-    curl \
-    zip \
-    unzip \
-    git \
-    supervisor \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    oniguruma-dev \
-    libxml2-dev \
-    icu-dev
-
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-    pdo \
-    pdo_sqlite \
-    pdo_mysql \
-    mbstring \
-    xml \
-    ctype \
-    tokenizer \
-    bcmath \
-    gd \
-    intl \
-    opcache
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Environment variables
+ENV AUTORUN_ENABLED=true \
+    SSL_MODE=off \
+    PHP_OPCACHE_ENABLE=1
 
 WORKDIR /var/www/html
 
-# Copy application files (including pre-built public/build)
-COPY . .
+# Switch to root to configure permissions
+USER root
 
-# Install PHP dependencies (production only)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Copy application files (including pre-bundled public/build)
+COPY --chown=webuser:webuser . /var/www/html
 
-# Setup Laravel
-RUN cp .env.example .env \
-    && php artisan key:generate \
-    && mkdir -p storage/framework/{sessions,views,cache/data} \
+# Setup storage and database directories
+RUN mkdir -p storage/framework/{sessions,views,cache/data} \
     && mkdir -p database \
     && touch database/database.sqlite \
-    && php artisan migrate --force \
+    && chown -R webuser:webuser /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
+
+# Switch back to webuser to install dependencies
+USER webuser
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Setup Laravel environment and caches
+RUN cp .env.example .env \
+    && php artisan key:generate \
     && php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache database
+USER root
 
-# Nginx config
-COPY docker/nginx.conf /etc/nginx/http.d/default.conf
-
-# Supervisor config
-COPY docker/supervisord.conf /etc/supervisord.conf
-
-# PHP-FPM config
-RUN sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/php-fpm.d/www.conf \
-    && echo "listen.owner = www-data" >> /usr/local/etc/php-fpm.d/www.conf \
-    && echo "listen.group = www-data" >> /usr/local/etc/php-fpm.d/www.conf
-
-# Start script
-COPY docker/start.sh /start.sh
-RUN chmod +x /start.sh
-
-EXPOSE 10000
-
-CMD ["/start.sh"]
+# Expose Render default port (8080 is default for serversideup)
+EXPOSE 8080
