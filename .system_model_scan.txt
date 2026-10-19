@@ -1,0 +1,456 @@
+﻿MODEL: App\Models\Academics\Classroom
+  File: app\Models\Academics\Classroom.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\ClassSubject
+  File: app\Models\Academics\ClassSubject.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\Grade
+  File: app\Models\Academics\Grade.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Academics\SchoolClass
+  File: app\Models\Academics\SchoolClass.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Academics\Section
+  File: app\Models\Academics\Section.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\Subject
+  File: app\Models\Academics\Subject.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Academics\SubjectGroup
+  File: app\Models\Academics\SubjectGroup.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\TeacherAssignment
+  File: app\Models\Academics\TeacherAssignment.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\Timetable
+  File: app\Models\Academics\Timetable.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Academics\TimetableEntry
+  File: app\Models\Academics\TimetableEntry.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Assignments\Assignment
+  File: app\Models\Assignments\Assignment.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Assignments\AssignmentAttachment
+  File: app\Models\Assignments\AssignmentAttachment.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Assignments\AssignmentGrade
+  File: app\Models\Assignments\AssignmentGrade.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Assignments\AssignmentSubmission
+  File: app\Models\Assignments\AssignmentSubmission.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Attendance\AttendanceCorrection
+  File: app\Models\Attendance\AttendanceCorrection.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Attendance\AttendanceSession
+  File: app\Models\Attendance\AttendanceSession.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Attendance\AttendanceStatus
+  File: app\Models\Attendance\AttendanceStatus.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Attendance\StudentAttendance
+  File: app\Models\Attendance\StudentAttendance.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Auth\LoginActivity
+  File: app\Models\Auth\LoginActivity.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Auth\Permission
+  File: app\Models\Auth\Permission.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Auth\Role
+  File: app\Models\Auth\Role.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Auth\RolePermission
+  File: app\Models\Auth\RolePermission.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Auth\User
+  File: app\Models\Auth\User.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Auth\UserRole
+  File: app\Models\Auth\UserRole.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Core\AcademicYear
+  File: app\Models\Core\AcademicYear.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Core\Holiday
+  File: app\Models\Core\Holiday.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Core\School
+  File: app\Models\Core\School.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Core\SchoolBranch
+  File: app\Models\Core\SchoolBranch.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Core\SchoolSetting
+  File: app\Models\Core\SchoolSetting.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Core\SchoolShift
+  File: app\Models\Core\SchoolShift.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Core\SchoolTerm
+  File: app\Models\Core\SchoolTerm.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Core\TimeSlot
+  File: app\Models\Core\TimeSlot.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\Employee
+  File: app\Models\Employees\Employee.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeAttendance
+  File: app\Models\Employees\EmployeeAttendance.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeContact
+  File: app\Models\Employees\EmployeeContact.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeDepartment
+  File: app\Models\Employees\EmployeeDepartment.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeDocument
+  File: app\Models\Employees\EmployeeDocument.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeLeave
+  File: app\Models\Employees\EmployeeLeave.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeePosition
+  File: app\Models\Employees\EmployeePosition.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\EmployeeStatus
+  File: app\Models\Employees\EmployeeStatus.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Employees\LeaveType
+  File: app\Models\Employees\LeaveType.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Enrollment\Enrollment
+  File: app\Models\Enrollment\Enrollment.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Enrollment\EnrollmentDetail
+  File: app\Models\Enrollment\EnrollmentDetail.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Enrollment\StudentPromotion
+  File: app\Models\Enrollment\StudentPromotion.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Enrollment\StudentTransfer
+  File: app\Models\Enrollment\StudentTransfer.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Enrollment\Withdrawal
+  File: app\Models\Enrollment\Withdrawal.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Examination\Exam
+  File: app\Models\Examination\Exam.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\ExamResult
+  File: app\Models\Examination\ExamResult.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\ExamSchedule
+  File: app\Models\Examination\ExamSchedule.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\ExamSubject
+  File: app\Models\Examination\ExamSubject.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\ExamType
+  File: app\Models\Examination\ExamType.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\GradeScale
+  File: app\Models\Examination\GradeScale.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Examination\StudentGrade
+  File: app\Models\Examination\StudentGrade.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\ExpenseCategory
+  File: app\Models\Finance\ExpenseCategory.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\FeeCategory
+  File: app\Models\Finance\FeeCategory.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\FeeStructure
+  File: app\Models\Finance\FeeStructure.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\InvoiceDetail
+  File: app\Models\Finance\InvoiceDetail.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\PaymentMethod
+  File: app\Models\Finance\PaymentMethod.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Finance\SchoolExpense
+  File: app\Models\Finance\SchoolExpense.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Finance\StudentInvoice
+  File: app\Models\Finance\StudentInvoice.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Finance\StudentPayment
+  File: app\Models\Finance\StudentPayment.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Library\LibraryBook
+  File: app\Models\Library\LibraryBook.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Library\LibraryBookCopy
+  File: app\Models\Library\LibraryBookCopy.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Library\LibraryCategory
+  File: app\Models\Library\LibraryCategory.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Library\LibraryIssue
+  File: app\Models\Library\LibraryIssue.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Library\LibraryReturn
+  File: app\Models\Library\LibraryReturn.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\Guardian
+  File: app\Models\Students\Guardian.php
+  Table: 
+  PK: id | SoftDeletes: True
+  Relations (0):
+
+MODEL: App\Models\Students\GuardianContact
+  File: app\Models\Students\GuardianContact.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\Student
+  File: app\Models\Students\Student.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\file
+  File: app\Models\Students\StudentAddresse.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentDocument
+  File: app\Models\Students\StudentDocument.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentGuardian
+  File: app\Models\Students\StudentGuardian.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentMedicalRecord
+  File: app\Models\Students\StudentMedicalRecord.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentNote
+  File: app\Models\Students\StudentNote.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentProfile
+  File: app\Models\Students\StudentProfile.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+
+MODEL: App\Models\Students\StudentStatus
+  File: app\Models\Students\StudentStatus.php
+  Table: 
+  PK: id | SoftDeletes: False
+  Relations (0):
+

@@ -1,0 +1,702 @@
+﻿MODEL: App\Models\Academics\Classroom
+  File: app\Models\Academics\Classroom.php
+  Table: classrooms
+  PK: id | SoftDeletes: False
+  Fillables: name, building, capacity
+  Relations (1):
+    - timetable_entries() : hasMany(\App\Models\Academics\TimetableEntry::class, 'classroom_id')
+
+MODEL: App\Models\Academics\ClassSubject
+  File: app\Models\Academics\ClassSubject.php
+  Table: class_subjects
+  PK: id | SoftDeletes: False
+  Fillables: class_id, subject_id
+  Relations (3):
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - subject() : belongsTo(\App\Models\Academics\Subject::class, 'subject_id')
+    - teacher_assignments() : hasMany(\App\Models\Academics\TeacherAssignment::class, 'class_subject_id')
+
+MODEL: App\Models\Academics\Grade
+  File: app\Models\Academics\Grade.php
+  Table: grades
+  PK: id | SoftDeletes: True
+  Fillables: name, level
+  Relations (1):
+    - classes() : hasMany(\App\Models\Academics\SchoolClass::class, 'grade_id')
+
+MODEL: App\Models\Academics\SchoolClass
+  File: app\Models\Academics\SchoolClass.php
+  Table: school_classes
+  PK: id | SoftDeletes: True
+  Fillables: grade_id, section_id, academic_year_id, capacity
+  Relations (6):
+    - grade() : belongsTo(\App\Models\Academics\Grade::class, 'grade_id')
+    - section() : belongsTo(\App\Models\Academics\Section::class, 'section_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - class_subjects() : hasMany(\App\Models\Academics\ClassSubject::class, 'class_id')
+    - timetables() : hasMany(\App\Models\Academics\Timetable::class, 'class_id')
+    - students() : hasMany(\App\Models\Students\Student::class, 'school_class_id')
+
+MODEL: App\Models\Academics\Section
+  File: app\Models\Academics\Section.php
+  Table: sections
+  PK: id | SoftDeletes: False
+  Fillables: name, capacity
+  Relations (1):
+    - classes() : hasMany(\App\Models\Academics\SchoolClass::class, 'section_id')
+
+MODEL: App\Models\Academics\Subject
+  File: app\Models\Academics\Subject.php
+  Table: subjects
+  PK: id | SoftDeletes: True
+  Fillables: name, code, type
+  Relations (2):
+    - class_subjects() : hasMany(\App\Models\Academics\ClassSubject::class, 'subject_id')
+    - timetable_entries() : hasMany(\App\Models\Academics\TimetableEntry::class, 'subject_id')
+
+MODEL: App\Models\Academics\SubjectGroup
+  File: app\Models\Academics\SubjectGroup.php
+  Table: subject_groups
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (0):
+
+MODEL: App\Models\Academics\TeacherAssignment
+  File: app\Models\Academics\TeacherAssignment.php
+  Table: teacher_assignments
+  PK: id | SoftDeletes: False
+  Fillables: employee_id, class_subject_id, academic_year_id
+  Relations (2):
+    - class_subject() : belongsTo(\App\Models\Academics\ClassSubject::class, 'class_subject_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+
+MODEL: App\Models\Academics\Timetable
+  File: app\Models\Academics\Timetable.php
+  Table: timetables
+  PK: id | SoftDeletes: False
+  Fillables: class_id, academic_year_id, school_term_id
+  Relations (4):
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - school_term() : belongsTo(\App\Models\Core\SchoolTerm::class, 'school_term_id')
+    - timetable_entries() : hasMany(\App\Models\Academics\TimetableEntry::class, 'timetable_id')
+
+MODEL: App\Models\Academics\TimetableEntry
+  File: app\Models\Academics\TimetableEntry.php
+  Table: timetable_entries
+  PK: id | SoftDeletes: False
+  Fillables: timetable_id, time_slot_id, day_of_week, subject_id, teacher_id, classroom_id
+  Relations (5):
+    - timetable() : belongsTo(\App\Models\Academics\Timetable::class, 'timetable_id')
+    - time_slot() : belongsTo(\App\Models\Core\TimeSlot::class, 'time_slot_id')
+    - subject() : belongsTo(\App\Models\Academics\Subject::class, 'subject_id')
+    - classroom() : belongsTo(\App\Models\Academics\Classroom::class, 'classroom_id')
+    - teacher() : belongsTo(\App\Models\Employees\Employee::class, 'teacher_id')
+
+MODEL: App\Models\Assignments\Assignment
+  File: app\Models\Assignments\Assignment.php
+  Table: assignments
+  PK: id | SoftDeletes: True
+  Fillables: class_id, section_id, subject_id, teacher_id, title, description, due_date, total_marks
+  Relations (6):
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - section() : belongsTo(\App\Models\Academics\Section::class, 'section_id')
+    - subject() : belongsTo(\App\Models\Academics\Subject::class, 'subject_id')
+    - teacher() : belongsTo(\App\Models\Employees\Employee::class, 'teacher_id')
+    - assignment_attachments() : hasMany(\App\Models\Assignments\AssignmentAttachment::class, 'assignment_id')
+    - assignment_submissions() : hasMany(\App\Models\Assignments\AssignmentSubmission::class, 'assignment_id')
+
+MODEL: App\Models\Assignments\AssignmentAttachment
+  File: app\Models\Assignments\AssignmentAttachment.php
+  Table: assignment_attachments
+  PK: id | SoftDeletes: False
+  Fillables: assignment_id, file_name, file_path
+  Relations (1):
+    - assignment() : belongsTo(\App\Models\Assignments\Assignment::class, 'assignment_id')
+
+MODEL: App\Models\Assignments\AssignmentGrade
+  File: app\Models\Assignments\AssignmentGrade.php
+  Table: assignment_grades
+  PK: id | SoftDeletes: False
+  Fillables: assignment_submission_id, marks_obtained, grade, feedback, graded_by
+  Relations (2):
+    - assignment_submission() : belongsTo(\App\Models\Assignments\AssignmentSubmission::class, 'assignment_submission_id')
+    - gradedBy() : belongsTo(\App\Models\Auth\User::class, 'graded_by')
+
+MODEL: App\Models\Assignments\AssignmentSubmission
+  File: app\Models\Assignments\AssignmentSubmission.php
+  Table: assignment_submissions
+  PK: id | SoftDeletes: True
+  Fillables: assignment_id, student_id, submission_date, status, remarks
+  Relations (3):
+    - assignment() : belongsTo(\App\Models\Assignments\Assignment::class, 'assignment_id')
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - assignmentGrade() : hasOne(\App\Models\Assignments\AssignmentGrade::class, 'assignment_submission_id')
+
+MODEL: App\Models\Attendance\AttendanceCorrection
+  File: app\Models\Attendance\AttendanceCorrection.php
+  Table: attendance_corrections
+  PK: id | SoftDeletes: False
+  Fillables: student_attendance_id, old_status_id, new_status_id, reason, requested_by, approved_by, status
+  Relations (5):
+    - student_attendance() : belongsTo(\App\Models\Attendance\StudentAttendance::class, 'student_attendance_id')
+    - oldStatus() : belongsTo(\App\Models\Attendance\AttendanceStatus::class, 'old_status_id')
+    - newStatus() : belongsTo(\App\Models\Attendance\AttendanceStatus::class, 'new_status_id')
+    - requestedBy() : belongsTo(\App\Models\Auth\User::class, 'requested_by')
+    - approvedBy() : belongsTo(\App\Models\Auth\User::class, 'approved_by')
+
+MODEL: App\Models\Attendance\AttendanceSession
+  File: app\Models\Attendance\AttendanceSession.php
+  Table: attendance_sessions
+  PK: id | SoftDeletes: True
+  Fillables: academic_year_id, class_id, section_id, attendance_date, period, recorded_by, status
+  Relations (6):
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - schoolClass() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - section() : belongsTo(\App\Models\Academics\Section::class, 'section_id')
+    - recordedBy() : belongsTo(\App\Models\Auth\User::class, 'recorded_by')
+    - student_attendances() : hasMany(\App\Models\Attendance\StudentAttendance::class, 'attendance_session_id')
+
+MODEL: App\Models\Attendance\AttendanceStatus
+  File: app\Models\Attendance\AttendanceStatus.php
+  Table: attendance_statuses
+  PK: id | SoftDeletes: False
+  Fillables: name, code, description
+  Relations (3):
+    - student_attendances() : hasMany(\App\Models\Attendance\StudentAttendance::class, 'attendance_status_id')
+    - old_attendance_corrections() : hasMany(\App\Models\Attendance\AttendanceCorrection::class, 'old_status_id')
+    - new_attendance_corrections() : hasMany(\App\Models\Attendance\AttendanceCorrection::class, 'new_status_id')
+
+MODEL: App\Models\Attendance\StudentAttendance
+  File: app\Models\Attendance\StudentAttendance.php
+  Table: student_attendances
+  PK: id | SoftDeletes: False
+  Fillables: attendance_session_id, student_id, attendance_status_id, remarks
+  Relations (4):
+    - attendance_session() : belongsTo(\App\Models\Attendance\AttendanceSession::class, 'attendance_session_id')
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - attendance_status() : belongsTo(\App\Models\Attendance\AttendanceStatus::class, 'attendance_status_id')
+    - attendance_corrections() : hasMany(\App\Models\Attendance\AttendanceCorrection::class, 'student_attendance_id')
+
+MODEL: App\Models\Auth\LoginActivity
+  File: app\Models\Auth\LoginActivity.php
+  Table: login_activities
+  PK: id | SoftDeletes: False
+  Fillables: user_id, ip_address, user_agent, login_time
+  Relations (1):
+    - user() : belongsTo(\App\Models\Auth\User::class, 'user_id')
+
+MODEL: App\Models\Auth\Permission
+  File: app\Models\Auth\Permission.php
+  Table: permissions
+  PK: id | SoftDeletes: False
+  Fillables: name, slug
+  Relations (1):
+    - role_permissions() : hasMany(\App\Models\Auth\RolePermission::class, 'permission_id')
+
+MODEL: App\Models\Auth\Role
+  File: app\Models\Auth\Role.php
+  Table: roles
+  PK: id | SoftDeletes: False
+  Fillables: name, slug
+  Relations (2):
+    - role_permissions() : hasMany(\App\Models\Auth\RolePermission::class, 'role_id')
+    - user_roles() : hasMany(\App\Models\Auth\UserRole::class, 'role_id')
+
+MODEL: App\Models\Auth\RolePermission
+  File: app\Models\Auth\RolePermission.php
+  Table: role_permissions
+  PK: id | SoftDeletes: False
+  Fillables: role_id, permission_id
+  Relations (2):
+    - role() : belongsTo(\App\Models\Auth\Role::class, 'role_id')
+    - permission() : belongsTo(\App\Models\Auth\Permission::class, 'permission_id')
+
+MODEL: App\Models\Auth\User
+  File: app\Models\Auth\User.php
+  Table: users
+  PK: id | SoftDeletes: True
+  Fillables: name, email, email_verified_at, password, remember_token, status
+  Relations (2):
+    - user_roles() : hasMany(\App\Models\Auth\UserRole::class, 'user_id')
+    - login_activities() : hasMany(\App\Models\Auth\LoginActivity::class, 'user_id')
+
+MODEL: App\Models\Auth\UserRole
+  File: app\Models\Auth\UserRole.php
+  Table: user_roles
+  PK: id | SoftDeletes: False
+  Fillables: user_id, role_id
+  Relations (2):
+    - user() : belongsTo(\App\Models\Auth\User::class, 'user_id')
+    - role() : belongsTo(\App\Models\Auth\Role::class, 'role_id')
+
+MODEL: App\Models\Core\AcademicYear
+  File: app\Models\Core\AcademicYear.php
+  Table: academic_years
+  PK: id | SoftDeletes: True
+  Fillables: name, start_date, end_date, is_active
+  Relations (5):
+    - school_terms() : hasMany(\App\Models\Core\SchoolTerm::class, 'academic_year_id')
+    - holidays() : hasMany(\App\Models\Core\Holiday::class, 'academic_year_id')
+    - classes() : hasMany(\App\Models\Academics\SchoolClass::class, 'academic_year_id')
+    - teacher_assignments() : hasMany(\App\Models\Academics\TeacherAssignment::class, 'academic_year_id')
+    - timetables() : hasMany(\App\Models\Academics\Timetable::class, 'academic_year_id')
+
+MODEL: App\Models\Core\Holiday
+  File: app\Models\Core\Holiday.php
+  Table: holidays
+  PK: id | SoftDeletes: False
+  Fillables: academic_year_id, name, start_date, end_date
+  Relations (1):
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+
+MODEL: App\Models\Core\School
+  File: app\Models\Core\School.php
+  Table: schools
+  PK: id | SoftDeletes: True
+  Fillables: name, address, phone, email, website, logo_path, status
+  Relations (2):
+    - school_branches() : hasMany(\App\Models\Core\SchoolBranch::class, 'school_id')
+    - school_settings() : hasMany(\App\Models\Core\SchoolSetting::class, 'school_id')
+
+MODEL: App\Models\Core\SchoolBranch
+  File: app\Models\Core\SchoolBranch.php
+  Table: school_branches
+  PK: id | SoftDeletes: True
+  Fillables: school_id, name, address, contact_number, status
+  Relations (1):
+    - school() : belongsTo(\App\Models\Core\School::class, 'school_id')
+
+MODEL: App\Models\Core\SchoolSetting
+  File: app\Models\Core\SchoolSetting.php
+  Table: school_settings
+  PK: id | SoftDeletes: False
+  Fillables: school_id, setting_key, setting_value
+  Relations (1):
+    - school() : belongsTo(\App\Models\Core\School::class, 'school_id')
+
+MODEL: App\Models\Core\SchoolShift
+  File: app\Models\Core\SchoolShift.php
+  Table: school_shifts
+  PK: id | SoftDeletes: False
+  Fillables: name, start_time, end_time
+  Relations (1):
+    - time_slots() : hasMany(\App\Models\Core\TimeSlot::class, 'school_shift_id')
+
+MODEL: App\Models\Core\SchoolTerm
+  File: app\Models\Core\SchoolTerm.php
+  Table: school_terms
+  PK: id | SoftDeletes: False
+  Fillables: academic_year_id, name, start_date, end_date
+  Relations (2):
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - timetables() : hasMany(\App\Models\Academics\Timetable::class, 'school_term_id')
+
+MODEL: App\Models\Core\TimeSlot
+  File: app\Models\Core\TimeSlot.php
+  Table: time_slots
+  PK: id | SoftDeletes: False
+  Fillables: school_shift_id, start_time, end_time, is_break
+  Relations (2):
+    - school_shift() : belongsTo(\App\Models\Core\SchoolShift::class, 'school_shift_id')
+    - timetable_entries() : hasMany(\App\Models\Academics\TimetableEntry::class, 'time_slot_id')
+
+MODEL: App\Models\Employees\Employee
+  File: app\Models\Employees\Employee.php
+  Table: employees
+  PK: id | SoftDeletes: True
+  Fillables: user_id, employee_department_id, employee_position_id, employee_status_id, employee_code, date_of_joining, date_of_birth, gender, blood_group, basic_salary
+  Relations (8):
+    - user() : belongsTo(\App\Models\Auth\User::class, 'user_id')
+    - employee_department() : belongsTo(\App\Models\Employees\EmployeeDepartment::class, 'employee_department_id')
+    - employee_position() : belongsTo(\App\Models\Employees\EmployeePosition::class, 'employee_position_id')
+    - employee_status() : belongsTo(\App\Models\Employees\EmployeeStatus::class, 'employee_status_id')
+    - employeeContact() : hasOne(\App\Models\Employees\EmployeeContact::class, 'employee_id')
+    - employee_documents() : hasMany(\App\Models\Employees\EmployeeDocument::class, 'employee_id')
+    - employee_leaves() : hasMany(\App\Models\Employees\EmployeeLeave::class, 'employee_id')
+    - employee_attendances() : hasMany(\App\Models\Employees\EmployeeAttendance::class, 'employee_id')
+
+MODEL: App\Models\Employees\EmployeeAttendance
+  File: app\Models\Employees\EmployeeAttendance.php
+  Table: employee_attendances
+  PK: id | SoftDeletes: False
+  Fillables: employee_id, attendance_date, status, in_time, out_time, remarks
+  Relations (1):
+    - employee() : belongsTo(\App\Models\Employees\Employee::class, 'employee_id')
+
+MODEL: App\Models\Employees\EmployeeContact
+  File: app\Models\Employees\EmployeeContact.php
+  Table: employee_contacts
+  PK: id | SoftDeletes: False
+  Fillables: employee_id, phone, emergency_phone, email, current_address, permanent_address
+  Relations (1):
+    - employee() : belongsTo(\App\Models\Employees\Employee::class, 'employee_id')
+
+MODEL: App\Models\Employees\EmployeeDepartment
+  File: app\Models\Employees\EmployeeDepartment.php
+  Table: employee_departments
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - employees() : hasMany(\App\Models\Employees\Employee::class, 'employee_department_id')
+
+MODEL: App\Models\Employees\EmployeeDocument
+  File: app\Models\Employees\EmployeeDocument.php
+  Table: employee_documents
+  PK: id | SoftDeletes: False
+  Fillables: employee_id, document_type, document_path
+  Relations (1):
+    - employee() : belongsTo(\App\Models\Employees\Employee::class, 'employee_id')
+
+MODEL: App\Models\Employees\EmployeeLeave
+  File: app\Models\Employees\EmployeeLeave.php
+  Table: employee_leaves
+  PK: id | SoftDeletes: False
+  Fillables: employee_id, leave_type_id, start_date, end_date, reason, status, approved_by
+  Relations (3):
+    - employee() : belongsTo(\App\Models\Employees\Employee::class, 'employee_id')
+    - leave_type() : belongsTo(\App\Models\Employees\LeaveType::class, 'leave_type_id')
+    - approvedBy() : belongsTo(\App\Models\Auth\User::class, 'approved_by')
+
+MODEL: App\Models\Employees\EmployeePosition
+  File: app\Models\Employees\EmployeePosition.php
+  Table: employee_positions
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - employees() : hasMany(\App\Models\Employees\Employee::class, 'employee_position_id')
+
+MODEL: App\Models\Employees\EmployeeStatus
+  File: app\Models\Employees\EmployeeStatus.php
+  Table: employee_statuses
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - employees() : hasMany(\App\Models\Employees\Employee::class, 'employee_status_id')
+
+MODEL: App\Models\Employees\LeaveType
+  File: app\Models\Employees\LeaveType.php
+  Table: leave_types
+  PK: id | SoftDeletes: False
+  Fillables: name, description, days_allowed
+  Relations (1):
+    - employee_leaves() : hasMany(\App\Models\Employees\EmployeeLeave::class, 'leave_type_id')
+
+MODEL: App\Models\Enrollment\Enrollment
+  File: app\Models\Enrollment\Enrollment.php
+  Table: enrollments
+  PK: id | SoftDeletes: True
+  Fillables: student_id, academic_year_id, enrollment_date, status
+  Relations (3):
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - enrollmentDetail() : hasOne(\App\Models\Enrollment\EnrollmentDetail::class, 'enrollment_id')
+
+MODEL: App\Models\Enrollment\EnrollmentDetail
+  File: app\Models\Enrollment\EnrollmentDetail.php
+  Table: enrollment_details
+  PK: id | SoftDeletes: False
+  Fillables: enrollment_id, class_id, section_id, roll_number
+  Relations (3):
+    - enrollment() : belongsTo(\App\Models\Enrollment\Enrollment::class, 'enrollment_id')
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - section() : belongsTo(\App\Models\Academics\Section::class, 'section_id')
+
+MODEL: App\Models\Enrollment\StudentPromotion
+  File: app\Models\Enrollment\StudentPromotion.php
+  Table: student_promotions
+  PK: id | SoftDeletes: False
+  Fillables: student_id, from_academic_year_id, to_academic_year_id, from_class_id, to_class_id, promotion_date, status
+  Relations (5):
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - from_academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'from_academic_year_id')
+    - to_academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'to_academic_year_id')
+    - from_class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'from_class_id')
+    - to_class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'to_class_id')
+
+MODEL: App\Models\Enrollment\StudentTransfer
+  File: app\Models\Enrollment\StudentTransfer.php
+  Table: student_transfers
+  PK: id | SoftDeletes: False
+  Fillables: student_id, from_school_id, to_school_id, transfer_date, reason, status
+  Relations (3):
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - from_school() : belongsTo(\App\Models\Core\School::class, 'from_school_id')
+    - to_school() : belongsTo(\App\Models\Core\School::class, 'to_school_id')
+
+MODEL: App\Models\Enrollment\Withdrawal
+  File: app\Models\Enrollment\Withdrawal.php
+  Table: withdrawals
+  PK: id | SoftDeletes: True
+  Fillables: student_id, withdrawal_date, reason, status
+  Relations (1):
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+
+MODEL: App\Models\Examination\Exam
+  File: app\Models\Examination\Exam.php
+  Table: exams
+  PK: id | SoftDeletes: False
+  Fillables: exam_type_id, academic_year_id, school_term_id, name, start_date, end_date
+  Relations (5):
+    - exam_type() : belongsTo(\App\Models\Examination\ExamType::class, 'exam_type_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - school_term() : belongsTo(\App\Models\Core\SchoolTerm::class, 'school_term_id')
+    - exam_schedules() : hasMany(\App\Models\Examination\ExamSchedule::class, 'exam_id')
+    - student_grades() : hasMany(\App\Models\Examination\StudentGrade::class, 'exam_id')
+
+MODEL: App\Models\Examination\ExamResult
+  File: app\Models\Examination\ExamResult.php
+  Table: exam_results
+  PK: id | SoftDeletes: False
+  Fillables: exam_subject_id, student_id, marks_obtained, grade, remarks
+  Relations (2):
+    - exam_subject() : belongsTo(\App\Models\Examination\ExamSubject::class, 'exam_subject_id')
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+
+MODEL: App\Models\Examination\ExamSchedule
+  File: app\Models\Examination\ExamSchedule.php
+  Table: exam_schedules
+  PK: id | SoftDeletes: False
+  Fillables: exam_id, class_id, section_id
+  Relations (4):
+    - exam() : belongsTo(\App\Models\Examination\Exam::class, 'exam_id')
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - section() : belongsTo(\App\Models\Academics\Section::class, 'section_id')
+    - exam_subjects() : hasMany(\App\Models\Examination\ExamSubject::class, 'exam_schedule_id')
+
+MODEL: App\Models\Examination\ExamSubject
+  File: app\Models\Examination\ExamSubject.php
+  Table: exam_subjects
+  PK: id | SoftDeletes: False
+  Fillables: exam_schedule_id, subject_id, exam_date, start_time, end_time, max_marks, pass_marks
+  Relations (3):
+    - exam_schedule() : belongsTo(\App\Models\Examination\ExamSchedule::class, 'exam_schedule_id')
+    - subject() : belongsTo(\App\Models\Academics\Subject::class, 'subject_id')
+    - exam_results() : hasMany(\App\Models\Examination\ExamResult::class, 'exam_subject_id')
+
+MODEL: App\Models\Examination\ExamType
+  File: app\Models\Examination\ExamType.php
+  Table: exam_types
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - exams() : hasMany(\App\Models\Examination\Exam::class, 'exam_type_id')
+
+MODEL: App\Models\Examination\GradeScale
+  File: app\Models\Examination\GradeScale.php
+  Table: grade_scales
+  PK: id | SoftDeletes: False
+  Fillables: name, min_percentage, max_percentage, grade, gpa_point
+  Relations (0):
+
+MODEL: App\Models\Examination\StudentGrade
+  File: app\Models\Examination\StudentGrade.php
+  Table: student_grades
+  PK: id | SoftDeletes: False
+  Fillables: exam_id, student_id, total_marks, percentage, grade, gpa, result_status
+  Relations (2):
+    - exam() : belongsTo(\App\Models\Examination\Exam::class, 'exam_id')
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+
+MODEL: App\Models\Finance\ExpenseCategory
+  File: app\Models\Finance\ExpenseCategory.php
+  Table: expense_categories
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - school_expenses() : hasMany(\App\Models\Finance\SchoolExpense::class, 'expense_category_id')
+
+MODEL: App\Models\Finance\FeeCategory
+  File: app\Models\Finance\FeeCategory.php
+  Table: fee_categories
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (2):
+    - fee_structures() : hasMany(\App\Models\Finance\FeeStructure::class, 'fee_category_id')
+    - invoice_details() : hasMany(\App\Models\Finance\InvoiceDetail::class, 'fee_category_id')
+
+MODEL: App\Models\Finance\FeeStructure
+  File: app\Models\Finance\FeeStructure.php
+  Table: fee_structures
+  PK: id | SoftDeletes: False
+  Fillables: fee_category_id, academic_year_id, class_id, amount
+  Relations (4):
+    - fee_category() : belongsTo(\App\Models\Finance\FeeCategory::class, 'fee_category_id')
+    - academic_year() : belongsTo(\App\Models\Core\AcademicYear::class, 'academic_year_id')
+    - class() : belongsTo(\App\Models\Academics\SchoolClass::class, 'class_id')
+    - student_invoices() : hasMany(\App\Models\Finance\StudentInvoice::class, 'fee_structure_id')
+
+MODEL: App\Models\Finance\InvoiceDetail
+  File: app\Models\Finance\InvoiceDetail.php
+  Table: invoice_details
+  PK: id | SoftDeletes: False
+  Fillables: student_invoice_id, fee_category_id, amount
+  Relations (2):
+    - student_invoice() : belongsTo(\App\Models\Finance\StudentInvoice::class, 'student_invoice_id')
+    - fee_category() : belongsTo(\App\Models\Finance\FeeCategory::class, 'fee_category_id')
+
+MODEL: App\Models\Finance\PaymentMethod
+  File: app\Models\Finance\PaymentMethod.php
+  Table: payment_methods
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - student_payments() : hasMany(\App\Models\Finance\StudentPayment::class, 'payment_method_id')
+
+MODEL: App\Models\Finance\SchoolExpense
+  File: app\Models\Finance\SchoolExpense.php
+  Table: school_expenses
+  PK: id | SoftDeletes: True
+  Fillables: expense_category_id, amount, expense_date, description, receipt_path
+  Relations (1):
+    - expense_category() : belongsTo(\App\Models\Finance\ExpenseCategory::class, 'expense_category_id')
+
+MODEL: App\Models\Finance\StudentInvoice
+  File: app\Models\Finance\StudentInvoice.php
+  Table: student_invoices
+  PK: id | SoftDeletes: True
+  Fillables: student_id, fee_structure_id, total_amount, discount_amount, net_amount, status, due_date
+  Relations (4):
+    - student() : belongsTo(\App\Models\Students\Student::class, 'student_id')
+    - fee_structure() : belongsTo(\App\Models\Finance\FeeStructure::class, 'fee_structure_id')
+    - invoice_details() : hasMany(\App\Models\Finance\InvoiceDetail::class, 'student_invoice_id')
+    - student_payments() : hasMany(\App\Models\Finance\StudentPayment::class, 'student_invoice_id')
+
+MODEL: App\Models\Finance\StudentPayment
+  File: app\Models\Finance\StudentPayment.php
+  Table: student_payments
+  PK: id | SoftDeletes: True
+  Fillables: student_invoice_id, payment_method_id, amount, payment_date, transaction_id
+  Relations (2):
+    - student_invoice() : belongsTo(\App\Models\Finance\StudentInvoice::class, 'student_invoice_id')
+    - payment_method() : belongsTo(\App\Models\Finance\PaymentMethod::class, 'payment_method_id')
+
+MODEL: App\Models\Library\LibraryBook
+  File: app\Models\Library\LibraryBook.php
+  Table: library_books
+  PK: id | SoftDeletes: True
+  Fillables: title, author, publisher, isbn, library_category_id
+  Relations (2):
+    - library_category() : belongsTo(\App\Models\Library\LibraryCategory::class, 'library_category_id')
+    - library_book_copies() : hasMany(\App\Models\Library\LibraryBookCopy::class, 'library_book_id')
+
+MODEL: App\Models\Library\LibraryBookCopy
+  File: app\Models\Library\LibraryBookCopy.php
+  Table: library_book_copies
+  PK: id | SoftDeletes: False
+  Fillables: library_book_id, accession_number, status
+  Relations (2):
+    - library_book() : belongsTo(\App\Models\Library\LibraryBook::class, 'library_book_id')
+    - library_issues() : hasMany(\App\Models\Library\LibraryIssue::class, 'library_book_copy_id')
+
+MODEL: App\Models\Library\LibraryCategory
+  File: app\Models\Library\LibraryCategory.php
+  Table: library_categories
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - library_books() : hasMany(\App\Models\Library\LibraryBook::class, 'library_category_id')
+
+MODEL: App\Models\Library\LibraryIssue
+  File: app\Models\Library\LibraryIssue.php
+  Table: library_issues
+  PK: id | SoftDeletes: False
+  Fillables: library_book_copy_id, user_id, issue_date, due_date
+  Relations (3):
+    - library_book_copy() : belongsTo(\App\Models\Library\LibraryBookCopy::class, 'library_book_copy_id')
+    - user() : belongsTo(\App\Models\Auth\User::class, 'user_id')
+    - libraryReturn() : hasOne(\App\Models\Library\LibraryReturn::class, 'library_issue_id')
+
+MODEL: App\Models\Library\LibraryReturn
+  File: app\Models\Library\LibraryReturn.php
+  Table: library_returns
+  PK: id | SoftDeletes: False
+  Fillables: library_issue_id, return_date, fine_amount
+  Relations (1):
+    - library_issue() : belongsTo(\App\Models\Library\LibraryIssue::class, 'library_issue_id')
+
+MODEL: App\Models\Students\Guardian
+  File: app\Models\Students\Guardian.php
+  Table: guardians
+  PK: id | SoftDeletes: True
+  Fillables: user_id, occupation, income, address
+  Relations (4):
+    - user() : belongsTo(User::class, 'user_id')
+    - students() : belongsToMany(Student::class, 'student_guardians', 'guardian_id', 'student_id' )->using(StudentGuardian::class) ->withPivot(['id', 'relationship']) ->withTimestamps()
+    - studentGuardians() : hasMany(StudentGuardian::class, 'guardian_id')
+    - contacts() : hasMany(GuardianContact::class, 'guardian_id')
+
+MODEL: App\Models\Students\GuardianContact
+  File: app\Models\Students\GuardianContact.php
+  Table: guardian_contacts
+  PK: id | SoftDeletes: False
+  Fillables: guardian_id, phone, email
+  Relations (1):
+    - guardian() : belongsTo(Guardian::class, 'guardian_id')
+
+MODEL: App\Models\Students\Student
+  File: app\Models\Students\Student.php
+  Table: students
+  PK: id | SoftDeletes: False
+  Fillables: school_id, user_id, admission_number, admission_date, enrollment_date, roll_number, student_status_id, student_category_id, academic_year_id, school_class_id, section_id, school_shift_id
+  Relations (0):
+
+MODEL: App\Models\Students\file
+  File: app\Models\Students\StudentAddresse.php
+  Table: student_addresses
+  PK: id | SoftDeletes: False
+  Fillables: student_id, current_address, permanent_address, address_line_1, address_line_2, village, commune, district, province, postal_code
+  Relations (1):
+    - student() : belongsTo(Student::class, 'student_id')
+
+MODEL: App\Models\Students\StudentDocument
+  File: app\Models\Students\StudentDocument.php
+  Table: student_documents
+  PK: id | SoftDeletes: False
+  Fillables: student_id, document_type, document_path
+  Relations (1):
+    - student() : belongsTo(Student::class, 'student_id')
+
+MODEL: App\Models\Students\StudentGuardian
+  File: app\Models\Students\StudentGuardian.php
+  Table: student_guardians
+  PK: id | SoftDeletes: False
+  Fillables: student_id, guardian_id, relationship, is_primary, is_emergency
+  Relations (2):
+    - student() : belongsTo(Student::class, 'student_id')
+    - guardian() : belongsTo(Guardian::class, 'guardian_id')
+
+MODEL: App\Models\Students\StudentMedicalRecord
+  File: app\Models\Students\StudentMedicalRecord.php
+  Table: student_medical_records
+  PK: id | SoftDeletes: False
+  Fillables: student_id, allergies, chronic_diseases, regular_medications
+  Relations (1):
+    - student() : belongsTo(Student::class, 'student_id')
+
+MODEL: App\Models\Students\StudentNote
+  File: app\Models\Students\StudentNote.php
+  Table: student_notes
+  PK: id | SoftDeletes: False
+  Fillables: student_id, note, note_type, note_date, visibility, tags, is_important, follow_up_required, priority, status, created_by
+  Relations (2):
+    - student() : belongsTo(Student::class, 'student_id')
+    - author() : belongsTo(User::class, 'created_by')
+
+MODEL: App\Models\Students\StudentProfile
+  File: app\Models\Students\StudentProfile.php
+  Table: student_profiles
+  PK: id | SoftDeletes: False
+  Fillables: student_id, photo, phone, first_name, last_name, first_name_khmer, last_name_khmer, dob, gender, blood_group, nationality, national_id, previous_school, special_needs, medical_information, notes
+  Relations (1):
+    - student() : belongsTo(Student::class, 'student_id')
+
+MODEL: App\Models\Students\StudentStatus
+  File: app\Models\Students\StudentStatus.php
+  Table: student_statuses
+  PK: id | SoftDeletes: False
+  Fillables: name, description
+  Relations (1):
+    - students() : hasMany(Student::class, 'student_status_id')
+
