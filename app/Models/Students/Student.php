@@ -464,12 +464,18 @@ class Student extends Model
      */
     public static function generateNextAdmissionNumber(): string
     {
-        // Lock the table for reading so concurrent requests queue behind each other.
-        $latest = DB::table('students')
-            ->where('admission_number', 'regexp', '^BPS[0-9]{5}$')
-            ->lockForUpdate()
-            ->orderByRaw('CAST(SUBSTRING(admission_number, 4) AS UNSIGNED) DESC')
-            ->value('admission_number');
+        if (DB::getDriverName() === 'mysql') {
+            $latest = DB::table('students')
+                ->where('admission_number', 'regexp', '^BPS[0-9]{5}$')
+                ->lockForUpdate()
+                ->orderByRaw('CAST(SUBSTRING(admission_number, 4) AS UNSIGNED) DESC')
+                ->value('admission_number');
+        } else {
+            $latest = DB::table('students')
+                ->where('admission_number', 'LIKE', 'BPS%')
+                ->orderByRaw('CAST(SUBSTR(admission_number, 4) AS INTEGER) DESC')
+                ->value('admission_number');
+        }
 
         $nextNumber = $latest
             ? (int) substr($latest, 3) + 1
