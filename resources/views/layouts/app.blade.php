@@ -48,47 +48,47 @@
             --color-brand-900: #78350f;
 
             /* ── Brand Semantic Shortcuts ───────────────────────── */
-            --gold:         var(--color-brand-500);
-            --gold-dark:    var(--color-brand-600);
-            --gold-text:    var(--color-brand-700);
-            --gold-light:   var(--color-brand-100);
-            --gold-subtle:  rgba(245, 158, 11, 0.12);
+            --gold:         #f3b63a;
+            --gold-dark:    #d97706;
+            --gold-text:    #181b20;
+            --gold-light:   #fef3c7;
+            --gold-subtle:  rgba(243, 182, 58, 0.15);
 
-            /* ── កន្លែងកែពណ៌ Sidebar (របារម៉ឺនុយខាងឆ្វេង) ─────────────── */
-            --sidebar-bg:             #ffffff; /* ពណ៌ផ្ទៃ Sidebar ទាំងមូល (ស ស្អាត ស្រួលមើល ទំនើប) */
-            --sidebar-header:         #ffffff; /* ពណ៌ក្បាល Sidebar ខាងលើដែលមាន Logo */
-            --sidebar-border:         #f1f5f9; /* ពណ៌បន្ទាត់ខណ្ឌ Sidebar */
-            --sidebar-text:           #475569; /* ពណ៌អក្សរ Menu ធម្មតា */
-            --sidebar-text-hover:     #92400e; /* ពណ៌អក្សរពេលដាក់ Mouse លើ (Amber) */
-            --sidebar-item-hover:     #fffbeb; /* ពណ៌ផ្ទៃពេលដាក់ Mouse លើ Menu (Amber ស្រាលបំផុត) */
-            --sidebar-active-bg:      #fef3c7; /* ពណ៌ផ្ទៃ Menu ដែលកំពុងជ្រើសរើស (Active - Amber/Gold ស្រាល ទន់ភ្នែក) */
-            --sidebar-active-text:    #92400e; /* ពណ៌អក្សរ Menu ដែលកំពុងជ្រើសរើស (Amber ចាស់ ច្បាស់ល្អ) */
-            --sidebar-section-text:   #94a3b8; /* ពណ៌ចំណងជើងផ្នែក (ដូចជា ការសិក្សា & សិស្ស...) */
+            /* ── កន្លែងកែពណ៌ Sidebar (របារម៉ឺនុយខាងឆ្វេង - Deep Charcoal) ─────────────── */
+            --sidebar-bg:             #181b20; /* ពណ៌ផ្ទៃ Sidebar ទាំងមូល (Deep Charcoal ទំនើប និងមានរបៀប) */
+            --sidebar-header:         #181b20; /* ពណ៌ក្បាល Sidebar ខាងលើដែលមាន Logo */
+            --sidebar-border:         #262a33; /* ពណ៌បន្ទាត់ខណ្ឌ Sidebar */
+            --sidebar-text:           #9ca3af; /* ពណ៌អក្សរ Menu ធម្មតា (Muted Slate) */
+            --sidebar-text-hover:     #ffffff; /* ពណ៌អក្សរពេលដាក់ Mouse លើ */
+            --sidebar-item-hover:     rgba(255, 255, 255, 0.06); /* ពណ៌ផ្ទៃពេលដាក់ Mouse លើ Menu */
+            --sidebar-active-bg:      #f3b63a; /* ពណ៌ផ្ទៃ Menu ដែលកំពុងជ្រើសរើស (Golden-Yellow លេចធ្លោ) */
+            --sidebar-active-text:    #181b20; /* ពណ៌អក្សរ Menu ដែលកំពុងជ្រើសរើស (Dark Charcoal ងាយស្រួលមើល) */
+            --sidebar-section-text:   #64748b; /* ពណ៌ចំណងជើងផ្នែក */
             --sidebar-width:          260px;
             --sidebar-collapsed-width: 68px;
 
             /* ── Topbar & Footer ────────────────────────────────── */
             --topbar-height:  60px;
             --topbar-bg:      #ffffff;
-            --topbar-border:  #e2e8f0;
-            --footer-bg:      #ffffff; /* ពណ៌ផ្ទៃ Footer ខាងក្រោម (ប្ដូរពណ៌កន្លែងនេះ) */
-            --footer-border:  #e2e8f0; /* បន្ទាត់គែមខាងលើ Footer */
+            --topbar-border:  #e5e7eb;
+            --footer-bg:      #ffffff;
+            --footer-border:  #e5e7eb;
 
-            /* ── App Surfaces (ផ្ទៃខាងក្រោយទំព័រ) ──────── */
-            --app-bg:       #f8fafc; /* ផ្ទៃខាងក្រោយទំព័រទាំងមូល (ស្រាល ស្រួលមើល មិនចាំងភ្នែក) */
-            --surface:      #ffffff;
+            /* ── App Surfaces (ផ្ទៃខាងក្រោយទំព័រ - Soft Off-White) ──────── */
+            --app-bg:       #f8f9fa; /* ផ្ទៃខាងក្រោយទំព័រទាំងមូល (Soft Off-White ស្រាល ស្រួលមើល មិនចាំងភ្នែក) */
+            --surface:      #ffffff; /* ពណ៌ផ្ទៃ Card ពណ៌ស */
             --surface-raised: #ffffff;
 
             /* ── កន្លែងកែពណ៌ Form & តារាង (White / ពណ៌ស) ───────── */
             --form-card-bg:        #ffffff; /* ផ្ទៃខាងក្នុង Form និងផ្ទាំងតារាង (Card Body ជាពណ៌ស) */
-            --form-card-header-bg: #ffffff; /* ពណ៌ក្បាល Form និង Header តារាង (Card Header ជាពណ៌ស) */
-            --form-card-border:    #e2e8f0; /* ពណ៌បន្ទាត់គែមជុំវិញ (Border) */
-            --form-input-bg:       #ffffff; /* ពណ៌ផ្ទៃប្រអប់បញ្ចូលទិន្នន័យ និង Filter Bar ជាពណ៌ស */
+            --form-card-header-bg: #ffffff; /* ពណ៌ក្បាល Form និង Header តារាង */
+            --form-card-border:    #e5e7eb; /* ពណ៌បន្ទាត់គែមជុំវិញ (Thin Light-Gray Border) */
+            --form-input-bg:       #ffffff; /* ពណ៌ផ្ទៃប្រអប់បញ្ចូលទិន្នន័យ */
 
             /* ── Borders ────────────────────────────────────────── */
-            --border:       #e2e8f0;
+            --border:       #e5e7eb;
             --border-soft:  #f1f5f9;
-            --border-input: #cbd5e1;
+            --border-input: #d1d5db;
 
             /* ── Text ───────────────────────────────────────────── */
             --text-dark:        #0f172a;
@@ -111,20 +111,20 @@
             --color-info-text:      #0369a1;
             --color-info-border:    #bae6fd;
 
-            /* ── Border Radius ──────────────────────────────────── */
-            --radius-xs:   0px;
-            --radius-sm:   0px;
-            --radius-md:   0px;
-            --radius-lg:   0px;
-            --radius-xl:   0px;
+            /* ── Border Radius (Rounded Corners) ────────────────── */
+            --radius-xs:   4px;
+            --radius-sm:   6px;
+            --radius-md:   10px;
+            --radius-lg:   12px;
+            --radius-xl:   16px;
             --radius-full: 9999px;
 
             /* ── Shadows ────────────────────────────────────────── */
-            --shadow-xs:    0 1px 2px rgba(0,0,0,.04);
-            --shadow-sm:    0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
-            --shadow-md:    0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.04);
-            --shadow-lg:    0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -4px rgba(0,0,0,.04);
-            --shadow-brand: 0 4px 12px rgba(217, 119, 6, .25);
+            --shadow-xs:    0 1px 2px rgba(0,0,0,.03);
+            --shadow-sm:    0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
+            --shadow-md:    0 4px 6px -1px rgba(0,0,0,.06), 0 2px 4px -2px rgba(0,0,0,.03);
+            --shadow-lg:    0 10px 15px -3px rgba(0,0,0,.06), 0 4px 6px -4px rgba(0,0,0,.03);
+            --shadow-brand: 0 4px 12px rgba(243, 182, 58, 0.28);
 
             /* ── Transitions ────────────────────────────────────── */
             --transition-fast: 0.12s ease;
@@ -255,46 +255,46 @@
             font-weight: 400 !important;
             letter-spacing: 0.2px;
             line-height: 1.35;
-            color: #1e40af !important;
+            color: #ffffff !important;
             white-space: nowrap;
         }
 
         .brand-name .text-gold {
-            color: #2563eb !important;
+            color: var(--gold, #f3b63a) !important;
         }
 
         .brand-tagline {
             font-family: var(--font-heading);
             font-size: 0.72rem;
-            color: #2563eb !important;
-            font-weight: 600;
+            color: #9ca3af !important;
+            font-weight: 500;
             letter-spacing: 0.3px;
         }
 
         .sidebar-nav-wrapper {
             scrollbar-width: thin;
-            scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+            scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
         }
 
         .sidebar-nav-wrapper::-webkit-scrollbar {
             width: 4px;
         }
         .sidebar-nav-wrapper::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
         }
 
         .nav-section-header {
-            padding: 1rem 0.85rem 0.35rem;
+            padding: 1.1rem 0.85rem 0.35rem;
             list-style: none;
         }
 
         .nav-section-title {
             font-family: var(--font-heading, 'Siemreap', sans-serif) !important;
             font-weight: 700 !important;
-            font-size: 0.72rem;
-            color: var(--sidebar-section-text, #94a3b8) !important;
-            letter-spacing: 0.04em;
+            font-size: 0.70rem;
+            color: #6b7280 !important;
+            letter-spacing: 0.05em;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -305,16 +305,16 @@
             content: '';
             flex: 1;
             height: 1px;
-            background-color: var(--sidebar-border, #e2e8f0);
-            opacity: 0.8;
+            background-color: #262a33;
+            opacity: 1;
         }
 
         .sidebar-link {
             display: flex;
             align-items: center;
-            padding: 0.58rem 0.8rem;
-            color: var(--sidebar-text);
-            font-size: 0.95rem;
+            padding: 0.55rem 0.8rem;
+            color: var(--sidebar-text, #9ca3af);
+            font-size: 0.92rem;
             font-weight: 500;
             border-radius: 8px;
             text-decoration: none;
@@ -333,64 +333,64 @@
             justify-content: center;
             border-radius: 6px;
             flex-shrink: 0;
-            color: #64748b;
-            background-color: rgba(15, 23, 42, 0.03);
+            color: #9ca3af;
+            background-color: rgba(255, 255, 255, 0.04);
             transition: all 0.15s ease;
         }
 
         .sidebar-link:hover {
-            color: var(--sidebar-text-hover);
-            background-color: var(--sidebar-item-hover);
+            color: #ffffff;
+            background-color: var(--sidebar-item-hover, rgba(255, 255, 255, 0.06));
         }
 
         .sidebar-link:hover .nav-icon {
-            color: #d97706;
-            background-color: #fef3c7;
+            color: var(--gold, #f3b63a);
+            background-color: rgba(243, 182, 58, 0.15);
         }
 
         .sidebar-link:not(.collapsed) {
-            color: #92400e;
+            color: #ffffff;
             font-weight: 600;
         }
 
         .sidebar-link:not(.collapsed) .nav-icon {
-            color: #d97706;
-            background-color: #fef3c7;
+            color: var(--gold, #f3b63a);
+            background-color: rgba(243, 182, 58, 0.15);
         }
 
         .sidebar-link.active {
-            background-color: var(--sidebar-active-bg);
-            color: var(--sidebar-active-text);
-            font-weight: 600;
-            border-color: #fde68a;
-            box-shadow: inset 3px 0 0 #d97706, 0 1px 3px rgba(217, 119, 6, 0.08);
+            background-color: var(--sidebar-active-bg, #f3b63a) !important;
+            color: var(--sidebar-active-text, #181b20) !important;
+            font-weight: 600 !important;
+            border-color: var(--sidebar-active-bg, #f3b63a) !important;
+            box-shadow: 0 2px 8px rgba(243, 182, 58, 0.3) !important;
         }
 
         .sidebar-link.active .nav-icon {
-            color: #b45309;
-            background-color: #fde68a;
+            color: #181b20 !important;
+            background-color: rgba(24, 27, 32, 0.15) !important;
         }
 
         .sidebar-link.active .nav-arrow {
-            color: #92400e;
+            color: #181b20 !important;
         }
 
         .sidebar-link .nav-arrow {
             font-size: 0.8rem;
             transition: transform var(--transition-base);
-            color: #94a3b8;
+            color: #6b7280;
         }
 
         .sidebar-link:not(.collapsed) .nav-arrow {
             transform: rotate(180deg);
-            color: #d97706;
+            color: var(--gold, #f3b63a);
         }
 
         .sub-nav {
             padding-left: 0.65rem;
             margin-top: 2px;
             margin-bottom: 6px;
-            border-left: 2px solid #f1f5f9;
+            border-left: 2px solid rgba(255, 255, 255, 0.08);
             margin-left: 1.35rem;
             display: flex;
             flex-direction: column;
@@ -399,8 +399,8 @@
 
         .sub-link {
             padding: 0.45rem 0.75rem;
-            color: #64748b;
-            font-size: 0.9rem;
+            color: #9ca3af;
+            font-size: 0.88rem;
             font-weight: 500;
             border-radius: 6px;
             text-decoration: none;
@@ -410,40 +410,39 @@
         }
 
         .sub-link:hover {
-            color: #92400e;
-            background-color: #fffbeb;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.06);
             transform: translateX(2px);
         }
 
         .sub-link.active {
-            color: #92400e;
-            font-weight: 600;
-            background-color: #fef3c7;
-            border-left: 2px solid #d97706;
-            border-radius: 0 6px 6px 0;
-            margin-left: -2px;
+            color: #181b20 !important;
+            font-weight: 600 !important;
+            background-color: var(--gold, #f3b63a) !important;
+            border-radius: 6px !important;
+            margin-left: 0 !important;
         }
 
         .sidebar-user-footer {
-            background-color: #f8fafc;
-            border-top: 1px solid var(--sidebar-border, #e2e8f0) !important;
+            background-color: #14171c;
+            border-top: 1px solid #262a33 !important;
         }
 
         .user-avatar-sm {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: #0f172a;
+            background: #2a2f38;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #facc15;
+            color: var(--gold, #f3b63a);
             font-weight: 700;
             font-size: 0.8rem;
             flex-shrink: 0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            border: 2px solid #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .user-avatar-sm img {
@@ -456,14 +455,14 @@
         .user-name {
             font-size: 0.85rem;
             line-height: 1.25;
-            color: #0f172a;
+            color: #f3f4f6 !important;
             font-weight: 600;
         }
 
         .user-role {
             font-size: 0.72rem;
             line-height: 1.2;
-            color: #64748b;
+            color: #9ca3af !important;
         }
 
         .status-indicator-dot {
@@ -471,7 +470,7 @@
             height: 8px;
             border-radius: 50%;
             background-color: #10b981;
-            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
             flex-shrink: 0;
         }
 
@@ -821,31 +820,38 @@
         /* ─────────────────────────────────────────────────────────────
            8. REUSABLE CARDS & TABLES
         ───────────────────────────────────────────────────────────── */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid var(--border, #e5e7eb) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
         .toolbar-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px !important;
-            padding: 0.875rem 1.125rem;
-            box-shadow: var(--shadow-xs);
+            background: var(--surface, #ffffff);
+            border: 1px solid var(--border, #e5e7eb);
+            border-radius: 12px !important;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
         }
 
         .filter-chip {
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            background: #f1f5f9;
-            border: 1px solid var(--border);
+            background: #f8fafc;
+            border: 1px solid var(--border, #e5e7eb);
             border-radius: 20px;
-            padding: 0.15rem 0.65rem;
-            font-size: 0.725rem;
-            color: var(--text-dark);
+            padding: 0.2rem 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-dark, #0f172a);
         }
 
         .data-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px !important;
-            box-shadow: var(--shadow-xs);
+            background: var(--surface, #ffffff);
+            border: 1px solid var(--border, #e5e7eb);
+            border-radius: 12px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
             overflow: hidden;
         }
 
@@ -853,19 +859,20 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.875rem 1.25rem;
-            border-bottom: 1px solid var(--border-soft);
-            background: var(--surface);
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border, #e5e7eb);
+            background: #ffffff;
         }
 
         .data-card-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.75rem 1.25rem;
-            border-top: 1px solid var(--border-soft);
+            padding: 0.85rem 1.25rem;
+            border-top: 1px solid var(--border, #e5e7eb);
             flex-wrap: wrap;
             gap: 0.5rem;
+            background: #ffffff;
         }
 
         .data-table {
@@ -875,29 +882,34 @@
         }
 
         .data-table thead th, .table thead th {
-            background: #fafafa;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 700;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 0.82rem;
+            font-weight: 600;
             letter-spacing: 0.3px;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border, #e5e7eb);
             white-space: nowrap;
         }
 
         .data-table tbody td, .table tbody td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid var(--border-soft);
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
             vertical-align: middle;
-            font-size: 0.9375rem;
+            font-size: 0.90rem;
         }
 
         .data-table tbody tr:last-child td, .table tbody tr:last-child td {
             border-bottom: none;
         }
 
-        .data-table tbody tr:hover {
-            background-color: #f8fafc;
+        /* Selected row and table hover: Pale Yellow */
+        .data-table tbody tr:hover,
+        .data-table tbody tr.selected,
+        .data-table tbody tr.table-row-selected,
+        .table tbody tr:hover,
+        .table-hover tbody tr:hover {
+            background-color: #fefce8 !important; /* Pale Yellow selected/hover row */
         }
 
         .student-avatar {
@@ -908,33 +920,32 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             flex-shrink: 0;
-            background: var(--gold-light);
-            color: var(--gold-dark);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .student-name-link:hover {
-            color: var(--gold-dark) !important;
+            color: #d97706 !important;
         }
 
         /* ─────────────────────────────────────────────────────────────
            9. BADGES & LABELS
         ───────────────────────────────────────────────────────────── */
         .adm-badge {
-            background: #f1f5f9;
-            border: 1px solid var(--border);
-            padding: 0.2em 0.55em;
-            border-radius: 5px;
+            background: #f8fafc;
+            border: 1px solid var(--border, #e5e7eb);
+            padding: 0.22em 0.6em;
+            border-radius: 6px;
             font-size: 0.78rem;
             color: #334155;
             font-family: monospace;
         }
 
         .badge {
-            font-size: 0.8125rem;
+            font-size: 0.78rem;
             line-height: 1.4;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .badge-pill {
@@ -942,8 +953,8 @@
             align-items: center;
             padding: 0.28em 0.75em;
             border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 600;
+            font-size: 0.78rem;
+            font-weight: 500;
         }
 
         .badge-gender-male   { background: #e0f2fe; color: #0369a1; }
@@ -962,23 +973,27 @@
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 0.28em 0.8em;
+            gap: 0.35rem;
+            padding: 0.25em 0.75em;
             border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 600;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            color: #334155;
         }
 
-        .status-active, .status-approved, .status-paid { background: #dcfce7; color: #15803d; }
-        .status-inactive, .status-unpaid, .status-rejected { background: #fee2e2; color: #b91c1c; }
-        .status-pending, .status-warning { background: #fef9c3; color: #a16207; }
-        .status-unknown { background: #f1f5f9; color: #64748b; }
+        .status-active, .status-approved, .status-paid { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+        .status-inactive, .status-unpaid, .status-rejected { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+        .status-pending, .status-warning { background: #fef9c3; color: #a16207; border-color: #fef08a; }
+        .status-unknown { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
 
         .count-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             background: #f1f5f9;
-            color: var(--text-muted);
+            color: var(--text-muted, #64748b);
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 600;
@@ -990,8 +1005,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--gold-light);
-            color: var(--gold-dark);
+            background: var(--gold-light, #fef3c7);
+            color: var(--gold-text, #181b20);
             border-radius: 20px;
             font-size: 0.65rem;
             font-weight: 700;
@@ -1004,66 +1019,73 @@
            10. BUTTONS
         ───────────────────────────────────────────────────────────── */
         .btn-primary {
-            background-color: var(--gold) !important;
-            border-color: var(--gold) !important;
-            color: #ffffff !important;
-            transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base) !important;
+            background-color: var(--gold, #f3b63a) !important;
+            border-color: var(--gold, #f3b63a) !important;
+            color: #181b20 !important;
+            font-weight: 600 !important;
+            border-radius: 10px !important;
+            box-shadow: 0 1px 3px rgba(243, 182, 58, 0.25) !important;
+            transition: all var(--transition-base) !important;
         }
         .btn-primary:hover, .btn-primary:focus {
-            background-color: var(--gold-dark) !important;
-            border-color: var(--gold-dark) !important;
-            color: #ffffff !important;
-            box-shadow: var(--shadow-brand) !important;
+            background-color: #e0a32e !important;
+            border-color: #e0a32e !important;
+            color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(243, 182, 58, 0.35) !important;
+            transform: translateY(-1px);
         }
         .btn-primary:active {
-            background-color: var(--gold-dark) !important;
-            border-color: var(--gold-dark) !important;
-            color: #ffffff !important;
             transform: scale(0.98);
         }
 
         /* Global .btn-gold utility — used across many view files */
         .btn-gold {
-            background-color: var(--gold) !important;
-            border-color: var(--gold) !important;
-            color: #ffffff !important;
-            transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base) !important;
+            background-color: var(--gold, #f3b63a) !important;
+            border-color: var(--gold, #f3b63a) !important;
+            color: #181b20 !important;
+            font-weight: 600 !important;
+            border-radius: 10px !important;
+            box-shadow: 0 1px 3px rgba(243, 182, 58, 0.25) !important;
+            transition: all var(--transition-base) !important;
         }
         .btn-gold:hover, .btn-gold:focus {
-            background-color: var(--gold-dark) !important;
-            border-color: var(--gold-dark) !important;
-            color: #ffffff !important;
-            box-shadow: var(--shadow-brand) !important;
+            background-color: #e0a32e !important;
+            border-color: #e0a32e !important;
+            color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(243, 182, 58, 0.35) !important;
+            transform: translateY(-1px);
         }
         .btn-gold:active {
             transform: scale(0.98);
         }
         .badge.bg-primary {
-            background-color: var(--gold) !important;
-            color: #ffffff !important;
+            background-color: var(--gold, #f3b63a) !important;
+            color: #181b20 !important;
         }
 
         .btn-primary-action {
-            background: var(--gold);
-            border: 1px solid var(--gold);
-            color: #ffffff;
-            font-weight: 600;
+            background: var(--gold, #f3b63a) !important;
+            border: 1px solid var(--gold, #f3b63a) !important;
+            color: #181b20 !important;
+            font-weight: 600 !important;
             font-size: 0.875rem;
             padding: 0.5rem 1.125rem;
-            border-radius: var(--radius-sm);
+            border-radius: 10px !important;
             display: inline-flex;
             align-items: center;
             gap: 0.375rem;
             text-decoration: none;
-            transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+            transition: all var(--transition-base);
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(243, 182, 58, 0.25);
         }
 
         .btn-primary-action:hover {
-            background: var(--gold-dark);
-            border-color: var(--gold-dark);
-            color: #ffffff;
-            box-shadow: var(--shadow-brand);
+            background: #e0a32e !important;
+            border-color: #e0a32e !important;
+            color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(243, 182, 58, 0.35);
+            transform: translateY(-1px);
         }
 
         .btn-primary-action:active {
@@ -1072,7 +1094,8 @@
 
         .btn-primary-action.btn-sm {
             font-size: 0.8125rem;
-            padding: 0.3rem 0.875rem;
+            padding: 0.35rem 0.95rem;
+            border-radius: 8px !important;
         }
 
         .btn-ghost {

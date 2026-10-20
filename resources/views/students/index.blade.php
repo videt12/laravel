@@ -16,29 +16,36 @@
 {{-- ═══════════════════════════════════════════
      PAGE HEADER
 ═══════════════════════════════════════════ --}}
-<div class="page-header d-flex align-items-start justify-content-between mb-3">
+{{-- ═══════════════════════════════════════════
+     PAGE HEADER
+═══════════════════════════════════════════ --}}
+<div class="page-header d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
     <div>
-        <h1 class="page-title">គ្រប់គ្រងសិស្សានុសិស្ស</h1>
-        <p class="page-subtitle">គ្រប់គ្រងអត្តសញ្ញាណសិស្ស ការចុះឈ្មោះ និងសមតុល្យហិរញ្ញវត្ថុជាក់ស្តែង</p>
+        <div class="d-flex align-items-center gap-2 text-muted small mb-1" style="font-size: 0.82rem;">
+            <i class="bi bi-calendar3 text-muted"></i>
+            <span>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</span>
+        </div>
+        <h1 class="page-title fw-bold text-dark mb-1" style="font-size: 1.45rem;">គ្រប់គ្រងសិស្សានុសិស្ស</h1>
+        <p class="page-subtitle text-muted small mb-0">គ្រប់គ្រងអត្តសញ្ញាណសិស្ស ការចុះឈ្មោះ និងសមតុល្យហិរញ្ញវត្ថុជាក់ស្តែង</p>
     </div>
-    <div class="d-flex gap-2 flex-wrap">
+    <div class="d-flex gap-2 flex-wrap align-items-center">
         @if(!empty($filterClass) && auth()->user()?->canAccess(['students.edit', 'classes.edit']))
-            <a href="{{ route('classes.id-cards', $filterClass) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+            <a href="{{ route('classes.id-cards', $filterClass) }}" target="_blank" class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;">
                 <i class="bi bi-printer me-1"></i>បោះពុម្ពកាតទាំងថ្នាក់
             </a>
         @endif
         @if(auth()->user()?->canAccess(['reports.view', 'students.export']))
-        <a href="{{ route('students.export', request()->query()) }}" class="btn btn-sm btn-outline-success" title="ទាញយកបញ្ជីសិស្សជាឯកសារ Excel/CSV">
+        <a href="{{ route('students.export', request()->query()) }}" class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;" title="ទាញយកបញ្ជីសិស្សជាឯកសារ Excel/CSV">
             <i class="bi bi-file-earmark-excel me-1"></i>ទាញយក Excel
         </a>
         @endif
         @if(auth()->user()?->canAccess('students.create'))
-        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#importStudentModal">
+        <button type="button" class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;" data-bs-toggle="modal" data-bs-target="#importStudentModal">
             <i class="bi bi-file-earmark-arrow-up me-1"></i>នាំចូល CSV
         </button>
         @endif
         @if(auth()->user()?->canAccess(['finance.view', 'finance']))
-        <a href="{{ route('finance.student-balances') }}" class="btn btn-sm btn-outline-secondary">
+        <a href="{{ route('finance.student-balances') }}" class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;">
             <i class="bi bi-wallet2 me-1"></i>សមតុល្យសិស្ស
         </a>
         @endif
@@ -51,7 +58,7 @@
 </div>
 
 @if(session('import_errors') && count(session('import_errors')) > 0)
-    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert" style="border-radius: 8px;">
+    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert" style="border-radius: 10px;">
         <h6 class="alert-heading fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>បញ្ហាមួយចំនួនក្នុងការនាំចូលទិន្នន័យ៖</h6>
         <ul class="mb-0 ps-3 small">
             @foreach(session('import_errors') as $err)
@@ -67,52 +74,60 @@
 ═══════════════════════════════════════════ --}}
 @php
     $canSeeFinance = auth()->user()?->canAccess(['finance.view', 'finance']);
-    $metricCol = $canSeeFinance ? 'col-6 col-md-3' : 'col-6 col-md-4';
+    $metricCol = $canSeeFinance ? 'col-12 col-sm-6 col-xl-3' : 'col-12 col-sm-4';
 @endphp
-<div class="row g-2 mb-2">
+<div class="row g-3 mb-3">
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border-0 shadow-xs rounded-3 bg-white py-2 px-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="text-muted fw-medium" style="font-size:0.75rem">សិស្សសរុប</span>
-                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-1.5 py-0.5" style="font-size:0.70rem"><i class="bi bi-people-fill"></i></span>
+        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សសរុប</span>
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #eff6ff; color: #2563eb;">
+                    <i class="bi bi-people fs-6"></i>
+                </div>
             </div>
-            <h4 class="fw-bold text-dark my-1" style="font-size:1.35rem;line-height:1.2">{{ number_format($totalStudents) }}</h4>
-            <div class="d-flex align-items-center gap-1.5 text-truncate" style="font-size:0.70rem;line-height:1.2">
-                <span class="text-primary fw-medium">ពេញម៉ោង: {{ number_format($fullTimeCount ?? 0) }}</span>
-                <span class="text-muted">·</span>
-                <span class="text-warning-emphasis fw-medium">ក្រៅម៉ោង: {{ number_format($partTimeCount ?? 0) }}</span>
+            <h3 class="fw-bold text-dark mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($totalStudents) }}</h3>
+            <div class="d-flex align-items-center gap-1.5 text-muted small" style="font-size: 0.76rem;">
+                <span class="text-dark fw-medium">ពេញម៉ោង: {{ number_format($fullTimeCount ?? 0) }}</span>
+                <span>·</span>
+                <span class="text-muted">ក្រៅម៉ោង: {{ number_format($partTimeCount ?? 0) }}</span>
             </div>
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border-0 shadow-xs rounded-3 bg-white py-2 px-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="text-muted fw-medium" style="font-size:0.75rem">សិស្សថ្មី</span>
-                <span class="badge bg-success-subtle text-success border border-success-subtle px-1.5 py-0.5" style="font-size:0.70rem">ថ្មី</span>
+        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សថ្មី</span>
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #f0fdf4; color: #16a34a;">
+                    <i class="bi bi-person-plus fs-6"></i>
+                </div>
             </div>
-            <h4 class="fw-bold text-success my-1" style="font-size:1.35rem;line-height:1.2">{{ number_format($newStudentsCount) }}</h4>
-            <span class="text-muted text-truncate d-block" style="font-size:0.70rem;line-height:1.2">ចុះឈ្មោះលើកដំបូង</span>
+            <h3 class="fw-bold text-success mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($newStudentsCount) }}</h3>
+            <div class="text-muted small" style="font-size: 0.76rem;">ចុះឈ្មោះក្នុងឆ្នាំសិក្សាថ្មី</div>
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border-0 shadow-xs rounded-3 bg-white py-2 px-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="text-muted fw-medium" style="font-size:0.75rem">សិស្សចាស់ / បន្ត</span>
-                <span class="badge bg-info-subtle text-info border border-info-subtle px-1.5 py-0.5" style="font-size:0.70rem">បន្ត</span>
+        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សចាស់ / បន្ត</span>
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #faf5ff; color: #9333ea;">
+                    <i class="bi bi-mortarboard fs-6"></i>
+                </div>
             </div>
-            <h4 class="fw-bold text-primary my-1" style="font-size:1.35rem;line-height:1.2">{{ number_format($returningStudentsCount) }}</h4>
-            <span class="text-muted text-truncate d-block" style="font-size:0.70rem;line-height:1.2">បានសិក្សាឆ្នាំមុន</span>
+            <h3 class="fw-bold text-dark mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($returningStudentsCount) }}</h3>
+            <div class="text-muted small" style="font-size: 0.76rem;">សិស្សកំពុងបន្តការសិក្សា</div>
         </div>
     </div>
     @if($canSeeFinance)
-    <div class="col-6 col-md-3">
-        <div class="card h-100 border-0 shadow-xs rounded-3 bg-white py-2 px-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="text-muted fw-medium" style="font-size:0.75rem">សមតុល្យជំពាក់</span>
-                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-1.5 py-0.5" style="font-size:0.70rem"><i class="bi bi-cash-stack"></i></span>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សមតុល្យជំពាក់</span>
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #fff1f2; color: #e11d48;">
+                    <i class="bi bi-wallet2 fs-6"></i>
+                </div>
             </div>
-            <h4 class="fw-bold text-danger my-1" style="font-size:1.35rem;line-height:1.2">${{ number_format($totalOutstandingBalance, 2) }}</h4>
-            <span class="text-muted text-truncate d-block" style="font-size:0.70rem;line-height:1.2">ប្រាក់ត្រូវប្រមូលនៅសល់</span>
+            <h3 class="fw-bold text-danger mb-1" style="font-size: 1.55rem; line-height: 1.2;">${{ number_format($totalOutstandingBalance, 2) }}</h3>
+            <div class="text-muted small" style="font-size: 0.76rem;">ប្រាក់ត្រូវប្រមូលនៅសល់</div>
         </div>
     </div>
     @endif
@@ -388,8 +403,17 @@
 
                         $avatarText   = $khmerName ?: ($latinName ?: 'S');
                         $initials     = mb_strtoupper(mb_substr($avatarText, 0, 1));
-                        $avatarColors = ['#e8a838','#3b82f6','#10b981','#8b5cf6','#ef4444','#f59e0b'];
-                        $color        = $avatarColors[crc32($displayName) % count($avatarColors)];
+                        
+                        // Muted pastel palettes
+                        $pastelPalettes = [
+                            ['bg' => '#eff6ff', 'color' => '#2563eb', 'border' => '#dbeafe'], // soft blue
+                            ['bg' => '#f0fdf4', 'color' => '#16a34a', 'border' => '#dcfce7'], // soft green
+                            ['bg' => '#fefce8', 'color' => '#ca8a04', 'border' => '#fef08a'], // soft amber
+                            ['bg' => '#faf5ff', 'color' => '#9333ea', 'border' => '#f3e8ff'], // soft purple
+                            ['bg' => '#fff1f2', 'color' => '#e11d48', 'border' => '#ffe4e6'], // soft rose
+                            ['bg' => '#ecfeff', 'color' => '#0891b2', 'border' => '#cffafe'], // soft cyan
+                        ];
+                        $palette      = $pastelPalettes[abs(crc32($displayName)) % count($pastelPalettes)];
 
                         // Class & section display
                         $className = $student->schoolClass?->grade?->name ?? ($student->schoolClass ? 'Class #'.$student->schoolClass->id : '—');
@@ -408,7 +432,7 @@
 
                         {{-- Student Avatar + Name --}}
                         <td>
-                            <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-2.5">
                                 @php
                                     $photoUrl = $student->photo_url;
                                 @endphp
@@ -416,20 +440,20 @@
                                     <img src="{{ $photoUrl }}"
                                          alt="{{ $displayName }}"
                                          class="rounded-circle flex-shrink-0 border object-fit-cover shadow-xs"
-                                         style="width:32px;height:32px;"
+                                         style="width:34px;height:34px; border-color: #e5e7eb !important;"
                                          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
-                                    <div class="student-avatar flex-shrink-0 d-none" style="background:{{ $color }}1a;color:{{ $color }};width:32px;height:32px;font-size:.78rem">
+                                    <div class="student-avatar flex-shrink-0 d-none" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:34px;height:34px;font-size:.82rem;font-weight:600;border-radius:50%;">
                                         {{ $initials }}
                                     </div>
                                 @else
-                                    <div class="student-avatar flex-shrink-0" style="background:{{ $color }}1a;color:{{ $color }};width:32px;height:32px;font-size:.78rem">
+                                    <div class="student-avatar flex-shrink-0" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:34px;height:34px;font-size:.82rem;font-weight:600;border-radius:50%;">
                                         {{ $initials }}
                                     </div>
                                 @endif
                                 <div class="lh-sm min-w-0">
                                     <a href="{{ route('students.show', $student) }}"
                                        class="fw-semibold text-dark text-decoration-none student-name-link text-truncate d-block" 
-                                       style="max-width:190px;font-size:.83rem"
+                                       style="max-width:190px;font-size:.85rem"
                                        title="{{ $displayName }} ({{ $student->admission_number }})">
                                         {{ $displayName }}
                                     </a>
@@ -519,13 +543,23 @@
                         </td>
                         @endif
 
-                        {{-- Student Status --}}
+                        {{-- Student Status with small colored dot and text label --}}
                         <td>
-                            @if($student->studentStatus)
-                                <span class="status-badge status-active rounded-pill">{{ $student->studentStatus->khmer_name ?? $student->studentStatus->name }}</span>
-                            @else
-                                <span class="status-badge status-unknown rounded-pill">—</span>
-                            @endif
+                            @php
+                                $rawStatus = $student->studentStatus?->slug ?? $student->studentStatus?->name ?? 'active';
+                                $statusName = $student->studentStatus?->khmer_name ?? $student->studentStatus?->name ?? 'កំពុងរៀន';
+                                $dotColor = match(true) {
+                                    str_contains(strtolower($rawStatus), 'active') || str_contains($statusName, 'កំពុង') => '#22c55e',
+                                    str_contains(strtolower($rawStatus), 'suspend') || str_contains($statusName, 'ព្យួរ') => '#f59e0b',
+                                    str_contains(strtolower($rawStatus), 'graduat') || str_contains($statusName, 'បញ្ចប់') => '#3b82f6',
+                                    str_contains(strtolower($rawStatus), 'drop') || str_contains(strtolower($rawStatus), 'withdraw') || str_contains($statusName, 'ឈប់') => '#ef4444',
+                                    default => '#6b7280',
+                                };
+                            @endphp
+                            <div class="d-inline-flex align-items-center gap-1.5 px-2.5 py-1 rounded-pill bg-light border border-light-subtle text-dark" style="font-size: 0.78rem; font-weight: 500;">
+                                <span class="rounded-circle d-inline-block flex-shrink-0" style="width: 7px; height: 7px; background-color: {{ $dotColor }};"></span>
+                                <span>{{ $statusName }}</span>
+                            </div>
                         </td>
 
                         {{-- Actions dropdown --}}

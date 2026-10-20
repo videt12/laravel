@@ -1,14 +1,39 @@
 <header class="app-topbar bg-white border-bottom sticky-top">
     <div class="container-fluid px-3 px-lg-4 d-flex align-items-center justify-content-between h-100">
         
-        {{-- Left: Sidebar Toggle & Breadcrumb --}}
+        {{-- Left: Sidebar Toggle, School Selector & Breadcrumb --}}
         <div class="d-flex align-items-center gap-2 gap-md-3 min-w-0">
             <button type="button" class="btn btn-topbar-icon" id="sidebarToggleBtn" aria-label="Toggle navigation" title="បិទ/បើកម៉ឺនុយចំហៀង">
                 <i class="bi bi-list fs-5"></i>
             </button>
 
+            @php
+                $navSchool = \App\Models\Core\School::first();
+                $navSchoolName = $navSchool?->name ?? 'សាលារៀនប្រទីបបញ្ញា';
+            @endphp
+            {{-- School Selector --}}
+            <div class="dropdown d-none d-sm-block">
+                <button class="btn btn-sm d-flex align-items-center gap-2 px-2.5 py-1.5 rounded-pill border bg-light text-dark fw-medium" 
+                        type="button" id="schoolSelectorDropdown" data-bs-toggle="dropdown" aria-expanded="false" 
+                        style="font-size: 0.82rem; border-color: #e5e7eb !important;">
+                    <i class="bi bi-building text-muted"></i>
+                    <span class="text-truncate" style="max-width: 170px;">{{ $navSchoolName }}</span>
+                    <i class="bi bi-chevron-down text-muted ms-0.5" style="font-size: 0.7rem;"></i>
+                </button>
+                <ul class="dropdown-menu shadow-sm border-0 py-1" style="min-width: 220px; border-radius: 10px;">
+                    <li class="px-3 py-1.5 text-muted small fw-semibold" style="font-size: 0.72rem;">ជ្រើសរើសសាខាសាលារៀន</li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center justify-content-between py-1.5 active" href="javascript:void(0)" 
+                           style="background-color: var(--gold, #f3b63a) !important; color: #181b20 !important; font-weight: 500;">
+                            <span>{{ $navSchoolName }} (ចម្បង)</span>
+                            <i class="bi bi-check2"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             {{-- Topbar Breadcrumbs / Page Context --}}
-            <div class="topbar-breadcrumb d-none d-md-flex align-items-center">
+            <div class="topbar-breadcrumb d-none d-lg-flex align-items-center">
                 @hasSection('breadcrumb')
                     @yield('breadcrumb')
                 @else
@@ -53,6 +78,26 @@
                 </button>
             </div>
             @endif
+
+            {{-- Notification Bell Icon --}}
+            <div class="dropdown">
+                <button type="button" class="btn btn-topbar-icon position-relative" id="notificationsDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" title="ការជូនដំណឹង" aria-label="Notifications">
+                    <i class="bi bi-bell fs-6"></i>
+                    <span class="position-absolute p-1 bg-warning border border-light rounded-circle" style="top: 8px; right: 8px;">
+                        <span class="visually-hidden">ការជូនដំណឹងថ្មី</span>
+                    </span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 py-2" aria-labelledby="notificationsDropdownBtn" style="min-width: 280px; border-radius: 12px;">
+                    <li class="px-3 py-1.5 d-flex align-items-center justify-content-between border-bottom">
+                        <span class="fw-semibold text-dark small">ការជូនដំណឹង</span>
+                        <span class="badge bg-light text-muted border small">ប្រព័ន្ធ</span>
+                    </li>
+                    <li class="p-3 text-center text-muted small">
+                        <i class="bi bi-bell-slash d-block fs-3 mb-1 text-muted opacity-50"></i>
+                        គ្មានការជូនដំណឹងថ្មីនៅឡើយទេ
+                    </li>
+                </ul>
+            </div>
 
             {{-- User Profile Dropdown --}}
             @php
