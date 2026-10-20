@@ -156,49 +156,64 @@ class LibraryBookController extends Controller
      */
     protected function cleanupTestBooks(): void
     {
-        $testBooks = LibraryBook::withTrashed()
-            ->where(function ($q) {
-                $q->where('title', 'like', '%6aa55%')
-                    ->orWhere('title', 'like', 'Popular Algorithms%')
-                    ->orWhere('title', 'like', 'Damaged Return Book%')
-                    ->orWhere('title', 'like', 'Overdue Book%')
-                    ->orWhere('title', 'like', 'Double Return Book%')
-                    ->orWhere('title', 'like', 'Returnable Book%')
-                    ->orWhere('title', 'like', 'Book 6aa55%')
-                    ->orWhere('title', 'like', 'Test Book%')
-                    ->orWhere('title', 'like', 'Sample Book%')
-                    ->orWhere('title', 'REGEXP', '[0-9a-f]{13}$');
-            })
-            ->get();
+        try {
+            $testBooks = LibraryBook::withTrashed()
+                ->where(function ($q) {
+                    $q->where('title', 'like', '%6aa55%')
+                        ->orWhere('title', 'like', 'Popular Algorithms%')
+                        ->orWhere('title', 'like', 'Damaged Return Book%')
+                        ->orWhere('title', 'like', 'Overdue Book%')
+                        ->orWhere('title', 'like', 'Double Return Book%')
+                        ->orWhere('title', 'like', 'Returnable Book%')
+                        ->orWhere('title', 'like', 'Book 6aa55%')
+                        ->orWhere('title', 'like', 'Test Book%')
+                        ->orWhere('title', 'like', 'Sample Book%')
+                        ->orWhere('title', 'like', 'Book %');
+                })
+                ->get()
+                ->filter(function ($book) {
+                    return preg_match('/[0-9a-f]{13}$/', (string) $book->title)
+                        || str_starts_with($book->title, 'Popular Algorithms')
+                        || str_starts_with($book->title, 'Damaged Return Book')
+                        || str_starts_with($book->title, 'Overdue Book')
+                        || str_starts_with($book->title, 'Double Return Book')
+                        || str_starts_with($book->title, 'Returnable Book')
+                        || str_contains($book->title, '6aa55')
+                        || str_starts_with($book->title, 'Test Book')
+                        || str_starts_with($book->title, 'Sample Book');
+                });
 
-        if ($testBooks->isEmpty()) {
-            return;
-        }
+            if ($testBooks->isEmpty()) {
+                return;
+            }
 
-        DB::transaction(function () use ($testBooks) {
-            foreach ($testBooks as $book) {
-                $copyIds = DB::table('library_book_copies')
-                    ->where('library_book_id', $book->id)
-                    ->pluck('id')
-                    ->toArray();
-
-                if (! empty($copyIds)) {
-                    $issueIds = DB::table('library_issues')
-                        ->whereIn('library_book_copy_id', $copyIds)
+            DB::transaction(function () use ($testBooks) {
+                foreach ($testBooks as $book) {
+                    $copyIds = DB::table('library_book_copies')
+                        ->where('library_book_id', $book->id)
                         ->pluck('id')
                         ->toArray();
 
-                    if (! empty($issueIds)) {
-                        DB::table('library_returns')->whereIn('library_issue_id', $issueIds)->delete();
-                        DB::table('library_issues')->whereIn('id', $issueIds)->delete();
+                    if (! empty($copyIds)) {
+                        $issueIds = DB::table('library_issues')
+                            ->whereIn('library_book_copy_id', $copyIds)
+                            ->pluck('id')
+                            ->toArray();
+
+                        if (! empty($issueIds)) {
+                            DB::table('library_returns')->whereIn('library_issue_id', $issueIds)->delete();
+                            DB::table('library_issues')->whereIn('id', $issueIds)->delete();
+                        }
+
+                        DB::table('library_book_copies')->whereIn('id', $copyIds)->delete();
                     }
 
-                    DB::table('library_book_copies')->whereIn('id', $copyIds)->delete();
+                    $book->forceDelete();
                 }
-
-                $book->forceDelete();
-            }
-        });
+            });
+        } catch (\Throwable $e) {
+            report($e);
+        }
     }
 
     /**
@@ -206,41 +221,45 @@ class LibraryBookController extends Controller
      */
     protected function syncKhmerCategories(): void
     {
-        $map = [
-            'Science & Technology' => 'វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា',
-            'Mathematics' => 'គណិតវិទ្យា',
-            'Literature' => 'អក្សរសាស្ត្រ និងអក្សរសិល្ប៍',
-            'History & Geography' => 'ប្រវត្តិសាស្ត្រ និងភូមិវិទ្យា',
-            'Religion & Ethics' => 'សាសនា និងសីលធម៌',
-            'Language & Grammar' => 'ភាសា និងវេយ្យាករណ៍',
-            'Reference Books' => 'សៀវភៅឯកសារយោង',
-            "Children's Books" => 'សៀវភៅកុមារ',
-            'Magazine & Journals' => 'ទស្សនាវដ្តី និងព្រឹត្តិបត្រ',
-            'Sports & Health' => 'កីឡា និងសុខភាព',
-            'Computer Science Test' => 'វិទ្យាសាស្ត្រកុំព្យូទ័រ',
-        ];
+        try {
+            $map = [
+                'Science & Technology' => 'វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា',
+                'Mathematics' => 'គណិតវិទ្យា',
+                'Literature' => 'អក្សរសាស្ត្រ និងអក្សរសិល្ប៍',
+                'History & Geography' => 'ប្រវត្តិសាស្ត្រ និងភូមិវិទ្យា',
+                'Religion & Ethics' => 'សាសនា និងសីលធម៌',
+                'Language & Grammar' => 'ភាសា និងវេយ្យាករណ៍',
+                'Reference Books' => 'សៀវភៅឯកសារយោង',
+                "Children's Books" => 'សៀវភៅកុមារ',
+                'Magazine & Journals' => 'ទស្សនាវដ្តី និងព្រឹត្តិបត្រ',
+                'Sports & Health' => 'កីឡា និងសុខភាព',
+                'Computer Science Test' => 'វិទ្យាសាស្ត្រកុំព្យូទ័រ',
+            ];
 
-        foreach ($map as $en => $kh) {
-            DB::table('library_categories')->where('name', $en)->update(['name' => $kh]);
+            foreach ($map as $en => $kh) {
+                DB::table('library_categories')->where('name', $en)->update(['name' => $kh]);
+            }
+
+            // Clean up junk test categories that have no books attached
+            DB::table('library_categories')
+                ->where(function ($q) {
+                    $q->where('name', 'like', 'Category With Book%')
+                        ->orWhere('name', 'like', 'New Test Category%')
+                        ->orWhere('name', 'like', 'Updated Name%');
+                })
+                ->whereNotExists(function ($sub) {
+                    $sub->select(DB::raw(1))
+                        ->from('library_books')
+                        ->whereColumn('library_books.library_category_id', 'library_categories.id');
+                })
+                ->delete();
+
+            // Any remaining test categories with books get clean Khmer names
+            DB::table('library_categories')->where('name', 'like', 'Category With Book%')->update(['name' => 'ប្រភេទសៀវភៅទូទៅ']);
+            DB::table('library_categories')->where('name', 'like', 'New Test Category%')->update(['name' => 'ប្រភេទសៀវភៅថ្មី']);
+            DB::table('library_categories')->where('name', 'like', 'Updated Name%')->update(['name' => 'ប្រភេទសៀវភៅកែប្រែ']);
+        } catch (\Throwable $e) {
+            report($e);
         }
-
-        // Clean up junk test categories that have no books attached
-        DB::table('library_categories')
-            ->where(function ($q) {
-                $q->where('name', 'like', 'Category With Book%')
-                    ->orWhere('name', 'like', 'New Test Category%')
-                    ->orWhere('name', 'like', 'Updated Name%');
-            })
-            ->whereNotExists(function ($sub) {
-                $sub->select(DB::raw(1))
-                    ->from('library_books')
-                    ->whereColumn('library_books.library_category_id', 'library_categories.id');
-            })
-            ->delete();
-
-        // Any remaining test categories with books get clean Khmer names
-        DB::table('library_categories')->where('name', 'like', 'Category With Book%')->update(['name' => 'ប្រភេទសៀវភៅទូទៅ']);
-        DB::table('library_categories')->where('name', 'like', 'New Test Category%')->update(['name' => 'ប្រភេទសៀវភៅថ្មី']);
-        DB::table('library_categories')->where('name', 'like', 'Updated Name%')->update(['name' => 'ប្រភេទសៀវភៅកែប្រែ']);
     }
 }

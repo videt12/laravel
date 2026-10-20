@@ -87,41 +87,45 @@ class LibraryCategoryController extends Controller
      */
     protected function syncKhmerCategories(): void
     {
-        $map = [
-            'Science & Technology' => 'វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា',
-            'Mathematics' => 'គណិតវិទ្យា',
-            'Literature' => 'អក្សរសាស្ត្រ និងអក្សរសិល្ប៍',
-            'History & Geography' => 'ប្រវត្តិសាស្ត្រ និងភូមិវិទ្យា',
-            'Religion & Ethics' => 'សាសនា និងសីលធម៌',
-            'Language & Grammar' => 'ភាសា និងវេយ្យាករណ៍',
-            'Reference Books' => 'សៀវភៅឯកសារយោង',
-            "Children's Books" => 'សៀវភៅកុមារ',
-            'Magazine & Journals' => 'ទស្សនាវដ្តី និងព្រឹត្តិបត្រ',
-            'Sports & Health' => 'កីឡា និងសុខភាព',
-            'Computer Science Test' => 'វិទ្យាសាស្ត្រកុំព្យូទ័រ',
-        ];
+        try {
+            $map = [
+                'Science & Technology' => 'វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា',
+                'Mathematics' => 'គណិតវិទ្យា',
+                'Literature' => 'អក្សរសាស្ត្រ និងអក្សរសិល្ប៍',
+                'History & Geography' => 'ប្រវត្តិសាស្ត្រ និងភូមិវិទ្យា',
+                'Religion & Ethics' => 'សាសនា និងសីលធម៌',
+                'Language & Grammar' => 'ភាសា និងវេយ្យាករណ៍',
+                'Reference Books' => 'សៀវភៅឯកសារយោង',
+                "Children's Books" => 'សៀវភៅកុមារ',
+                'Magazine & Journals' => 'ទស្សនាវដ្តី និងព្រឹត្តិបត្រ',
+                'Sports & Health' => 'កីឡា និងសុខភាព',
+                'Computer Science Test' => 'វិទ្យាសាស្ត្រកុំព្យូទ័រ',
+            ];
 
-        foreach ($map as $en => $kh) {
-            DB::table('library_categories')->where('name', $en)->update(['name' => $kh]);
+            foreach ($map as $en => $kh) {
+                DB::table('library_categories')->where('name', $en)->update(['name' => $kh]);
+            }
+
+            // Clean up junk test categories that have no books attached
+            DB::table('library_categories')
+                ->where(function ($q) {
+                    $q->where('name', 'like', 'Category With Book%')
+                        ->orWhere('name', 'like', 'New Test Category%')
+                        ->orWhere('name', 'like', 'Updated Name%');
+                })
+                ->whereNotExists(function ($sub) {
+                    $sub->select(DB::raw(1))
+                        ->from('library_books')
+                        ->whereColumn('library_books.library_category_id', 'library_categories.id');
+                })
+                ->delete();
+
+            // Any remaining test categories with books get clean Khmer names
+            DB::table('library_categories')->where('name', 'like', 'Category With Book%')->update(['name' => 'ប្រភេទសៀវភៅទូទៅ']);
+            DB::table('library_categories')->where('name', 'like', 'New Test Category%')->update(['name' => 'ប្រភេទសៀវភៅថ្មី']);
+            DB::table('library_categories')->where('name', 'like', 'Updated Name%')->update(['name' => 'ប្រភេទសៀវភៅកែប្រែ']);
+        } catch (\Throwable $e) {
+            report($e);
         }
-
-        // Clean up junk test categories that have no books attached
-        DB::table('library_categories')
-            ->where(function ($q) {
-                $q->where('name', 'like', 'Category With Book%')
-                    ->orWhere('name', 'like', 'New Test Category%')
-                    ->orWhere('name', 'like', 'Updated Name%');
-            })
-            ->whereNotExists(function ($sub) {
-                $sub->select(DB::raw(1))
-                    ->from('library_books')
-                    ->whereColumn('library_books.library_category_id', 'library_categories.id');
-            })
-            ->delete();
-
-        // Any remaining test categories with books get clean Khmer names
-        DB::table('library_categories')->where('name', 'like', 'Category With Book%')->update(['name' => 'ប្រភេទសៀវភៅទូទៅ']);
-        DB::table('library_categories')->where('name', 'like', 'New Test Category%')->update(['name' => 'ប្រភេទសៀវភៅថ្មី']);
-        DB::table('library_categories')->where('name', 'like', 'Updated Name%')->update(['name' => 'ប្រភេទសៀវភៅកែប្រែ']);
     }
 }
