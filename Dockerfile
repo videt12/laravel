@@ -24,6 +24,8 @@ RUN cp .env.example .env \
     && touch database/database.sqlite \
     && php artisan migrate --force \
     && php artisan db:seed --force \
+    && rm -rf public/storage \
+    && php artisan storage:link \
     && php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache

@@ -62,12 +62,12 @@
                             
                             @php
                                 $hasExistingPhoto = $student->studentProfile && $student->studentProfile->photo;
-                                $existingPhotoUrl = $hasExistingPhoto ? Storage::url($student->studentProfile->photo) : '';
+                                $existingPhotoUrl = $hasExistingPhoto ? ($student->photo_url ?? Storage::url($student->studentProfile->photo)) : '';
                             @endphp
 
                             <div class="photo-card-box position-relative" onclick="document.getElementById('photo_input').click()" title="ចុចដើម្បីជ្រើសរើសរូបថត">
                                 <div class="photo-inner-wrapper">
-                                    <img id="photo_preview" src="{{ $existingPhotoUrl }}" alt="Preview" class="photo-img-tag {{ $hasExistingPhoto ? '' : 'd-none' }}">
+                                    <img id="photo_preview" src="{{ $existingPhotoUrl }}" alt="Preview" class="photo-img-tag {{ $hasExistingPhoto ? '' : 'd-none' }}" onerror="this.classList.add('d-none'); document.getElementById('photo_placeholder')?.classList.remove('d-none');">
                                     <div id="photo_placeholder" class="photo-placeholder-wrap {{ $hasExistingPhoto ? 'd-none' : '' }}">
                                         <div class="photo-icon-avatar">
                                             <i class="bi bi-person-fill"></i>

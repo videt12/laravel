@@ -166,10 +166,32 @@
 <div class="student-profile-hero mb-3">
     <div class="d-flex align-items-center gap-3 flex-wrap">
         {{-- Avatar --}}
-        @if($student->studentProfile && $student->studentProfile->photo)
-            <img src="{{ Storage::url($student->studentProfile->photo) }}" class="hero-avatar" style="object-fit: cover;" alt="Avatar">
+        @php
+            $photoUrl = $student->photo_url;
+            $pastelPalettes = [
+                ['bg' => '#eff6ff', 'color' => '#2563eb', 'border' => '#dbeafe'],
+                ['bg' => '#f0fdf4', 'color' => '#16a34a', 'border' => '#dcfce7'],
+                ['bg' => '#fefce8', 'color' => '#ca8a04', 'border' => '#fef08a'],
+                ['bg' => '#faf5ff', 'color' => '#9333ea', 'border' => '#f3e8ff'],
+                ['bg' => '#fff1f2', 'color' => '#e11d48', 'border' => '#ffe4e6'],
+                ['bg' => '#ecfeff', 'color' => '#0891b2', 'border' => '#cffafe'],
+            ];
+            $palette = $pastelPalettes[abs(crc32($name)) % count($pastelPalettes)];
+        @endphp
+        @if($photoUrl)
+            <img src="{{ $photoUrl }}"
+                 class="hero-avatar object-fit-cover flex-shrink-0"
+                 alt="{{ $name }}"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+            <div class="hero-avatar flex-shrink-0 d-none d-flex align-items-center justify-content-center fw-bold"
+                 style="background-color:{{ $palette['bg'] }}; color:{{ $palette['color'] }}; border:1px solid {{ $palette['border'] }} !important;">
+                {{ $initials }}
+            </div>
         @else
-            <div class="hero-avatar">{{ $initials }}</div>
+            <div class="hero-avatar flex-shrink-0 d-flex align-items-center justify-content-center fw-bold"
+                 style="background-color:{{ $palette['bg'] }}; color:{{ $palette['color'] }}; border:1px solid {{ $palette['border'] }} !important;">
+                {{ $initials }}
+            </div>
         @endif
 
         {{-- Identity --}}
