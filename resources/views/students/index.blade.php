@@ -338,9 +338,6 @@
             <table class="data-table align-middle w-100" style="border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="width: 44px; text-align: center;">
-                            <input type="checkbox" class="form-check-input" id="selectAllCheckbox" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;" title="ជ្រើសរើសទាំងអស់">
-                        </th>
                         <th>ឈ្មោះសិស្ស</th>
                         <th>លេខសម្គាល់</th>
                         <th>ភេទ</th>
@@ -411,11 +408,6 @@
                         $dotColor = $isAct ? '#22c55e' : (str_contains(strtolower($rawStatus), 'suspend') || str_contains($statusName, 'ព្យួរ') ? '#f59e0b' : '#94a3b8');
                     @endphp
                     <tr class="table-row-hover">
-                        {{-- Checkbox --}}
-                        <td style="text-align: center;">
-                            <input type="checkbox" class="form-check-input student-checkbox" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;">
-                        </td>
-
                         {{-- Student Avatar + Name --}}
                         <td>
                             <div class="d-flex align-items-center gap-2.5">
@@ -709,11 +701,6 @@
         }, 600);
     });
 
-    // Master checkbox select-all toggle
-    document.getElementById('selectAllCheckbox')?.addEventListener('change', function() {
-        const checked = this.checked;
-        document.querySelectorAll('.student-checkbox').forEach(cb => cb.checked = checked);
-    });
 </script>
 @endsection
 
