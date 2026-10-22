@@ -76,17 +76,17 @@
     $canSeeFinance = auth()->user()?->canAccess(['finance.view', 'finance']);
     $metricCol = $canSeeFinance ? 'col-12 col-sm-6 col-xl-3' : 'col-12 col-sm-4';
 @endphp
-<div class="row g-3 mb-4">
+<div class="row g-2.5 mb-3">
     <div class="{{ $metricCol }}">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សសរុប</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
-                    <i class="bi bi-people-fill fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">សិស្សសរុប</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
+                    <i class="bi bi-people-fill" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($totalStudents) }}</h3>
-            <div class="d-flex align-items-center gap-1.5 small" style="font-size: 0.78rem; color: #64748b;">
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #0f172a;">{{ number_format($totalStudents) }}</h3>
+            <div class="d-flex align-items-center gap-1 text-truncate" style="font-size: 0.72rem; color: #64748b;">
                 <span class="text-dark fw-medium">ពេញម៉ោង: {{ number_format($fullTimeCount ?? 0) }}</span>
                 <span>·</span>
                 <span>ក្រៅម៉ោង: {{ number_format($partTimeCount ?? 0) }}</span>
@@ -94,40 +94,40 @@
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សថ្មី</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
-                    <i class="bi bi-person-plus-fill fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">សិស្សថ្មី</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
+                    <i class="bi bi-person-plus-fill" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #16a34a;">{{ number_format($newStudentsCount) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">ចុះឈ្មោះក្នុងឆ្នាំសិក្សាថ្មី</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #16a34a;">{{ number_format($newStudentsCount) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">ចុះឈ្មោះក្នុងឆ្នាំសិក្សាថ្មី</div>
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សចាស់ / បន្ត</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
-                    <i class="bi bi-mortarboard-fill fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">សិស្សចាស់ / បន្ត</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
+                    <i class="bi bi-mortarboard-fill" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($returningStudentsCount) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">សិស្សកំពុងបន្តការសិក្សា</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #0f172a;">{{ number_format($returningStudentsCount) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">សិស្សកំពុងបន្តការសិក្សា</div>
         </div>
     </div>
     @if($canSeeFinance)
     <div class="col-12 col-sm-6 col-xl-3">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សមតុល្យជំពាក់</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #fff1f2; color: #e11d48; flex-shrink: 0;">
-                    <i class="bi bi-wallet2 fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">សមតុល្យជំពាក់</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #fff1f2; color: #e11d48; flex-shrink: 0;">
+                    <i class="bi bi-wallet2" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #e11d48;">${{ number_format($totalOutstandingBalance, 2) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">ប្រាក់ត្រូវប្រមូលនៅសល់</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #e11d48;">${{ number_format($totalOutstandingBalance, 2) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">ប្រាក់ត្រូវប្រមូលនៅសល់</div>
         </div>
     </div>
     @endif

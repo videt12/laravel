@@ -79,17 +79,17 @@
 {{-- ═══════════════════════════════════════════
      METRIC SUMMARY CARDS (CLEAN SHADCN/UI STYLE)
 ═══════════════════════════════════════════ --}}
-<div class="row g-3 mb-4">
+<div class="row g-2.5 mb-3">
     <div class="col-xl-3 col-sm-6">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">បុគ្គលិកសរុប</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
-                    <i class="bi bi-person-badge fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">បុគ្គលិកសរុប</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
+                    <i class="bi bi-person-badge" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['total'] ?? $employees->total()) }}</h3>
-            <div class="d-flex align-items-center gap-1.5 small" style="font-size: 0.78rem; color: #64748b;">
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['total'] ?? $employees->total()) }}</h3>
+            <div class="d-flex align-items-center gap-1 text-truncate" style="font-size: 0.72rem; color: #64748b;">
                 <span class="text-dark fw-medium">សកម្ម: {{ number_format($stats['active'] ?? 0) }}</span>
                 <span>·</span>
                 <span>អសកម្ម: {{ number_format(max(0, ($stats['total'] ?? 0) - ($stats['active'] ?? 0))) }}</span>
@@ -97,39 +97,39 @@
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">បុគ្គលិកសកម្ម</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
-                    <i class="bi bi-check2-circle fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">បុគ្គលិកសកម្ម</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
+                    <i class="bi bi-check2-circle" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #16a34a;">{{ number_format($stats['active'] ?? 0) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">កំពុងបំពេញការងារជាក់ស្តែង</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #16a34a;">{{ number_format($stats['active'] ?? 0) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">កំពុងបំពេញការងារជាក់ស្តែង</div>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">ផ្នែក / ដេប៉ាតឺម៉ង់</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #fffbeb; color: #d97706; flex-shrink: 0;">
-                    <i class="bi bi-building fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">ផ្នែក / ដេប៉ាតឺម៉ង់</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #fffbeb; color: #d97706; flex-shrink: 0;">
+                    <i class="bi bi-building" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['departments'] ?? $departments->count()) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">ផ្នែកនិងការិយាល័យការងារ</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['departments'] ?? $departments->count()) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">ផ្នែកនិងការិយាល័យការងារ</div>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">មុខតំណែង</span>
-                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
-                    <i class="bi bi-briefcase fs-6"></i>
+        <div class="card h-100 bg-white py-2.5 px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 10px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="fw-medium text-truncate" style="font-size: 0.78rem; color: #64748b;">មុខតំណែង</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border-radius: 6px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
+                    <i class="bi bi-briefcase" style="font-size: 0.78rem;"></i>
                 </div>
             </div>
-            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['positions'] ?? 0) }}</h3>
-            <div class="small" style="font-size: 0.78rem; color: #64748b;">តួនាទីនិងការទទួលខុសត្រូវ</div>
+            <h3 class="fw-bold mb-0.5" style="font-size: 1.35rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['positions'] ?? 0) }}</h3>
+            <div class="text-truncate" style="font-size: 0.72rem; color: #64748b;">តួនាទីនិងការទទួលខុសត្រូវ</div>
         </div>
     </div>
 </div>
