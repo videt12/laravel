@@ -86,50 +86,6 @@
     padding: 0.25rem 0.65rem !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   METRIC SUMMARY CARDS
-═══════════════════════════════════════════════════════════════════ */
-.metric-stat-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-top: 3px solid #e8a838;
-    border-radius: var(--radius-md, 10px);
-    padding: 0.75rem 1rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.metric-stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(232, 168, 56, 0.1);
-}
-.metric-stat-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    flex-shrink: 0;
-    background: #fef3c7;
-    color: #b45309;
-}
-.metric-stat-val {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--text-dark, #0f172a);
-    line-height: 1.15;
-}
-.metric-stat-label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text-muted, #64748b);
-    margin-top: 0.1rem;
-    line-height: 1.3;
-}
 
 /* ═══════════════════════════════════════════════════════════════════
    FILTER BAR
@@ -353,51 +309,59 @@
 @endif
 
 {{-- ═══════════════════════════════════════════════════════════════════
-     METRIC SUMMARY CARDS
+     METRIC SUMMARY CARDS (CLEAN SPACIOUS SHADCN/UI STYLE)
 ═══════════════════════════════════════════════════════════════════ --}}
-<div class="row g-3 mb-3">
+<div class="row g-3 mb-4">
     <div class="col-xl-3 col-sm-6">
-        <div class="metric-stat-card">
-            <div class="metric-stat-icon">
-                <i class="bi bi-person-badge"></i>
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">បុគ្គលិកសរុប</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
+                    <i class="bi bi-person-badge fs-6"></i>
+                </div>
             </div>
-            <div>
-                <div class="metric-stat-val">{{ $stats['total'] ?? $employees->total() }}</div>
-                <div class="metric-stat-label">បុគ្គលិកសរុប</div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['total'] ?? $employees->total()) }}</h3>
+            <div class="d-flex align-items-center gap-1.5 small" style="font-size: 0.78rem; color: #64748b;">
+                <span class="text-dark fw-medium">សកម្ម: {{ number_format($stats['active'] ?? 0) }}</span>
+                <span>·</span>
+                <span>អសកម្ម: {{ number_format(max(0, ($stats['total'] ?? 0) - ($stats['active'] ?? 0))) }}</span>
             </div>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="metric-stat-card">
-            <div class="metric-stat-icon">
-                <i class="bi bi-check2-circle"></i>
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">បុគ្គលិកសកម្ម</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
+                    <i class="bi bi-check2-circle fs-6"></i>
+                </div>
             </div>
-            <div>
-                <div class="metric-stat-val">{{ $stats['active'] ?? '—' }}</div>
-                <div class="metric-stat-label">បុគ្គលិកសកម្ម</div>
-            </div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #16a34a;">{{ number_format($stats['active'] ?? 0) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">កំពុងបំពេញការងារជាក់ស្តែង</div>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="metric-stat-card">
-            <div class="metric-stat-icon">
-                <i class="bi bi-building"></i>
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">ផ្នែក / ដេប៉ាតឺម៉ង់</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #fffbeb; color: #d97706; flex-shrink: 0;">
+                    <i class="bi bi-building fs-6"></i>
+                </div>
             </div>
-            <div>
-                <div class="metric-stat-val">{{ $stats['departments'] ?? $departments->count() }}</div>
-                <div class="metric-stat-label">ផ្នែក</div>
-            </div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['departments'] ?? $departments->count()) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">ផ្នែកនិងការិយាល័យការងារ</div>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="metric-stat-card">
-            <div class="metric-stat-icon">
-                <i class="bi bi-briefcase"></i>
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">មុខតំណែង</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
+                    <i class="bi bi-briefcase fs-6"></i>
+                </div>
             </div>
-            <div>
-                <div class="metric-stat-val">{{ $stats['positions'] ?? '—' }}</div>
-                <div class="metric-stat-label">មុខតំណែង</div>
-            </div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($stats['positions'] ?? 0) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">តួនាទីនិងការទទួលខុសត្រូវ</div>
         </div>
     </div>
 </div>
