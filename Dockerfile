@@ -32,6 +32,10 @@ RUN cp .env.example .env \
 
 USER root
 
+# Copy startup script for runtime entrypoint execution
+COPY docker/99-startup.sh /etc/entrypoint.d/99-startup.sh
+RUN chmod +x /etc/entrypoint.d/99-startup.sh
+
 # Ensure correct permissions on database, storage, and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
     && chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
