@@ -64,8 +64,8 @@
                     <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size: .85rem;"></i>
                     <input type="text"
                            name="search"
-                           class="form-control form-control-sm topbar-search-input ps-5 pe-4"
-                           placeholder="ស្វែងរកសិស្ស, ថ្នាក់រៀន, កំណត់ត្រា..."
+                           class="form-control form-control-sm topbar-search-input ps-5 pe-5"
+                           placeholder="ស្វែងរក..."
                            autocomplete="off">
                     <span class="search-shortcut position-absolute top-50 end-0 translate-middle-y me-2 text-muted d-none d-md-inline-block">/</span>
                 </form>
