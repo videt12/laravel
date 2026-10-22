@@ -5,6 +5,7 @@ namespace App\Models\Employees;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Schema;
 
 class EmployeeStatus extends Model
 {
@@ -34,7 +35,11 @@ class EmployeeStatus extends Model
      */
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        if (Schema::hasColumn('employee_statuses', 'is_active')) {
+            return $query->where('is_active', true);
+        }
+
+        return $query->where('name', 'like', '%Active%');
     }
 
     /**

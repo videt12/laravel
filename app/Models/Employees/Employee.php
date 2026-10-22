@@ -240,8 +240,13 @@ class Employee extends Model
     public function scopeActive($query)
     {
         return $query->whereHas('employee_status', function ($q) {
-            $q->where('name', 'like', '%Active%')
-                ->orWhere('is_active', true);
+            $q->where(function ($sub) {
+                $sub->where('name', 'like', '%Active%')
+                    ->orWhere('name', 'like', '%សកម្ម%');
+                if (Schema::hasColumn('employee_statuses', 'is_active')) {
+                    $sub->orWhere('is_active', true);
+                }
+            });
         });
     }
 
