@@ -54,7 +54,7 @@
     </div>
     <div class="d-flex gap-2 flex-wrap align-items-center">
         <a href="{{ route('employees.create') }}" class="btn btn-sm btn-primary-action px-3" style="background-color: #F59E0B; border-color: #F59E0B; color: #ffffff; font-weight: 600; border-radius: 8px; height: 38px; display: inline-flex; align-items: center;">
-            <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមបុគ្គលិក
+            <i class="bi bi-plus-lg me-1"></i>បន្ថែមបុគ្គលិក
         </a>
     </div>
 </div>
@@ -219,7 +219,7 @@
                 <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">សម្អាតការស្វែងរកទាំងអស់</a>
             @else
                 <a href="{{ route('employees.create') }}" class="btn btn-sm text-white" style="background-color: #F59E0B; border-radius: 8px;">
-                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមបុគ្គលិកដំបូង
+                    <i class="bi bi-plus-lg me-1"></i>បន្ថែមបុគ្គលិកដំបូង
                 </a>
             @endif
         </div>

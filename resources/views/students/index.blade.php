@@ -51,7 +51,7 @@
         @endif
         @if(auth()->user()?->canAccess('students.create'))
         <a href="{{ route('students.create') }}" class="btn btn-primary-action">
-            <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្ស
+            <i class="bi bi-plus-lg me-1"></i>បន្ថែមសិស្ស
         </a>
         @endif
     </div>
@@ -329,7 +329,7 @@
                 <a href="{{ route('students.index') }}" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">សម្អាតការស្វែងរកទាំងអស់</a>
             @elseif(auth()->user()?->canAccess('students.create'))
                 <a href="{{ route('students.create') }}" class="btn btn-primary-action btn-sm">
-                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្សដំបូង
+                    <i class="bi bi-plus-lg me-1"></i>បន្ថែមសិស្សដំបូង
                 </a>
             @endif
         </div>
