@@ -1,7 +1,7 @@
 FROM serversideup/php:8.3-fpm-nginx
 
-ENV AUTORUN_ENABLED=true \
-    AUTORUN_LARAVEL_MIGRATION_SKIP_DB_CHECK=true \
+# Disable serversideup built-in autorun so it doesn't conflict with our custom startup script
+ENV AUTORUN_ENABLED=false \
     SSL_MODE=off \
     PHP_OPCACHE_ENABLE=1
 
@@ -17,7 +17,7 @@ USER www-data
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Setup Laravel environment, SQLite db, run migrations & seeders, then build cache
+# Setup Laravel environment, SQLite db for build verification, then clear cache files
 RUN cp .env.example .env \
     && php artisan key:generate \
     && mkdir -p storage/framework/{sessions,views,cache/data} \
@@ -27,9 +27,7 @@ RUN cp .env.example .env \
     && php artisan db:seed --force \
     && rm -rf public/storage \
     && php artisan storage:link \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+    && rm -f bootstrap/cache/*.php
 
 USER root
 

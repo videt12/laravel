@@ -1,17 +1,28 @@
 #!/bin/sh
 set -e
 
-echo "==> Starting application initialization..."
+echo "==> [Startup] Initializing application..."
 
-# If external database is configured, run migrations on boot
+# 1. Clear any stale cached configurations from Docker build
+rm -f /var/www/html/bootstrap/cache/*.php
+php artisan config:clear || true
+php artisan route:clear || true
+php artisan view:clear || true
+
+# 2. Run migrations on connected external database if configured
 if [ -n "$DATABASE_URL" ] || [ "$DB_CONNECTION" = "pgsql" ] || [ "$DB_CONNECTION" = "mysql" ]; then
-    echo "==> Running database migrations on connected external database..."
+    echo "==> [Startup] Running database migrations on external database..."
     php artisan migrate --force || true
+    echo "==> [Startup] Ensuring base seeders are populated..."
+    php artisan db:seed --force || true
 fi
 
-# Re-cache configuration, routes, and views with live environment variables
+# 3. Cache configuration and views with runtime live environment variables
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-echo "==> Application initialization completed successfully."
+# 4. Ensure storage symlink exists
+php artisan storage:link || true
+
+echo "==> [Startup] Initialization completed successfully."
