@@ -6,6 +6,7 @@ use App\Models\Core\AcademicYear;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,13 +25,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (config('app.env') === 'production' || str_contains(config('app.url'), 'https://')) {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+            URL::forceScheme('https');
         }
 
         Paginator::useBootstrapFive();
 
         // Enforce that only the single academic year chosen in Settings is active
-        AcademicYear::ensureSingleActiveYear();
+        try {
+            AcademicYear::ensureSingleActiveYear();
+        } catch (\Throwable $e) {
+            // Database not ready or tables not migrated yet
+        }
 
         // Ensure teacher role strictly does not retain unauthorized permissions (students, subjects, classrooms, teacher assignments, academic years)
         try {
