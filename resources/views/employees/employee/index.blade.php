@@ -14,303 +14,71 @@
 
 @push('styles')
 <style>
-/* ═══════════════════════════════════════════════════════════════════
-   PAGE HERO BANNER
-═══════════════════════════════════════════════════════════════════ */
-.employee-banner {
-    background: linear-gradient(135deg, #e8a838 0%, #c98b1e 100%);
-    border-radius: var(--radius-lg, 12px);
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-    overflow: hidden;
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(232, 168, 56, 0.18);
-}
-.employee-banner::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 170px;
-    height: 170px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 50%;
-    pointer-events: none;
-}
-.employee-banner::after {
-    content: '';
-    position: absolute;
-    bottom: -35px;
-    right: 120px;
-    width: 110px;
-    height: 110px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 50%;
-    pointer-events: none;
-}
-.employee-banner .banner-icon {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-md, 8px);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 0.25rem;
-}
-.employee-banner h1 {
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 0 0.15rem;
-    letter-spacing: -0.02em;
-}
-.employee-banner p {
-    font-size: 0.76rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-}
-.employee-banner .banner-actions {
-    position: absolute;
-    top: 0.75rem;
-    right: 1rem;
-    z-index: 2;
-    display: flex;
-    gap: 0.5rem;
-}
-.employee-banner .banner-actions .btn {
-    font-size: 0.78rem !important;
-    padding: 0.25rem 0.65rem !important;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════
-   FILTER BAR
-═══════════════════════════════════════════════════════════════════ */
-.filter-bar {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: var(--radius-lg, 12px);
-    padding: 0.35rem 0.65rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-.filter-inputs {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-}
-.search-wrapper {
-    position: relative;
-    min-width: 240px;
-}
-.search-wrapper i {
-    position: absolute;
-    left: 0.65rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #94a3b8;
-    pointer-events: none;
-    font-size: 0.8rem;
-}
-.search-wrapper input {
-    width: 100%;
-    padding: 0.25rem 0.65rem 0.25rem 1.85rem;
-    font-size: 0.8rem;
-    height: 32px;
-    min-height: 32px;
-    border: 1px solid #cbd5e1;
-    border-radius: var(--radius-md, 8px);
-    transition: all 0.2s ease;
-    background-color: #fff;
-    line-height: 1.3;
-}
-.search-wrapper input:focus {
-    border-color: #e8a838;
-    box-shadow: 0 0 0 2px rgba(232, 168, 56, 0.15);
-    outline: none;
-}
-.filter-select {
-    font-size: 0.8rem;
-    padding: 0.25rem 1.8rem 0.25rem 0.65rem;
-    height: 32px;
-    min-height: 32px;
-    border: 1px solid #cbd5e1;
-    border-radius: var(--radius-md, 8px);
-    background-color: #fff;
-    color: #1e293b;
-    transition: all 0.15s ease;
-    line-height: 1.3;
-}
-.filter-select:focus {
-    border-color: #e8a838;
-    box-shadow: 0 0 0 2px rgba(232, 168, 56, 0.15);
-    outline: none;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   DATA TABLE
-═══════════════════════════════════════════════════════════════════ */
-.table-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-top: 3px solid #e8a838;
-    border-radius: var(--radius-lg, 12px);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.02);
-}
-.table-custom {
-    margin-bottom: 0;
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-.table-custom thead th {
-    background: #fffbeb;
-    color: #78350f;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 0.45rem 0.75rem;
-    border-bottom: 1px solid #fde68a;
-    white-space: nowrap;
-}
-.table-custom tbody tr {
-    transition: background-color 0.15s ease;
-}
-.table-custom tbody tr:hover {
-    background-color: #fffdf5;
-}
-.table-custom tbody td {
-    padding: 0.45rem 0.75rem;
-    font-size: 0.82rem;
-    color: #1e293b;
-    border-bottom: 1px solid #f1f5f9;
-    vertical-align: middle;
-}
-.table-custom tbody tr:last-child td {
-    border-bottom: none;
-}
-
-/* Staff Avatar & Profile */
-.employee-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #e8a838;
-    color: #fff;
-    font-size: 0.85rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 2px 4px rgba(232, 168, 56, 0.2);
-}
-.employee-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-.employee-name {
-    font-weight: 600;
-    color: #0f172a;
-    text-decoration: none;
-    transition: color 0.15s ease;
-}
-.employee-name:hover {
-    color: #c98b1e;
-}
-.employee-code-badge {
-    font-size: 0.72rem;
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    color: #b45309;
-    background: #fef3c7;
-    border: 1px solid #fde68a;
-    border-radius: 4px;
-    padding: 0.1rem 0.4rem;
-    font-weight: 600;
-}
-
-/* Action Buttons */
-.action-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-sm, 6px);
-    color: #64748b;
-    transition: all 0.15s ease;
-    background: transparent;
-    border: 1px solid transparent;
-    text-decoration: none;
-    font-size: 0.82rem;
-}
-.action-btn:hover {
-    background: #f1f5f9;
-    color: #0f172a;
-    border-color: #cbd5e1;
-}
-.action-btn-view:hover {
-    background: #fef3c7;
-    color: #b45309;
-    border-color: #fde68a;
-}
-.action-btn-edit:hover {
-    background: #fffbeb;
-    color: #92400e;
-    border-color: #fde68a;
-}
-.action-btn-danger:hover {
-    background: #fee2e2;
-    color: #dc2626;
-    border-color: #fca5a5;
-}
+    /* Uniform Table & Badges sizing - Compact (Matching Student Table) */
+    .data-table thead th {
+        font-size: 0.82rem !important;
+        padding: 0.55rem 0.75rem !important;
+        white-space: nowrap;
+        background-color: #fafafa !important;
+        color: #64748b !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+    .data-table tbody td {
+        font-size: 0.82rem !important;
+        padding: 0.45rem 0.75rem !important;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+    }
+    .data-table .adm-badge {
+        font-size: 0.78rem !important;
+        padding: 0.15rem 0.45rem !important;
+    }
 </style>
 @endpush
 
 @section('content')
 
-{{-- ═══════════════════════════════════════════════════════════════════
-     HERO BANNER
-═══════════════════════════════════════════════════════════════════ --}}
-<div class="employee-banner">
-    <div class="banner-actions">
-        <a href="{{ route('employees.create') }}" class="btn btn-sm text-white shadow-sm" style="background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.35);">
-            <i class="bi bi-person-plus-fill me-1.5"></i>+ បន្ថែមបុគ្គលិកថ្មី
+{{-- ═══════════════════════════════════════════
+     PAGE HEADER (CLEAN SHADCN/UI STYLE)
+═══════════════════════════════════════════ --}}
+<div class="page-header d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2 text-muted small mb-1" style="font-size: 0.82rem;">
+            <i class="bi bi-calendar3 text-muted"></i>
+            <span>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</span>
+        </div>
+        <h1 class="page-title fw-bold text-dark mb-1" style="font-size: 1.45rem;">បញ្ជីបុគ្គលិក</h1>
+        <p class="page-subtitle text-muted small mb-0">បញ្ជីរាយនាមបុគ្គលិកបង្រៀន រដ្ឋបាល និងបុគ្គលិកជំនួយការទាំងអស់</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap align-items-center">
+        <a href="{{ route('employees.create') }}" class="btn btn-sm btn-primary-action px-3" style="background-color: #F59E0B; border-color: #F59E0B; color: #ffffff; font-weight: 600; border-radius: 8px; height: 38px; display: inline-flex; align-items: center;">
+            <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមបុគ្គលិក
         </a>
     </div>
-    <div class="banner-icon"><i class="bi bi-people-fill"></i></div>
-    <h1>បញ្ជីព័ត៌មានបុគ្គលិក និងលោកគ្រូអ្នកគ្រូ</h1>
-    <p>បញ្ជីរាយនាមបុគ្គលិកបង្រៀន រដ្ឋបាល និងបុគ្គលិកជំនួយការទាំងអស់។</p>
 </div>
 
 {{-- FLASH MESSAGES --}}
 @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2 mb-2 shadow-sm" role="alert" style="border-radius: var(--radius-md, 8px);">
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2 mb-3 shadow-none border" role="alert" style="border-radius: 8px; border-color: #bbf7d0 !important;">
         <i class="bi bi-check-circle-fill text-success fs-5"></i>
-        <div class="flex-grow-1">{{ session('success') }}</div>
+        <div class="flex-grow-1 text-dark" style="font-size: 0.88rem;">{{ session('success') }}</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 
 @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center gap-2 mb-2 shadow-sm" role="alert" style="border-radius: var(--radius-md, 8px);">
+    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center gap-2 mb-3 shadow-none border" role="alert" style="border-radius: 8px; border-color: #fecaca !important;">
         <i class="bi bi-exclamation-triangle-fill text-danger fs-5"></i>
-        <div class="flex-grow-1">{{ session('error') }}</div>
+        <div class="flex-grow-1 text-dark" style="font-size: 0.88rem;">{{ session('error') }}</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 
-{{-- ═══════════════════════════════════════════════════════════════════
-     METRIC SUMMARY CARDS (CLEAN SPACIOUS SHADCN/UI STYLE)
-═══════════════════════════════════════════════════════════════════ --}}
+{{-- ═══════════════════════════════════════════
+     METRIC SUMMARY CARDS (CLEAN SHADCN/UI STYLE)
+═══════════════════════════════════════════ --}}
 <div class="row g-3 mb-4">
     <div class="col-xl-3 col-sm-6">
         <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
@@ -366,193 +134,286 @@
     </div>
 </div>
 
-{{-- ═══════════════════════════════════════════════════════════════════
-     FILTER BAR
-═══════════════════════════════════════════════════════════════════ --}}
-<div class="filter-bar mb-2">
-    <form action="{{ route('employees.index') }}" method="GET" class="filter-inputs m-0 w-100">
-        {{-- Search Input --}}
-        <div class="search-wrapper flex-grow-1">
-            <i class="bi bi-search"></i>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="ស្វែងរកតាមឈ្មោះ, អត្តលេខ, អ៊ីមែល ឬលេខទូរស័ព្ទ...">
+{{-- ═══════════════════════════════════════════
+     DATA TABLE CARD (COMPACT LIKE STUDENT TABLE)
+═══════════════════════════════════════════ --}}
+<div class="card bg-white" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; overflow: hidden; box-shadow: none !important;">
+
+    {{-- Card Header: Title & Total Count --}}
+    <div class="p-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2 border-bottom" style="border-color: #e2e8f0 !important;">
+        <div>
+            <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.12rem;">បញ្ជីបុគ្គលិកទាំងអស់</h5>
+            <div class="text-muted small" style="font-size: 0.82rem;">បង្ហាញបុគ្គលិកចំនួន {{ number_format($employees->total()) }} នាក់ ក្នុងប្រព័ន្ធទិន្នន័យ</div>
         </div>
+    </div>
 
-        {{-- Filter by Department --}}
-        <select name="department_id" class="form-select filter-select" style="width: auto;" onchange="this.form.submit()">
-            <option value="">ផ្នែកទាំងអស់</option>
-            @foreach($departments as $dept)
-                <option value="{{ $dept->id }}" {{ request('department_id') == $dept->id ? 'selected' : '' }}>
-                    {{ $dept->name }}
-                </option>
-            @endforeach
-        </select>
-        
-        {{-- Filter by Status --}}
-        <select name="status_id" class="form-select filter-select" style="width: auto;" onchange="this.form.submit()">
-            <option value="">ស្ថានភាពទាំងអស់</option>
-            @foreach($statuses as $stat)
-                <option value="{{ $stat->id }}" {{ request('status_id') == $stat->id ? 'selected' : '' }}>
-                    {{ $stat->name }}
-                </option>
-            @endforeach
-        </select>
+    {{-- Filter Toolbar --}}
+    <div class="p-3 px-4 bg-light bg-opacity-50 border-bottom" style="border-color: #e2e8f0 !important;">
+        <form action="{{ route('employees.index') }}" method="GET" id="employeeFilterForm">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                {{-- Search with magnifying glass --}}
+                <div class="position-relative" style="width: 320px; max-width: 100%;">
+                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size: 0.82rem;"></i>
+                    <input type="text"
+                           name="search"
+                           value="{{ request('search') }}"
+                           class="form-control form-control-sm ps-5 pe-3"
+                           style="border: 1px solid #e2e8f0; border-radius: 8px; background: #ffffff; height: 38px;"
+                           placeholder="ស្វែងរកតាមឈ្មោះ ឬលេខកូដ..."
+                           autocomplete="off">
+                </div>
 
-        {{-- Submit Filter Button --}}
-        <button type="submit" class="btn btn-sm btn-outline-secondary px-2.5 d-inline-flex align-items-center" style="height: 32px; font-size: 0.8rem;">
-            <i class="bi bi-funnel me-1"></i>ស្វែងរក
-        </button>
+                {{-- Right controls: Department dropdown + Status dropdown + Search button --}}
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <select name="department_id" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff; width: auto; min-width: 140px; height: 38px;" onchange="document.getElementById('employeeFilterForm').submit()">
+                        <option value="">គ្រប់ផ្នែកទាំងអស់</option>
+                        @foreach($departments as $dept)
+                            <option value="{{ $dept->id }}" {{ request('department_id') == $dept->id ? 'selected' : '' }}>
+                                {{ $dept->name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-        {{-- Clear Filters --}}
-        @if(request()->anyFilled(['search', 'department_id', 'status_id']))
-            <a href="{{ route('employees.index') }}" class="btn btn-sm btn-outline-danger px-2.5 d-inline-flex align-items-center" style="height: 32px; font-size: 0.8rem;">
-                <i class="bi bi-x-circle me-1"></i>កំណត់ឡើងវិញ
-            </a>
-        @endif
-    </form>
-</div>
+                    <select name="status_id" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff; width: auto; min-width: 130px; height: 38px;" onchange="document.getElementById('employeeFilterForm').submit()">
+                        <option value="">ស្ថានភាពទាំងអស់</option>
+                        @foreach($statuses as $stat)
+                            <option value="{{ $stat->id }}" {{ request('status_id') == $stat->id ? 'selected' : '' }}>
+                                {{ $stat->name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-{{-- ═══════════════════════════════════════════════════════════════════
-     DATA TABLE
-═══════════════════════════════════════════════════════════════════ --}}
-<div class="table-card">
-    <div class="table-responsive">
-        <table class="table table-custom mb-0">
-            <thead>
-                <tr>
-                    <th>ប្រវត្តិរូបបុគ្គលិក</th>
-                    <th>ផ្នែក</th>
-                    <th>តួនាទី / មុខតំណែង</th>
-                    <th>ព័ត៌មានទំនាក់ទំនង</th>
-                    <th>កាលបរិច្ឆេទចូលបម្រើការងារ</th>
-                    <th>ស្ថានភាព</th>
-                    <th class="text-end">សកម្មភាព</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($employees as $employee)
+                    <button type="submit" class="btn btn-sm btn-primary-action px-3" style="background-color: #F59E0B; border-color: #F59E0B; color: #ffffff; font-weight: 600; border-radius: 8px; height: 38px;">
+                        ស្វែងរក
+                    </button>
+
+                    @if(request()->anyFilled(['search', 'department_id', 'status_id']))
+                        <a href="{{ route('employees.index') }}" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" style="border-radius: 8px; height: 38px; width: 38px;" title="សម្អាតតម្រងទាំងអស់">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {{-- Data Table --}}
+    @if($employees->isEmpty())
+        <div class="py-5 text-center">
+            <div class="fs-1 text-muted mb-2"><i class="bi bi-people" style="opacity: 0.65;"></i></div>
+            <h6 class="fw-bold text-dark mb-1" style="font-size: 0.95rem;">
+                @if(request()->anyFilled(['search', 'department_id', 'status_id']))
+                    រកមិនឃើញបុគ្គលិកត្រូវនឹងលក្ខខណ្ឌស្វែងរកឡើយ
+                @else
+                    មិនទាន់មានបុគ្គលិកចុះឈ្មោះនៅឡើយទេ
+                @endif
+            </h6>
+            <p class="text-muted small mb-3">
+                @if(request()->anyFilled(['search', 'department_id', 'status_id']))
+                    សូមសាកល្បងផ្លាស់ប្តូរ ឬសម្អាតប៉ារ៉ាម៉ែត្រស្វែងរក។
+                @else
+                    ចាប់ផ្តើមដោយបន្ថែមបុគ្គលិកដំបូងរបស់អ្នកចូលទៅក្នុងប្រព័ន្ធ។
+                @endif
+            </p>
+            @if(request()->anyFilled(['search', 'department_id', 'status_id']))
+                <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">សម្អាតការស្វែងរកទាំងអស់</a>
+            @else
+                <a href="{{ route('employees.create') }}" class="btn btn-sm text-white" style="background-color: #F59E0B; border-radius: 8px;">
+                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមបុគ្គលិកដំបូង
+                </a>
+            @endif
+        </div>
+    @else
+        <div class="table-responsive">
+            <table class="data-table align-middle w-100" style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="width: 44px; text-align: center;">
+                            <input type="checkbox" class="form-check-input" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;" title="ជ្រើសរើសទាំងអស់">
+                        </th>
+                        <th>ឈ្មោះបុគ្គលិក</th>
+                        <th>លេខសម្គាល់</th>
+                        <th>ផ្នែក / ដេប៉ាតឺម៉ង់</th>
+                        <th>មុខតំណែង</th>
+                        <th>លេខទូរស័ព្ទ</th>
+                        <th>កាលបរិច្ឆេទចូល</th>
+                        <th>ស្ថានភាព</th>
+                        <th style="width: 60px;" class="text-end">សកម្មភាព</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($employees as $employee)
                     @php
-                        $name = $employee->user->name ?? $employee->name ?? 'មិនស្គាល់ឈ្មោះបុគ្គលិក';
-                        $nameArr = explode(' ', trim($name));
-                        $initials = strtoupper(substr($nameArr[0], 0, 1) . (isset($nameArr[1]) ? substr($nameArr[1], 0, 1) : ''));
-                        
+                        $name = $employee->user->name ?? $employee->name ?? 'មិនស្គាល់';
+                        $email = $employee->user?->email ?? '';
+                        $phone = $employee->employeeContact?->phone ?? $employee->user?->phone ?? '—';
+                        $initials = mb_strtoupper(mb_substr($name, 0, 1));
+
+                        // Pastel palettes matching student avatars
+                        $pastelPalettes = [
+                            ['bg' => '#eff6ff', 'color' => '#2563eb', 'border' => '#dbeafe'],
+                            ['bg' => '#f0fdf4', 'color' => '#16a34a', 'border' => '#dcfce7'],
+                            ['bg' => '#fefce8', 'color' => '#ca8a04', 'border' => '#fef08a'],
+                            ['bg' => '#faf5ff', 'color' => '#9333ea', 'border' => '#f3e8ff'],
+                            ['bg' => '#fff1f2', 'color' => '#e11d48', 'border' => '#ffe4e6'],
+                            ['bg' => '#ecfeff', 'color' => '#0891b2', 'border' => '#cffafe'],
+                        ];
+                        $palette = $pastelPalettes[abs(crc32($name)) % count($pastelPalettes)];
+
                         $rawStatus = $employee->employee_status->name ?? 'Active';
                         $statusLower = strtolower($rawStatus);
                         $statusText = $employee->employee_status?->khmer_name ?? \App\Models\Employees\EmployeeStatus::translateToKhmer($rawStatus);
-                        $badgeClass = match(true) {
-                            str_contains($statusLower, 'active') => 'bg-success text-white',
-                            str_contains($statusLower, 'leave') => 'bg-warning text-dark',
-                            str_contains($statusLower, 'inactive'), str_contains($statusLower, 'terminated'), str_contains($statusLower, 'resign') => 'bg-danger text-white',
-                            default => 'bg-secondary text-white'
-                        };
+
+                        $isAct = str_contains($statusLower, 'active') || str_contains($statusText, 'សកម្ម');
+                        $isLeave = str_contains($statusLower, 'leave') || str_contains($statusText, 'ច្បាប់');
+                        $dotColor = $isAct ? '#22c55e' : ($isLeave ? '#f59e0b' : '#94a3b8');
+                        $textColor = $isAct ? '#15803d' : ($isLeave ? '#b45309' : '#475569');
                     @endphp
-                    <tr>
+                    <tr class="table-row-hover">
+                        {{-- Checkbox --}}
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="form-check-input" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;">
+                        </td>
+
+                        {{-- Employee Avatar + Name (Compact 36px circular avatar like student) --}}
                         <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="employee-avatar overflow-hidden position-relative">
-                                    @if($employee->photo_url)
-                                        <img src="{{ $employee->photo_url }}" alt="{{ $name }}" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
-                                        <span class="d-none">{{ $initials ?: 'EM' }}</span>
-                                    @else
-                                        {{ $initials ?: 'EM' }}
-                                    @endif
-                                </div>
-                                <div>
-                                    <a href="{{ route('employees.show', $employee) }}" class="employee-name d-block mb-0.5">
+                            <div class="d-flex align-items-center gap-2.5">
+                                @if($employee->photo_url)
+                                    <img src="{{ $employee->photo_url }}"
+                                         alt="{{ $name }}"
+                                         class="rounded-circle flex-shrink-0 border object-fit-cover shadow-xs"
+                                         style="width: 36px; height: 36px; border-color: #e5e7eb !important;"
+                                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+                                    <div class="flex-shrink-0 d-none" style="background-color:{{ $palette['bg'] }}; color:{{ $palette['color'] }}; border:1px solid {{ $palette['border'] }}; width:36px; height:36px; font-size:.84rem; font-weight:600; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                                        {{ $initials }}
+                                    </div>
+                                @else
+                                    <div class="flex-shrink-0" style="background-color:{{ $palette['bg'] }}; color:{{ $palette['color'] }}; border:1px solid {{ $palette['border'] }}; width:36px; height:36px; font-size:.84rem; font-weight:600; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                                        {{ $initials }}
+                                    </div>
+                                @endif
+                                <div class="lh-sm min-w-0">
+                                    <a href="{{ route('employees.show', $employee) }}"
+                                       class="fw-semibold text-dark text-decoration-none text-truncate d-block"
+                                       style="max-width: 200px; font-size: .88rem;"
+                                       title="{{ $name }}">
                                         {{ $name }}
                                     </a>
-                                    <span class="employee-code-badge">
-                                        {{ $employee->employee_code }}
-                                    </span>
+                                    @if($email)
+                                        <div class="text-muted text-truncate" style="font-size: .74rem; max-width: 200px;">
+                                            {{ $email }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <span class="badge bg-light text-dark border px-2.5 py-1">
-                                <i class="bi bi-building me-1 text-muted"></i>{{ $employee->employee_department->name ?? '—' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span class="fw-medium text-dark">{{ $employee->employee_position->name ?? '—' }}</span>
-                        </td>
-                        <td>
-                            <div class="small">
-                                @if($employee->employeeContact?->phone)
-                                    <div><i class="bi bi-telephone me-1 text-teal"></i>{{ $employee->employeeContact->phone }}</div>
-                                @endif
-                                @if($employee->user?->email)
-                                    <div class="text-muted"><i class="bi bi-envelope me-1"></i>{{ $employee->user->email }}</div>
-                                @endif
-                                @if(!$employee->employeeContact?->phone && !$employee->user?->email)
-                                    <span class="text-muted">—</span>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="small text-muted">
-                            {{ $employee->date_of_joining ? $employee->date_of_joining->format('M d, Y') : '—' }}
-                        </td>
-                        <td>
-                            <span class="badge {{ $badgeClass }} px-2.5 py-1 rounded-pill small">
-                                <i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i>{{ $statusText }}
-                            </span>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end gap-1">
-                                <a href="{{ route('employees.id-card', $employee) }}" target="_blank" class="action-btn" style="color:#0284c7" data-bs-toggle="tooltip" title="បោះពុម្ពកាតបុគ្គលិក">
-                                    <i class="bi bi-person-badge"></i>
-                                </a>
-                                <a href="{{ route('employees.show', $employee) }}" class="action-btn action-btn-view" data-bs-toggle="tooltip" title="មើលព័ត៌មានលម្អិត">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a href="{{ route('employees.edit', $employee) }}" class="action-btn action-btn-edit" data-bs-toggle="tooltip" title="កែសម្រួល">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <button type="button" class="action-btn action-btn-danger" 
-                                        data-bs-toggle="tooltip" title="លុប"
-                                        onclick="confirmDelete({{ $employee->id }}, '{{ addslashes($name) }}', '{{ addslashes($employee->employee_code) }}')">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="7" class="text-center py-4">
-                            <div class="text-muted mb-1"><i class="bi bi-people fs-2" style="color: #e8a838; opacity: 0.65;"></i></div>
-                            <h6 class="fw-bold text-dark mb-1" style="font-size: 0.92rem;">រកមិនឃើញទិន្នន័យបុគ្គលិកទេ</h6>
-                            <p class="text-muted small mb-2.5" style="font-size: 0.78rem;">មិនមានបុគ្គលិកត្រូវនឹងការច្រោះស្វែងរករបស់អ្នក ឬមិនទាន់មានការចុះឈ្មោះបុគ្គលិកនៅឡើយទេ។</p>
-                            <a href="{{ route('employees.create') }}" class="btn btn-sm btn-primary-action text-white shadow-sm" style="background: #e8a838; border-color: #e8a838; font-size: 0.78rem; padding: 0.3rem 0.75rem;">
-                                <i class="bi bi-plus-circle me-1"></i>+ បន្ថែមបុគ្គលិកដំបូង
-                            </a>
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
 
-    {{-- Pagination --}}
-    @if($employees->hasPages())
-        <div class="p-3 border-top bg-light d-flex align-items-center justify-content-between flex-wrap gap-2">
-            <div class="text-muted small">
-                បង្ហាញពី {{ $employees->firstItem() }} ដល់ {{ $employees->lastItem() }} នៃ {{ $employees->total() }} នាក់
-            </div>
-            <div>
-                {{ $employees->links('pagination::bootstrap-5') }}
-            </div>
+                        {{-- Employee Code (Separate Column with clean badge like student) --}}
+                        <td>
+                            <code class="adm-badge font-monospace fw-semibold" style="font-size: 0.82rem; background-color: #f1f5f9; padding: 2px 7px; border-radius: 5px; color: #1e293b;">
+                                {{ $employee->employee_code }}
+                            </code>
+                        </td>
+
+                        {{-- Department --}}
+                        <td>
+                            <span class="fw-medium text-dark" style="font-size: 0.86rem;">
+                                {{ $employee->employee_department->name ?? '—' }}
+                            </span>
+                        </td>
+
+                        {{-- Position --}}
+                        <td>
+                            <span class="text-dark" style="font-size: 0.85rem;">
+                                {{ $employee->employee_position->name ?? '—' }}
+                            </span>
+                        </td>
+
+                        {{-- Phone (Single Line) --}}
+                        <td>
+                            <span class="text-dark" style="font-size: 0.85rem;">{{ $phone }}</span>
+                        </td>
+
+                        {{-- Date of Joining --}}
+                        <td>
+                            <span class="text-muted" style="font-size: 0.84rem;">
+                                {{ $employee->date_of_joining ? $employee->date_of_joining->format('M d, Y') : '—' }}
+                            </span>
+                        </td>
+
+                        {{-- Minimal Dot Status ("• សកម្ម") --}}
+                        <td>
+                            <div class="d-inline-flex align-items-center gap-1.5" style="font-size: 0.84rem; font-weight: 500; color: {{ $textColor }};">
+                                <span class="rounded-circle d-inline-block flex-shrink-0" style="width: 7px; height: 7px; background-color: {{ $dotColor }};"></span>
+                                <span>{{ $statusText }}</span>
+                            </div>
+                        </td>
+
+                        {{-- Actions "..." Dropdown Menu --}}
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-light border-0 py-1 px-2 text-muted" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="border-radius: 6px;"
+                                        title="សកម្មភាព">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border py-1" style="min-width: 165px; border-color: #e2e8f0; border-radius: 8px; font-size: 0.86rem;">
+                                    <li>
+                                        <a class="dropdown-item py-1.5" href="{{ route('employees.show', $employee) }}">
+                                            <i class="bi bi-eye me-2 text-muted"></i>មើលព័ត៌មានលម្អិត
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-1.5" href="{{ route('employees.id-card', $employee) }}" target="_blank">
+                                            <i class="bi bi-person-badge me-2 text-muted"></i>បោះពុម្ពកាតបុគ្គលិក
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-1.5" href="{{ route('employees.edit', $employee) }}">
+                                            <i class="bi bi-pencil me-2 text-muted"></i>កែសម្រួល
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <button type="button" class="dropdown-item py-1.5 text-danger"
+                                                onclick="confirmDelete({{ $employee->id }}, '{{ addslashes($name) }}', '{{ addslashes($employee->employee_code) }}')">
+                                            <i class="bi bi-trash me-2 text-danger"></i>លុបបុគ្គលិក
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+
+        {{-- Pagination --}}
+        @if($employees->hasPages())
+            <div class="p-3 px-4 border-top bg-light bg-opacity-50 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-color: #e2e8f0 !important;">
+                <div class="text-muted small" style="font-size: 0.82rem;">
+                    បង្ហាញពី {{ $employees->firstItem() }} ដល់ {{ $employees->lastItem() }} នៃ {{ $employees->total() }} នាក់
+                </div>
+                <div>
+                    {{ $employees->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
+        @endif
     @endif
 </div>
 
-{{-- ═══════════════════════════════════════════════════════════════════
-     DELETE MODAL
-═══════════════════════════════════════════════════════════════════ --}}
+{{-- ═══════════════════════════════════════════
+     DELETE CONFIRMATION MODAL
+═══════════════════════════════════════════ --}}
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-lg, 12px);">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 12px;">
             <div class="modal-body p-4 text-center">
                 <div class="mb-3">
-                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 64px; height: 64px;">
-                        <i class="bi bi-exclamation-triangle fs-2"></i>
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 56px; height: 56px;">
+                        <i class="bi bi-exclamation-triangle fs-3"></i>
                     </span>
                 </div>
                 <h5 class="fw-bold mb-1 text-dark">លុបប្រវត្តិរូបបុគ្គលិក?</h5>
@@ -561,11 +422,11 @@
                     សកម្មភាពនេះនឹងផ្អាកគណនី និងលុបចេញពីបញ្ជី ប៉ុន្តែនៅរក្សាទុកប្រវត្តិនៃវត្តមាន និងប្រាក់បៀវត្សរ៍ដដែល។
                 </p>
                 <div class="d-flex justify-content-center gap-2">
-                    <button type="button" class="btn btn-outline-secondary btn-sm px-4" data-bs-dismiss="modal">បោះបង់</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-4" style="border-radius: 8px;" data-bs-dismiss="modal">បោះបង់</button>
                     <form id="deleteForm" method="POST" action="">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm px-4 shadow-sm">
+                        <button type="submit" class="btn btn-danger btn-sm px-4 shadow-none" style="border-radius: 8px;">
                             <i class="bi bi-trash me-1"></i>យល់ព្រមលុប
                         </button>
                     </form>
