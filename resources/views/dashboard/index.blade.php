@@ -224,7 +224,7 @@
                     <i class="bi bi-calendar2-check text-muted"></i> វត្តមាន
                 </a>
                 <a href="{{ route('students.create') }}" class="btn btn-primary-action btn-sm" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; border-radius: 8px;">
-                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្ស
+                    <i class="bi bi-plus-lg me-1"></i>បន្ថែមសិស្ស
                 </a>
             @else
                 <a href="{{ route('attendance.index') }}" class="btn btn-primary-action btn-sm" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; border-radius: 8px;">
