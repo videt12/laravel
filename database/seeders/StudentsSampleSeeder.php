@@ -2,7 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Academics\Grade;
+use App\Models\Academics\SchoolClass;
+use App\Models\Academics\Section;
 use App\Models\Auth\User;
+use App\Models\Core\AcademicYear;
+use App\Models\Core\SchoolShift;
 use App\Models\Students\Student;
 use App\Models\Students\StudentProfile;
 use App\Models\Students\StudentStatus;
@@ -18,6 +23,22 @@ class StudentsSampleSeeder extends Seeder
     public function run(): void
     {
         $statusActive = StudentStatus::where('name', 'Active')->first() ?? StudentStatus::first();
+        $academicYear = AcademicYear::first();
+        $grade = Grade::where('name', 'Grade 1')->first() ?? Grade::first();
+        $section = Section::where('name', 'Section A')->first() ?? Section::first();
+        $shift = SchoolShift::first();
+
+        // Ensure at least one SchoolClass exists for students to enroll into
+        $schoolClass = SchoolClass::firstOrCreate(
+            [
+                'grade_id' => $grade?->id ?? 1,
+                'section_id' => $section?->id ?? 1,
+                'academic_year_id' => $academicYear?->id ?? 1,
+            ],
+            [
+                'capacity' => 40,
+            ]
+        );
 
         $students = [
             [
@@ -33,10 +54,6 @@ class StudentsSampleSeeder extends Seeder
                 'dob' => '2010-10-23',
                 'photo' => 'student-photos/wwxgsUaiZTfSGGG7owvhdZh7tpx1igdV54CjaXvV.webp',
                 'nationality' => 'Cambodian',
-                'academic_year_id' => 1,
-                'school_class_id' => 1,
-                'section_id' => 1,
-                'school_shift_id' => 1,
                 'study_mode' => 'full_time',
             ],
             [
@@ -52,10 +69,6 @@ class StudentsSampleSeeder extends Seeder
                 'dob' => '2011-05-15',
                 'photo' => null,
                 'nationality' => 'Cambodian',
-                'academic_year_id' => 1,
-                'school_class_id' => 1,
-                'section_id' => 1,
-                'school_shift_id' => 1,
                 'study_mode' => 'full_time',
             ],
             [
@@ -71,10 +84,6 @@ class StudentsSampleSeeder extends Seeder
                 'dob' => '2010-08-20',
                 'photo' => null,
                 'nationality' => 'Cambodian',
-                'academic_year_id' => 1,
-                'school_class_id' => 1,
-                'section_id' => 1,
-                'school_shift_id' => 1,
                 'study_mode' => 'part_time',
             ],
         ];
@@ -107,10 +116,10 @@ class StudentsSampleSeeder extends Seeder
                     'admission_date' => Carbon::now()->subMonths(2),
                     'enrollment_date' => Carbon::now()->subMonths(2)->toDateString(),
                     'student_status_id' => $statusActive?->id ?? 1,
-                    'academic_year_id' => $data['academic_year_id'],
-                    'school_class_id' => $data['school_class_id'],
-                    'section_id' => $data['section_id'],
-                    'school_shift_id' => $data['school_shift_id'],
+                    'academic_year_id' => $academicYear?->id ?? 1,
+                    'school_class_id' => $schoolClass->id,
+                    'section_id' => $section?->id ?? 1,
+                    'school_shift_id' => $shift?->id ?? 1,
                     'study_mode' => $data['study_mode'],
                 ]
             );
