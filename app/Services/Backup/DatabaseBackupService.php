@@ -386,26 +386,53 @@ class DatabaseBackupService
     {
         $conn = DB::connection();
         $dbName = $conn->getDatabaseName();
+        $driver = $conn->getDriverName();
+
+        $totalTables = 0;
+        $sizeMb = 0.0;
 
         try {
-            $tableStats = DB::select('
-                SELECT 
-                    COUNT(*) as total_tables,
-                    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS size_mb
-                FROM information_schema.tables 
-                WHERE table_schema = ?
-            ', [$dbName]);
+            if ($driver === 'pgsql') {
+                $tableStats = DB::select("
+                    SELECT 
+                        count(*) as total_tables,
+                        round(sum(pg_total_relation_size(quote_ident(schemaname) || '.' || quote_ident(tablename)))::numeric / 1024 / 1024, 2) as size_mb
+                    FROM pg_tables 
+                    WHERE schemaname = current_schema()
+                ");
+                $totalTables = (int) ($tableStats[0]->total_tables ?? 0);
+                $sizeMb = (float) ($tableStats[0]->size_mb ?? 0.0);
+            } elseif ($driver === 'sqlite') {
+                $tables = DB::select("SELECT count(*) as total_tables FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
+                $totalTables = (int) ($tables[0]->total_tables ?? 0);
+                $sizeMb = round(@filesize($dbName) / 1024 / 1024, 2);
+            } else {
+                $tableStats = DB::select('
+                    SELECT 
+                        COUNT(*) as total_tables,
+                        ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS size_mb
+                    FROM information_schema.tables 
+                    WHERE table_schema = ?
+                ', [$dbName]);
 
-            $totalTables = $tableStats[0]->total_tables ?? 0;
-            $sizeMb = $tableStats[0]->size_mb ?? 0.0;
+                $totalTables = (int) ($tableStats[0]->total_tables ?? 0);
+                $sizeMb = (float) ($tableStats[0]->size_mb ?? 0.0);
+            }
         } catch (\Throwable $e) {
-            $totalTables = count($conn->select('SHOW TABLES'));
+            try {
+                $totalTables = count(Schema::getTables());
+            } catch (\Throwable $ignored) {
+                $totalTables = 0;
+            }
             $sizeMb = 0.0;
         }
 
-        $pdo = $conn->getPdo();
-        $version = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
-        $driver = $conn->getDriverName();
+        try {
+            $pdo = $conn->getPdo();
+            $version = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+        } catch (\Throwable $e) {
+            $version = 'Unknown';
+        }
 
         return [
             'database_name' => $dbName,

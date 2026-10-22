@@ -29,6 +29,18 @@ if [ -n "$DATABASE_URL" ] || [ "$DB_CONNECTION" = "pgsql" ] || [ "$DB_CONNECTION
     echo "==> [Startup] Running database migrations on external database..."
     php artisan migrate --force || true
     echo "==> [Startup] Ensuring base seeders are populated..."
+    php artisan db:seed --class=RolesAndPermissionsSeeder --force || true
+    php artisan db:seed --class=StudentStatusesSeeder --force || true
+    php artisan db:seed --class=StudentCategoriesSeeder --force || true
+    php artisan db:seed --class=AttendanceStatusesSeeder --force || true
+    php artisan db:seed --class=ExamTypesSeeder --force || true
+    php artisan db:seed --class=GradeScalesSeeder --force || true
+    php artisan db:seed --class=FeeCategoriesSeeder --force || true
+    php artisan db:seed --class=PaymentMethodsSeeder --force || true
+    php artisan db:seed --class=LeaveTypesSeeder --force || true
+    php artisan db:seed --class=SubjectGroupsSeeder --force || true
+    php artisan db:seed --class=EmployeePositionsDepartmentsSeeder --force || true
+    php artisan db:seed --class=SchoolSetupSeeder --force || true
     php artisan db:seed --force || true
 fi
 
