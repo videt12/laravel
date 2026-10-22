@@ -51,14 +51,14 @@
         @endif
         @if(auth()->user()?->canAccess('students.create'))
         <a href="{{ route('students.create') }}" class="btn btn-primary-action">
-            <i class="bi bi-plus-lg me-1"></i>បន្ថែមសិស្ស
+            <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្ស
         </a>
         @endif
     </div>
 </div>
 
 @if(session('import_errors') && count(session('import_errors')) > 0)
-    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert" style="border-radius: 10px;">
+    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px; border: 1px solid #fde047;">
         <h6 class="alert-heading fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>បញ្ហាមួយចំនួនក្នុងការនាំចូលទិន្នន័យ៖</h6>
         <ul class="mb-0 ps-3 small">
             @foreach(session('import_errors') as $err)
@@ -70,275 +70,245 @@
 @endif
 
 {{-- ═══════════════════════════════════════════
-     SUMMARY METRICS CARDS
+     SUMMARY METRICS CARDS (P-4 / P-6 SPACIOUS PURE WHITE CARDS)
 ═══════════════════════════════════════════ --}}
 @php
     $canSeeFinance = auth()->user()?->canAccess(['finance.view', 'finance']);
     $metricCol = $canSeeFinance ? 'col-12 col-sm-6 col-xl-3' : 'col-12 col-sm-4';
 @endphp
-<div class="row g-3 mb-3">
+<div class="row g-3 mb-4">
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សសរុប</span>
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #eff6ff; color: #2563eb;">
-                    <i class="bi bi-people fs-6"></i>
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សសរុប</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #eff6ff; color: #2563eb; flex-shrink: 0;">
+                    <i class="bi bi-people-fill fs-6"></i>
                 </div>
             </div>
-            <h3 class="fw-bold text-dark mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($totalStudents) }}</h3>
-            <div class="d-flex align-items-center gap-1.5 text-muted small" style="font-size: 0.76rem;">
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($totalStudents) }}</h3>
+            <div class="d-flex align-items-center gap-1.5 small" style="font-size: 0.78rem; color: #64748b;">
                 <span class="text-dark fw-medium">ពេញម៉ោង: {{ number_format($fullTimeCount ?? 0) }}</span>
                 <span>·</span>
-                <span class="text-muted">ក្រៅម៉ោង: {{ number_format($partTimeCount ?? 0) }}</span>
+                <span>ក្រៅម៉ោង: {{ number_format($partTimeCount ?? 0) }}</span>
             </div>
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សថ្មី</span>
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #f0fdf4; color: #16a34a;">
-                    <i class="bi bi-person-plus fs-6"></i>
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សថ្មី</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #f0fdf4; color: #16a34a; flex-shrink: 0;">
+                    <i class="bi bi-person-plus-fill fs-6"></i>
                 </div>
             </div>
-            <h3 class="fw-bold text-success mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($newStudentsCount) }}</h3>
-            <div class="text-muted small" style="font-size: 0.76rem;">ចុះឈ្មោះក្នុងឆ្នាំសិក្សាថ្មី</div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #16a34a;">{{ number_format($newStudentsCount) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">ចុះឈ្មោះក្នុងឆ្នាំសិក្សាថ្មី</div>
         </div>
     </div>
     <div class="{{ $metricCol }}">
-        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សិស្សចាស់ / បន្ត</span>
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #faf5ff; color: #9333ea;">
-                    <i class="bi bi-mortarboard fs-6"></i>
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សិស្សចាស់ / បន្ត</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #faf5ff; color: #9333ea; flex-shrink: 0;">
+                    <i class="bi bi-mortarboard-fill fs-6"></i>
                 </div>
             </div>
-            <h3 class="fw-bold text-dark mb-1" style="font-size: 1.55rem; line-height: 1.2;">{{ number_format($returningStudentsCount) }}</h3>
-            <div class="text-muted small" style="font-size: 0.76rem;">សិស្សកំពុងបន្តការសិក្សា</div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #0f172a;">{{ number_format($returningStudentsCount) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">សិស្សកំពុងបន្តការសិក្សា</div>
         </div>
     </div>
     @if($canSeeFinance)
     <div class="col-12 col-sm-6 col-xl-3">
-        <div class="card h-100 border bg-white p-3 shadow-xs" style="border-color: #e5e7eb !important; border-radius: 12px;">
+        <div class="card h-100 bg-white p-4" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; box-shadow: none !important;">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fw-medium" style="font-size: 0.8rem;">សមតុល្យជំពាក់</span>
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #fff1f2; color: #e11d48;">
+                <span class="fw-medium" style="font-size: 0.84rem; color: #64748b;">សមតុល្យជំពាក់</span>
+                <div class="d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 8px; background-color: #fff1f2; color: #e11d48; flex-shrink: 0;">
                     <i class="bi bi-wallet2 fs-6"></i>
                 </div>
             </div>
-            <h3 class="fw-bold text-danger mb-1" style="font-size: 1.55rem; line-height: 1.2;">${{ number_format($totalOutstandingBalance, 2) }}</h3>
-            <div class="text-muted small" style="font-size: 0.76rem;">ប្រាក់ត្រូវប្រមូលនៅសល់</div>
+            <h3 class="fw-bold mb-1" style="font-size: 1.85rem; line-height: 1.15; color: #e11d48;">${{ number_format($totalOutstandingBalance, 2) }}</h3>
+            <div class="small" style="font-size: 0.78rem; color: #64748b;">ប្រាក់ត្រូវប្រមូលនៅសល់</div>
         </div>
     </div>
     @endif
 </div>
 
 {{-- ═══════════════════════════════════════════
-     FILTER TOOLBAR
+     SINGLE DATA TABLE & TOOLBAR CARD (#FFFFFF, 1px #E2E8F0)
 ═══════════════════════════════════════════ --}}
-<div class="toolbar-card mb-2">
-    <form method="GET" action="{{ route('students.index') }}" id="filterForm">
-        <div class="row g-2">
-            {{-- Search --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ស្វែងរក</label>
-                <div class="search-input-wrap">
-                    <i class="bi bi-search text-muted"></i>
+<div class="card bg-white" style="border: 1px solid #e2e8f0 !important; border-radius: 12px !important; overflow: hidden; box-shadow: none !important;">
+
+    {{-- Card Header: Title and total record count on the left, clean outline action button ("គ្រប់គ្រងវត្តមាន") on the right --}}
+    <div class="p-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2 border-bottom" style="border-color: #e2e8f0 !important;">
+        <div>
+            <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.12rem;">បញ្ជីសិស្សទាំងអស់</h5>
+            <div class="text-muted small" style="font-size: 0.82rem;">បង្ហាញសិស្សចំនួន {{ number_format($students->total()) }} នាក់ ក្នុងប្រព័ន្ធទិន្នន័យ</div>
+        </div>
+        <div>
+            <a href="{{ route('attendance.index') }}" class="btn btn-outline-white btn-sm px-3" style="border: 1px solid #e2e8f0 !important; border-radius: 8px !important; font-size: 0.85rem;">
+                <i class="bi bi-calendar-check me-1.5 text-muted"></i>គ្រប់គ្រងវត្តមាន
+            </a>
+        </div>
+    </div>
+
+    {{-- Filter Row: Search input on the left; clean dropdown filter ("គ្រប់ថ្នាក់") and filter button ("តម្រង") on the right --}}
+    <div class="p-3 px-4 bg-light bg-opacity-50 border-bottom" style="border-color: #e2e8f0 !important;">
+        <form method="GET" action="{{ route('students.index') }}" id="filterForm">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                {{-- Search with magnifying glass --}}
+                <div class="position-relative" style="width: 320px; max-width: 100%;">
+                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size: 0.82rem;"></i>
                     <input type="text"
                            name="search"
                            id="searchInput"
                            value="{{ $search }}"
-                           class="form-control form-control-sm"
-                           placeholder="ឈ្មោះ, អត្តលេខ…"
+                           class="form-control form-control-sm ps-5 pe-3"
+                           style="border: 1px solid #e2e8f0; border-radius: 8px; background: #ffffff; height: 38px;"
+                           placeholder="ស្វែងរកតាមឈ្មោះ ឬលេខសម្គាល់..."
                            autocomplete="off">
                 </div>
-            </div>
 
-            {{-- Academic Year --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ឆ្នាំសិក្សា</label>
-                <select name="academic_year_id" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ឆ្នាំទាំងអស់</option>
-                    @foreach($academicYears as $ay)
-                        <option value="{{ $ay->id }}" {{ $selectedYearId == $ay->id ? 'selected' : '' }}>
-                            {{ $ay->name }}{{ $ay->is_active ? ' (បច្ចុប្បន្ន)' : '' }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+                {{-- Right controls: Grade dropdown + filter button --}}
+                <div class="d-flex align-items-center gap-2">
+                    <select name="class_id" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff; width: auto; min-width: 130px; height: 38px;" onchange="document.getElementById('filterForm').submit()">
+                        <option value="">គ្រប់ថ្នាក់</option>
+                        @foreach($classes as $c)
+                            <option value="{{ $c->id }}" {{ $filterClass == $c->id ? 'selected' : '' }}>
+                                {{ $c->name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-            {{-- Class --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ថ្នាក់រៀន</label>
-                <select name="class_id" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ថ្នាក់ទាំងអស់</option>
-                    @foreach($classes as $c)
-                        <option value="{{ $c->id }}" {{ $filterClass == $c->id ? 'selected' : '' }}>
-                            {{ $c->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            {{-- Section --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">បន្ទប់/ផ្នែក</label>
-                <select name="section_id" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ទាំងអស់</option>
-                    @foreach($sections as $sec)
-                        <option value="{{ $sec->id }}" {{ $filterSection == $sec->id ? 'selected' : '' }}>
-                            {{ $sec->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            {{-- Student Type: New / Returning --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ប្រភេទសិស្ស</label>
-                <select name="student_type" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ប្រភេទទាំងអស់</option>
-                    <option value="new" {{ $filterStudentType === 'new' ? 'selected' : '' }}>សិស្សថ្មី</option>
-                    <option value="returning" {{ $filterStudentType === 'returning' ? 'selected' : '' }}>សិស្សចាស់</option>
-                </select>
-            </div>
-
-            {{-- Payment Status --}}
-            @if($canSeeFinance)
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ស្ថានភាពទូទាត់</label>
-                <select name="payment_status" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ការទូទាត់ទាំងអស់</option>
-                    <option value="paid" {{ $filterPaymentStatus === 'paid' ? 'selected' : '' }}>បានបង់គ្រប់</option>
-                    <option value="partial" {{ $filterPaymentStatus === 'partial' ? 'selected' : '' }}>បង់ខ្លះ</option>
-                    <option value="unpaid" {{ $filterPaymentStatus === 'unpaid' ? 'selected' : '' }}>មិនទាន់បង់</option>
-                    <option value="overdue" {{ $filterPaymentStatus === 'overdue' ? 'selected' : '' }}>ហួសកំណត់</option>
-                </select>
-            </div>
-            @endif
-
-            {{-- Row 2: Status, Study Mode & Actions all inline --}}
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ស្ថានភាពសិស្ស</label>
-                <select name="status" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ស្ថានភាពសិស្សទាំងអស់</option>
-                    @foreach($statuses as $status)
-                        <option value="{{ $status->id }}" {{ $filterStatus == $status->id ? 'selected' : '' }}>
-                            {{ $status->khmer_name ?? $status->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label text-muted small mb-1 fw-medium">ទម្រង់សិក្សា</label>
-                <select name="study_mode" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">ទម្រង់សិក្សាទាំងអស់</option>
-                    <option value="full_time" {{ $filterStudyMode === 'full_time' ? 'selected' : '' }}>🎓 ពេញម៉ោង</option>
-                    <option value="part_time" {{ $filterStudyMode === 'part_time' ? 'selected' : '' }}>⏰ ក្រៅម៉ោង</option>
-                    <option value="dual" {{ $filterStudyMode === 'dual' ? 'selected' : '' }}>🔄 ទាំងពេញម៉ោង និង ក្រៅម៉ោង</option>
-                </select>
-            </div>
-
-            {{-- Actions and Results Count in the same row --}}
-            <div class="col-xl-8 col-lg-8 col-md-12 col-12 d-flex align-items-end justify-content-between flex-wrap gap-2 pt-md-0 pt-1">
-                <div class="d-flex align-items-center gap-1.5">
-                    <button type="submit" class="btn btn-sm btn-primary px-3 shadow-xs" style="height:33px;">
-                        <i class="bi bi-funnel me-1"></i>ស្វែងរក
+                    <button type="button" class="btn btn-sm btn-outline-white" data-bs-toggle="collapse" data-bs-target="#advancedFiltersCollapse" aria-expanded="{{ $hasFilters ? 'true' : 'false' }}" style="border: 1px solid #e2e8f0; border-radius: 8px; height: 38px;">
+                        <i class="bi bi-funnel text-muted me-1"></i>តម្រង
                     </button>
+
+                    <button type="submit" class="btn btn-sm btn-primary-action px-3" style="border-radius: 8px; height: 38px;">
+                        ស្វែងរក
+                    </button>
+
                     @if($hasFilters)
-                        <a href="{{ route('students.index') }}" class="btn btn-sm btn-outline-secondary px-2" style="height:33px;line-height:1.7;">
-                            <i class="bi bi-arrow-counterclockwise me-1"></i>កំណត់ឡើងវិញ
+                        <a href="{{ route('students.index') }}" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" style="border-radius: 8px; height: 38px; width: 38px;" title="សម្អាតតម្រងទាំងអស់">
+                            <i class="bi bi-arrow-counterclockwise"></i>
                         </a>
                     @endif
                 </div>
+            </div>
 
-                <div class="text-muted small">
-                    បង្ហាញលទ្ធផលត្រូវគ្នាសរុប <strong class="text-dark">{{ $students->total() }}</strong> នាក់
+            {{-- Collapsible Advanced Filters Section --}}
+            <div class="collapse {{ $hasFilters && ($filterAcademicYear || $filterSection || $filterStudentType || $filterPaymentStatus || $filterStatus || $filterStudyMode) ? 'show' : '' }} mt-3 pt-3 border-top" id="advancedFiltersCollapse" style="border-color: #e2e8f0 !important;">
+                <div class="row g-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">ឆ្នាំសិក្សា</label>
+                        <select name="academic_year_id" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">ឆ្នាំទាំងអស់</option>
+                            @foreach($academicYears as $ay)
+                                <option value="{{ $ay->id }}" {{ $selectedYearId == $ay->id ? 'selected' : '' }}>
+                                    {{ $ay->name }}{{ $ay->is_active ? ' (បច្ចុប្បន្ន)' : '' }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">បន្ទប់/ផ្នែក</label>
+                        <select name="section_id" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">បន្ទប់ទាំងអស់</option>
+                            @foreach($sections as $sec)
+                                <option value="{{ $sec->id }}" {{ $filterSection == $sec->id ? 'selected' : '' }}>
+                                    {{ $sec->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">ប្រភេទសិស្ស</label>
+                        <select name="student_type" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">ប្រភេទទាំងអស់</option>
+                            <option value="new" {{ $filterStudentType === 'new' ? 'selected' : '' }}>សិស្សថ្មី</option>
+                            <option value="returning" {{ $filterStudentType === 'returning' ? 'selected' : '' }}>សិស្សចាស់</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">ស្ថានភាពសិស្ស</label>
+                        <select name="status" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">ស្ថានភាពទាំងអស់</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ $filterStatus == $status->id ? 'selected' : '' }}>
+                                    {{ $status->khmer_name ?? $status->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">ទម្រង់សិក្សា</label>
+                        <select name="study_mode" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">ទម្រង់ទាំងអស់</option>
+                            <option value="full_time" {{ $filterStudyMode === 'full_time' ? 'selected' : '' }}>ពេញម៉ោង</option>
+                            <option value="part_time" {{ $filterStudyMode === 'part_time' ? 'selected' : '' }}>ក្រៅម៉ោង</option>
+                        </select>
+                    </div>
+                    @if($canSeeFinance)
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <label class="form-label text-muted small mb-1 fw-medium">ការទូទាត់</label>
+                        <select name="payment_status" class="form-select form-select-sm" style="border: 1px solid #e2e8f0; border-radius: 8px;" onchange="document.getElementById('filterForm').submit()">
+                            <option value="">ការទូទាត់ទាំងអស់</option>
+                            <option value="paid" {{ $filterPaymentStatus === 'paid' ? 'selected' : '' }}>បានបង់គ្រប់</option>
+                            <option value="partial" {{ $filterPaymentStatus === 'partial' ? 'selected' : '' }}>បង់ខ្លះ</option>
+                            <option value="unpaid" {{ $filterPaymentStatus === 'unpaid' ? 'selected' : '' }}>មិនទាន់បង់</option>
+                            <option value="overdue" {{ $filterPaymentStatus === 'overdue' ? 'selected' : '' }}>ហួសកំណត់</option>
+                        </select>
+                    </div>
+                    @endif
                 </div>
             </div>
-        </div>
 
-        {{-- Active filter chips --}}
-        @if($hasFilters)
-        <div class="mt-2 d-flex align-items-center gap-2 flex-wrap">
-            <span class="text-muted" style="font-size:.75rem">តម្រងកំពុងប្រើ៖</span>
-            @if($search)
-                <span class="filter-chip">
-                    ស្វែងរក៖ "{{ $search }}"
-                    <a href="{{ route('students.index', request()->except('search')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterAcademicYear)
-                @php $activeYearObj = $academicYears->firstWhere('id', $filterAcademicYear); @endphp
-                <span class="filter-chip">
-                    ឆ្នាំ៖ {{ $activeYearObj?->name ?? $filterAcademicYear }}
-                    <a href="{{ route('students.index', request()->except('academic_year_id')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterClass)
-                @php $activeClassObj = $classes->firstWhere('id', $filterClass); @endphp
-                <span class="filter-chip">
-                    ថ្នាក់៖ {{ $activeClassObj?->name ?? $filterClass }}
-                    <a href="{{ route('students.index', request()->except('class_id')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterSection)
-                @php $activeSecObj = $sections->firstWhere('id', $filterSection); @endphp
-                <span class="filter-chip">
-                    បន្ទប់៖ {{ $activeSecObj?->name ?? $filterSection }}
-                    <a href="{{ route('students.index', request()->except('section_id')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterStudentType)
-                <span class="filter-chip">
-                    ប្រភេទ៖ {{ $filterStudentType === 'new' ? 'សិស្សថ្មី' : 'សិស្សចាស់' }}
-                    <a href="{{ route('students.index', request()->except('student_type')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterPaymentStatus && $canSeeFinance)
-                <span class="filter-chip">
-                    ការទូទាត់៖ {{ $filterPaymentStatus }}
-                    <a href="{{ route('students.index', request()->except('payment_status')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterStatus)
-                @php $selectedStatus = $statuses->find($filterStatus) @endphp
-                <span class="filter-chip">
-                    ស្ថានភាព៖ {{ $selectedStatus?->khmer_name ?? $selectedStatus?->name ?? $filterStatus }}
-                    <a href="{{ route('students.index', request()->except('status')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-            @if($filterStudyMode)
-                <span class="filter-chip">
-                    ទម្រង់៖ {{ $filterStudyMode === 'part_time' ? 'ក្រៅម៉ោង (Part-Time)' : 'ពេញម៉ោង (Full-Time)' }}
-                    <a href="{{ route('students.index', request()->except('study_mode')) }}" class="ms-1 text-muted"><i class="bi bi-x"></i></a>
-                </span>
-            @endif
-        </div>
-        @endif
-    </form>
-</div>
-
-{{-- ═══════════════════════════════════════════
-     STUDENT TABLE CARD
-═══════════════════════════════════════════ --}}
-<div class="data-card">
-
-    {{-- Card Header --}}
-    <div class="data-card-header d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center gap-2">
-            <span class="fw-semibold text-dark">បញ្ជីឈ្មោះសិស្ស</span>
-            <span class="count-badge">{{ $students->total() }}</span>
+            {{-- Active Filter Chips --}}
             @if($hasFilters)
-                <span class="text-muted" style="font-size:.75rem">· បានច្រោះ</span>
+            <div class="mt-2.5 d-flex align-items-center gap-2 flex-wrap">
+                <span class="text-muted" style="font-size: 0.74rem;">តម្រងកំពុងប្រើ៖</span>
+                @if($search)
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        ស្វែងរក៖ "{{ $search }}"
+                        <a href="{{ route('students.index', request()->except('search')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+                @if($filterClass)
+                    @php $activeClassObj = $classes->firstWhere('id', $filterClass); @endphp
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        ថ្នាក់៖ {{ $activeClassObj?->name ?? $filterClass }}
+                        <a href="{{ route('students.index', request()->except('class_id')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+                @if($filterAcademicYear)
+                    @php $activeYearObj = $academicYears->firstWhere('id', $filterAcademicYear); @endphp
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        ឆ្នាំ៖ {{ $activeYearObj?->name ?? $filterAcademicYear }}
+                        <a href="{{ route('students.index', request()->except('academic_year_id')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+                @if($filterSection)
+                    @php $activeSecObj = $sections->firstWhere('id', $filterSection); @endphp
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        បន្ទប់៖ {{ $activeSecObj?->name ?? $filterSection }}
+                        <a href="{{ route('students.index', request()->except('section_id')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+                @if($filterStudentType)
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        ប្រភេទ៖ {{ $filterStudentType === 'new' ? 'សិស្សថ្មី' : 'សិស្សចាស់' }}
+                        <a href="{{ route('students.index', request()->except('student_type')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+                @if($filterStatus)
+                    @php $selectedStatus = $statuses->find($filterStatus); @endphp
+                    <span class="badge bg-light text-dark border px-2 py-1" style="border-radius: 6px; font-weight: 500;">
+                        ស្ថានភាព៖ {{ $selectedStatus?->khmer_name ?? $selectedStatus?->name ?? $filterStatus }}
+                        <a href="{{ route('students.index', request()->except('status')) }}" class="ms-1 text-muted text-decoration-none"><i class="bi bi-x"></i></a>
+                    </span>
+                @endif
+            </div>
             @endif
-        </div>
-        <small class="text-muted">
-            @if($students->total() > 0)
-                បង្ហាញ {{ $students->firstItem() }}–{{ $students->lastItem() }} នៃ {{ $students->total() }}
-            @endif
-        </small>
+        </form>
     </div>
 
     {{-- Table / Empty State --}}
@@ -356,32 +326,32 @@
                 @endif
             </p>
             @if($hasFilters)
-                <a href="{{ route('students.index') }}" class="btn btn-outline-secondary btn-sm">សម្អាតការស្វែងរកទាំងអស់</a>
+                <a href="{{ route('students.index') }}" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">សម្អាតការស្វែងរកទាំងអស់</a>
             @elseif(auth()->user()?->canAccess('students.create'))
                 <a href="{{ route('students.create') }}" class="btn btn-primary-action btn-sm">
-                    <i class="bi bi-plus-lg me-1"></i>បន្ថែមសិស្សដំបូង
+                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្សដំបូង
                 </a>
             @endif
         </div>
     @else
         <div class="table-responsive">
-            <table class="data-table align-middle">
+            <table class="data-table align-middle w-100" style="border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="width:36px" class="text-center">#</th>
-                        <th>សិស្ស</th>
-                        <th>អត្តលេខ</th>
-                        <th>ថ្នាក់រៀន / បន្ទប់</th>
-                        <th>ឆ្នាំសិក្សា</th>
-                        <th>ប្រភេទ</th>
+                        <th style="width: 44px; text-align: center;">
+                            <input type="checkbox" class="form-check-input" id="selectAllCheckbox" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;" title="ជ្រើសរើសទាំងអស់">
+                        </th>
+                        <th>ឈ្មោះសិស្ស</th>
+                        <th>លេខសម្គាល់</th>
+                        <th>ភេទ</th>
+                        <th>ថ្នាក់រៀន</th>
+                        <th>លេខទូរស័ព្ទ</th>
                         @if($canSeeFinance)
-                        <th class="text-end">វិក្កយបត្រ</th>
-                        <th class="text-end">បានបង់</th>
                         <th class="text-end">សមតុល្យ</th>
-                        <th class="text-center">ស្ថានភាពទូទាត់</th>
+                        <th class="text-center">ការទូទាត់</th>
                         @endif
                         <th>ស្ថានភាព</th>
-                        <th style="width:60px" class="text-end">សកម្មភាព</th>
+                        <th style="width: 60px;" class="text-end">សកម្មភាព</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -404,14 +374,14 @@
                         $avatarText   = $khmerName ?: ($latinName ?: 'S');
                         $initials     = mb_strtoupper(mb_substr($avatarText, 0, 1));
                         
-                        // Muted pastel palettes
+                        // Muted pastel palettes (inspired by shadcn)
                         $pastelPalettes = [
-                            ['bg' => '#eff6ff', 'color' => '#2563eb', 'border' => '#dbeafe'], // soft blue
-                            ['bg' => '#f0fdf4', 'color' => '#16a34a', 'border' => '#dcfce7'], // soft green
-                            ['bg' => '#fefce8', 'color' => '#ca8a04', 'border' => '#fef08a'], // soft amber
-                            ['bg' => '#faf5ff', 'color' => '#9333ea', 'border' => '#f3e8ff'], // soft purple
-                            ['bg' => '#fff1f2', 'color' => '#e11d48', 'border' => '#ffe4e6'], // soft rose
-                            ['bg' => '#ecfeff', 'color' => '#0891b2', 'border' => '#cffafe'], // soft cyan
+                            ['bg' => '#eff6ff', 'color' => '#2563eb', 'border' => '#dbeafe'],
+                            ['bg' => '#f0fdf4', 'color' => '#16a34a', 'border' => '#dcfce7'],
+                            ['bg' => '#fefce8', 'color' => '#ca8a04', 'border' => '#fef08a'],
+                            ['bg' => '#faf5ff', 'color' => '#9333ea', 'border' => '#f3e8ff'],
+                            ['bg' => '#fff1f2', 'color' => '#e11d48', 'border' => '#ffe4e6'],
+                            ['bg' => '#ecfeff', 'color' => '#0891b2', 'border' => '#cffafe'],
                         ];
                         $palette      = $pastelPalettes[abs(crc32($displayName)) % count($pastelPalettes)];
 
@@ -424,11 +394,27 @@
                         $paid = $student->calculated_paid ?? 0;
                         $balance = $student->calculated_balance ?? 0;
                         $pStatus = $student->calculated_payment_status ?? 'unpaid';
-                        $sType = $student->calculated_student_type ?? 'new';
+
+                        // Gender & Phone
+                        $rawGender = $student->studentProfile?->gender;
+                        $genderText = match(strtolower((string) $rawGender)) {
+                            'female', 'f' => 'ស្រី',
+                            'male', 'm'   => 'ប្រុស',
+                            default       => '—'
+                        };
+                        $phoneText = $student->studentProfile?->phone ?? $student->user?->phone ?? '—';
+
+                        // Status dot calculation
+                        $rawStatus = $student->studentStatus?->slug ?? $student->studentStatus?->name ?? 'active';
+                        $statusName = $student->studentStatus?->khmer_name ?? $student->studentStatus?->name ?? 'សកម្ម';
+                        $isAct = str_contains(strtolower($rawStatus), 'active') || str_contains($statusName, 'សកម្ម') || str_contains($statusName, 'កំពុង');
+                        $dotColor = $isAct ? '#22c55e' : (str_contains(strtolower($rawStatus), 'suspend') || str_contains($statusName, 'ព្យួរ') ? '#f59e0b' : '#94a3b8');
                     @endphp
                     <tr class="table-row-hover">
-                        {{-- Row number --}}
-                        <td class="text-muted text-center" style="font-size:.75rem">{{ $students->firstItem() + $i }}</td>
+                        {{-- Checkbox --}}
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="form-check-input student-checkbox" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;">
+                        </td>
 
                         {{-- Student Avatar + Name --}}
                         <td>
@@ -440,25 +426,25 @@
                                     <img src="{{ $photoUrl }}"
                                          alt="{{ $displayName }}"
                                          class="rounded-circle flex-shrink-0 border object-fit-cover shadow-xs"
-                                         style="width:34px;height:34px; border-color: #e5e7eb !important;"
+                                         style="width:36px;height:36px; border-color: #e5e7eb !important;"
                                          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
-                                    <div class="student-avatar flex-shrink-0 d-none" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:34px;height:34px;font-size:.82rem;font-weight:600;border-radius:50%;">
+                                    <div class="student-avatar flex-shrink-0 d-none" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:36px;height:36px;font-size:.84rem;font-weight:600;border-radius:50%;">
                                         {{ $initials }}
                                     </div>
                                 @else
-                                    <div class="student-avatar flex-shrink-0" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:34px;height:34px;font-size:.82rem;font-weight:600;border-radius:50%;">
+                                    <div class="student-avatar flex-shrink-0" style="background-color:{{ $palette['bg'] }};color:{{ $palette['color'] }};border:1px solid {{ $palette['border'] }};width:36px;height:36px;font-size:.84rem;font-weight:600;border-radius:50%;">
                                         {{ $initials }}
                                     </div>
                                 @endif
                                 <div class="lh-sm min-w-0">
                                     <a href="{{ route('students.show', $student) }}"
                                        class="fw-semibold text-dark text-decoration-none student-name-link text-truncate d-block" 
-                                       style="max-width:190px;font-size:.85rem"
+                                       style="max-width:200px;font-size:.88rem"
                                        title="{{ $displayName }} ({{ $student->admission_number }})">
                                         {{ $displayName }}
                                     </a>
                                     @if($subName)
-                                        <div class="text-muted text-truncate" style="font-size:.72rem;max-width:190px" title="{{ $subName }}{{ $student->user?->email && $student->user->email !== $subName ? ' • ' . $student->user->email : '' }}">
+                                        <div class="text-muted text-truncate" style="font-size:.74rem;max-width:200px">
                                             {{ $subName }}
                                         </div>
                                     @endif
@@ -466,66 +452,36 @@
                             </div>
                         </td>
 
-                        {{-- Admission number --}}
+                        {{-- Admission number (Student ID) --}}
                         <td>
-                            <code class="adm-badge">{{ $student->admission_number ?? '—' }}</code>
+                            <code class="adm-badge font-monospace fw-semibold" style="font-size: 0.82rem; background-color: #f1f5f9; padding: 2px 7px; border-radius: 5px; color: #1e293b;">
+                                {{ $student->admission_number ?? '—' }}
+                            </code>
                         </td>
 
-                        {{-- Class & Section --}}
+                        {{-- Gender --}}
+                        <td>
+                            <span class="text-dark" style="font-size: 0.86rem;">{{ $genderText }}</span>
+                        </td>
+
+                        {{-- Grade & Section --}}
                         <td>
                             <div class="d-flex align-items-center gap-1 flex-wrap">
-                                <span class="fw-medium text-dark">{{ $className }}</span>
+                                <span class="fw-medium text-dark" style="font-size: 0.86rem;">{{ $className }}</span>
                                 @if($secName)
-                                    <span class="badge bg-light text-secondary border">{{ $secName }}</span>
+                                    <span class="badge bg-light text-secondary border" style="font-size: 0.72rem; border-color: #e2e8f0 !important;">{{ $secName }}</span>
                                 @endif
                             </div>
                         </td>
 
-                        {{-- Academic Year --}}
+                        {{-- Phone Number --}}
                         <td>
-                            <span class="text-muted small">
-                                {{ $student->academicYear?->name ?? '—' }}
-                            </span>
-                        </td>
-
-                        {{-- Student Type: New vs Returning & Study Mode --}}
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-wrap">
-                                @if($sType === 'returning')
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">សិស្សចាស់</span>
-                                @else
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">សិស្សថ្មី</span>
-                                @endif
-
-                                @if($student->study_mode === 'part_time')
-                                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill">
-                                        <i class="bi bi-clock me-1"></i>ក្រៅម៉ោង
-                                    </span>
-                                @elseif($student->study_mode === 'dual')
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">
-                                        <i class="bi bi-arrow-repeat me-1"></i>ពេញ & ក្រៅម៉ោង
-                                    </span>
-                                @else
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill">
-                                        <i class="bi bi-mortarboard me-1"></i>ពេញម៉ោង
-                                    </span>
-                                @endif
-                            </div>
+                            <span class="text-dark" style="font-size: 0.85rem;">{{ $phoneText }}</span>
                         </td>
 
                         @if($canSeeFinance)
-                        {{-- Total Invoiced --}}
-                        <td class="text-end fw-medium text-secondary" style="font-size:.85rem">
-                            ${{ number_format($invoiced, 2) }}
-                        </td>
-
-                        {{-- Total Paid --}}
-                        <td class="text-end fw-medium text-success" style="font-size:.85rem">
-                            ${{ number_format($paid, 2) }}
-                        </td>
-
                         {{-- Outstanding Balance --}}
-                        <td class="text-end fw-bold {{ $balance > 0 ? 'text-danger' : 'text-secondary' }}" style="font-size:.85rem">
+                        <td class="text-end fw-semibold {{ $balance > 0 ? 'text-danger' : 'text-secondary' }}" style="font-size:.85rem">
                             ${{ number_format($balance, 2) }}
                         </td>
 
@@ -543,42 +499,32 @@
                         </td>
                         @endif
 
-                        {{-- Student Status with small colored dot and text label --}}
+                        {{-- Minimal Green Dot Status Badge ("• សកម្ម") --}}
                         <td>
-                            @php
-                                $rawStatus = $student->studentStatus?->slug ?? $student->studentStatus?->name ?? 'active';
-                                $statusName = $student->studentStatus?->khmer_name ?? $student->studentStatus?->name ?? 'កំពុងរៀន';
-                                $dotColor = match(true) {
-                                    str_contains(strtolower($rawStatus), 'active') || str_contains($statusName, 'កំពុង') => '#22c55e',
-                                    str_contains(strtolower($rawStatus), 'suspend') || str_contains($statusName, 'ព្យួរ') => '#f59e0b',
-                                    str_contains(strtolower($rawStatus), 'graduat') || str_contains($statusName, 'បញ្ចប់') => '#3b82f6',
-                                    str_contains(strtolower($rawStatus), 'drop') || str_contains(strtolower($rawStatus), 'withdraw') || str_contains($statusName, 'ឈប់') => '#ef4444',
-                                    default => '#6b7280',
-                                };
-                            @endphp
-                            <div class="d-inline-flex align-items-center gap-1.5 px-2.5 py-1 rounded-pill bg-light border border-light-subtle text-dark" style="font-size: 0.78rem; font-weight: 500;">
+                            <div class="d-inline-flex align-items-center gap-1.5" style="font-size: 0.84rem; font-weight: 500; color: {{ $isAct ? '#15803d' : '#475569' }};">
                                 <span class="rounded-circle d-inline-block flex-shrink-0" style="width: 7px; height: 7px; background-color: {{ $dotColor }};"></span>
                                 <span>{{ $statusName }}</span>
                             </div>
                         </td>
 
-                        {{-- Actions dropdown --}}
+                        {{-- Actions "..." Dropdown Menu --}}
                         <td class="text-end">
                             <div class="dropdown">
-                                <button class="btn-action-dots" type="button"
+                                <button class="btn btn-sm btn-light border-0 py-1 px-2 text-muted" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="border-radius: 6px;"
                                         title="សកម្មភាព">
-                                    <i class="bi bi-three-dots-vertical"></i>
+                                    <i class="bi bi-three-dots"></i>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 py-1" style="min-width:160px;font-size:.875rem">
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border py-1" style="min-width:165px; border-color: #e2e8f0; border-radius: 8px; font-size: 0.86rem;">
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('students.show', $student) }}">
+                                        <a class="dropdown-item py-1.5" href="{{ route('students.show', $student) }}">
                                             <i class="bi bi-eye me-2 text-muted"></i>មើលប្រវត្តិរូប
                                         </a>
                                     </li>
                                     @if(auth()->user()?->canAccess('students.edit'))
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('students.edit', $student) }}">
+                                        <a class="dropdown-item py-1.5" href="{{ route('students.edit', $student) }}">
                                             <i class="bi bi-pencil me-2 text-muted"></i>កែសម្រួលព័ត៌មាន
                                         </a>
                                     </li>
@@ -586,14 +532,14 @@
                                     @if($canSeeFinance)
                                     <li><hr class="dropdown-divider my-1"></li>
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('student-invoices.index', ['student_id' => $student->id]) }}">
+                                        <a class="dropdown-item py-1.5" href="{{ route('student-invoices.index', ['student_id' => $student->id]) }}">
                                             <i class="bi bi-receipt me-2 text-primary"></i>មើលវិក្កយបត្រ
                                         </a>
                                     </li>
                                     @endif
                                     @if(auth()->user()?->canAccess(['finance.create', 'finance']))
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('student-payments.create', ['student_id' => $student->id]) }}">
+                                        <a class="dropdown-item py-1.5" href="{{ route('student-payments.create', ['student_id' => $student->id]) }}">
                                             <i class="bi bi-credit-card me-2 text-success"></i>កត់ត្រាការបង់ប្រាក់
                                         </a>
                                     </li>
@@ -601,12 +547,12 @@
                                     @if(auth()->user()?->canAccess(['students.edit', 'students.create']))
                                     <li><hr class="dropdown-divider my-1"></li>
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('students.id-card', $student) }}" target="_blank">
+                                        <a class="dropdown-item py-1.5" href="{{ route('students.id-card', $student) }}" target="_blank">
                                             <i class="bi bi-person-badge me-2 text-primary"></i>បោះពុម្ពកាតសិស្ស
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item py-2" href="{{ route('students.certificate', $student) }}" target="_blank">
+                                        <a class="dropdown-item py-1.5" href="{{ route('students.certificate', $student) }}" target="_blank">
                                             <i class="bi bi-award me-2 text-warning"></i>លិខិតបញ្ជាក់ការសិក្សា
                                         </a>
                                     </li>
@@ -615,10 +561,10 @@
                                     <li><hr class="dropdown-divider my-1"></li>
                                     <li>
                                         <button type="button"
-                                                class="dropdown-item py-2 text-danger"
+                                                class="dropdown-item py-1.5 text-danger"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#delModal{{ $student->id }}">
-                                            <i class="bi bi-trash me-2"></i>លុប
+                                            <i class="bi bi-trash me-2"></i>លុបសិស្ស
                                         </button>
                                     </li>
                                     @endif
@@ -629,7 +575,7 @@
                             @if(auth()->user()?->canAccess('students.delete'))
                             <div class="modal fade" id="delModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-sm">
-                                    <div class="modal-content border-0 shadow">
+                                    <div class="modal-content border-0" style="border: 1px solid #e2e8f0; border-radius: 12px;">
                                         <div class="modal-body p-4 text-center">
                                             <div class="mb-3">
                                                 <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10"
@@ -642,15 +588,15 @@
                                                 <strong>{{ $displayName }}</strong> (<code>{{ $student->admission_number }}</code>) នឹងត្រូវបានលុបចេញពីប្រព័ន្ធ។
                                             </p>
                                             @if($invoiced > 0 || $paid > 0)
-                                                <div class="alert alert-warning text-start small mb-3 py-1.5 px-2" style="font-size:0.75rem;">
+                                                <div class="alert alert-warning text-start small mb-3 py-1.5 px-2" style="font-size:0.75rem; border-radius: 8px;">
                                                     <i class="bi bi-shield-exclamation me-1"></i>សិស្សនេះមានទិន្នន័យហិរញ្ញវត្ថុ (${{ number_format($invoiced, 2) }} វិក្កយបត្រ / ${{ number_format($paid, 2) }} បង់ប្រាក់)។ ប្រព័ន្ធនឹងមិនអនុញ្ញាតឱ្យលុបឡើយ។
                                                 </div>
                                             @endif
                                             <div class="d-flex gap-2 justify-content-center">
-                                                <button class="btn btn-sm btn-outline-secondary px-3" data-bs-dismiss="modal">បោះបង់</button>
+                                                <button class="btn btn-sm btn-outline-secondary px-3" data-bs-dismiss="modal" style="border-radius: 8px;">បោះបង់</button>
                                                 <form action="{{ route('students.destroy', $student) }}" method="POST">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger px-3">លុប</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger px-3" style="border-radius: 8px;">លុប</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -665,17 +611,15 @@
             </table>
         </div>
 
-        {{-- Pagination --}}
-        @if($students->hasPages())
-        <div class="data-card-footer d-flex align-items-center justify-content-between flex-wrap gap-2 py-3 px-4 border-top">
-            <div class="text-muted" style="font-size:.8rem">
-                ទំព័រ {{ $students->currentPage() }} នៃ {{ $students->lastPage() }} (សិស្សសរុប {{ $students->total() }} នាក់)
+        {{-- Simple Numbered Pagination at the bottom right with an amber active page button --}}
+        <div class="p-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2 border-top" style="border-color: #e2e8f0 !important; background-color: #ffffff;">
+            <div class="text-muted" style="font-size: 0.82rem;">
+                បង្ហាញពី {{ $students->firstItem() ?? 0 }} ដល់ {{ $students->lastItem() ?? 0 }} នៃសិស្សសរុប {{ number_format($students->total()) }} នាក់
             </div>
             <div>
-                {{ $students->links('pagination::bootstrap-5') }}
+                {{ $students->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
         </div>
-        @endif
     @endif
 </div>
 
@@ -763,6 +707,12 @@
         searchTimer = setTimeout(() => {
             document.getElementById('filterForm').submit();
         }, 600);
+    });
+
+    // Master checkbox select-all toggle
+    document.getElementById('selectAllCheckbox')?.addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('.student-checkbox').forEach(cb => cb.checked = checked);
     });
 </script>
 @endsection

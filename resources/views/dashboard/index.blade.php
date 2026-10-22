@@ -19,153 +19,121 @@
        DASHBOARD DESIGN SYSTEM STYLES (COMPACT & KHMER LOCALIZED)
        ═══════════════════════════════════════════════════════════════ */
 
+    /* ═══════════════════════════════════════════════════════════════
+       DASHBOARD DESIGN SYSTEM STYLES (CLEAN SHADCN UX/UI, STATIC)
+       ═══════════════════════════════════════════════════════════════ */
     .dash-header-bar {
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(6px);
-        padding: 0.45rem 0.85rem;
-        border-radius: 0px !important;
-        border: 1px solid var(--border, #e2e8f0);
-        box-shadow: var(--shadow-xs, 0 1px 2px rgba(0,0,0,0.04));
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px !important;
+        padding: 0.85rem 1.25rem;
+        box-shadow: none !important;
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       DASHBOARD DESIGN SYSTEM STYLES (COMPACT & KHMER LOCALIZED)
-       ═══════════════════════════════════════════════════════════════ */
     .dash-kpi-card {
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(4px);
-        border: 1px solid var(--border, #e2e8f0);
-        border-radius: 0px !important;
-        padding: 0.38rem 0.65rem 0.32rem;
-        box-shadow: var(--shadow-xs, 0 1px 2px rgba(0,0,0,0.04));
-        transition: transform var(--transition-base, 0.2s ease), box-shadow var(--transition-base, 0.2s ease);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        box-shadow: none !important;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
-        overflow: hidden;
     }
-    .dash-kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md, 0 4px 12px rgba(0,0,0,0.08));
-    }
-    .dash-kpi-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: transparent;
-        transition: background 0.2s ease;
-    }
-    .dash-kpi-card.kpi-blue:hover::before { background: #3b82f6; }
-    .dash-kpi-card.kpi-emerald:hover::before { background: #10b981; }
-    .dash-kpi-card.kpi-amber:hover::before { background: #f59e0b; }
-    .dash-kpi-card.kpi-purple:hover::before { background: #8b5cf6; }
 
     .dash-icon-box {
-        width: 28px;
-        height: 28px;
-        border-radius: 0px !important;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px !important;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.95rem;
+        font-size: 1.05rem;
         flex-shrink: 0;
-        transition: transform 0.2s ease;
     }
-    .dash-kpi-card:hover .dash-icon-box {
-        transform: scale(1.05);
-    }
+
     .dash-stat-value {
         font-family: var(--font-heading, 'Siemreap', sans-serif);
-        font-size: 1.45rem;
-        font-weight: 800;
+        font-size: 1.85rem;
+        font-weight: 700;
         letter-spacing: -0.5px;
-        line-height: 1.1;
-        color: var(--text-dark, #0f172a);
+        line-height: 1.15;
+        color: #0f172a;
     }
 
     .dash-card {
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(4px);
-        border: 1px solid var(--border, #e2e8f0);
-        border-radius: var(--radius-md, 10px);
-        box-shadow: var(--shadow-xs, 0 1px 2px rgba(0,0,0,0.04));
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px !important;
+        box-shadow: none !important;
         overflow: hidden;
-        transition: box-shadow var(--transition-base, 0.2s ease);
     }
-    .dash-card:hover {
-        box-shadow: var(--shadow-sm, 0 2px 6px rgba(0,0,0,0.06));
-    }
+
     .dash-card-header {
-        background: rgba(255, 255, 255, 0.97);
-        border-bottom: 1px solid var(--border, #e2e8f0);
-        padding: 0.38rem 0.75rem;
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 0.85rem 1.25rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
     .dash-card-title {
         font-family: var(--font-heading, 'Siemreap', sans-serif);
         font-weight: 700;
-        font-size: 0.84rem;
-        color: var(--text-dark, #0f172a);
+        font-size: 0.9rem;
+        color: #0f172a;
         margin: 0;
         display: flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.5rem;
     }
 
     /* Financial Health Cards */
     .health-mini-card {
-        border-radius: 6px;
-        padding: 0.3rem 0.25rem;
+        border-radius: 8px;
+        padding: 0.75rem 0.5rem;
         text-align: center;
         text-decoration: none;
         display: block;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
         border: 1px solid transparent;
     }
     .health-mini-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        background-color: #f9fafb !important;
     }
     .health-mini-card.health-paid {
         background: #f0fdf4;
-        border-color: #bbf7d0;
+        border-color: #dcfce7;
         color: #166534;
     }
     .health-mini-card.health-partial {
         background: #fffbeb;
-        border-color: #fde68a;
+        border-color: #fef08a;
         color: #92400e;
     }
     .health-mini-card.health-unpaid {
         background: #fff1f2;
-        border-color: #fecdd3;
+        border-color: #ffe4e6;
         color: #9f1239;
     }
     .health-mini-card.health-overdue {
         background: #fef2f2;
-        border-color: #fecaca;
+        border-color: #fee2e2;
         color: #991b1b;
     }
 
     /* Attendance Mini Cards */
     .att-mini-box {
-        border-radius: 6px;
-        padding: 0.35rem 0.25rem;
+        border-radius: 8px;
+        padding: 0.65rem 0.5rem;
         text-align: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
         border: 1px solid transparent;
         position: relative;
     }
     .att-mini-box:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        background-color: #f9fafb !important;
     }
     .att-mini-box.att-present {
         background: #ecfdf5;
@@ -186,43 +154,37 @@
 
     /* Quick action buttons */
     .quick-action-tile {
-        background: var(--surface, #ffffff);
-        border: 1px solid var(--border, #e2e8f0);
-        border-radius: 9px;
-        padding: 0.75rem 0.45rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1rem 0.75rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0.35rem;
+        gap: 0.45rem;
         text-decoration: none;
-        transition: all 0.2s ease;
-        color: var(--text-dark, #0f172a);
+        color: #0f172a;
         height: 100%;
     }
     .quick-action-tile:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.06));
-        border-color: var(--gold, #e8a838);
-        color: var(--text-dark, #0f172a);
+        background-color: #f9fafb !important;
+        border-color: #cbd5e1;
+        color: #0f172a;
     }
     .quick-action-icon {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.15rem;
-        transition: transform 0.2s ease;
-    }
-    .quick-action-tile:hover .quick-action-icon {
-        transform: scale(1.08);
     }
 
     .student-avatar-sm {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         display: inline-flex;
         align-items: center;
@@ -258,15 +220,15 @@
 
         <div class="d-flex align-items-center gap-1.5 flex-wrap">
             @if($isAdmin)
-                <a href="{{ route('attendance.index') }}" class="btn btn-sm btn-ghost border fw-semibold d-inline-flex align-items-center gap-1 shadow-xs" style="padding: 0.25rem 0.6rem; font-size: 0.76rem;">
+                <a href="{{ route('attendance.index') }}" class="btn btn-sm btn-ghost border fw-semibold d-inline-flex align-items-center gap-1" style="padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
                     <i class="bi bi-calendar2-check text-muted"></i> វត្តមាន
                 </a>
-                <a href="{{ route('students.create') }}" class="btn btn-primary-action btn-sm shadow-sm" style="padding: 0.25rem 0.65rem; font-size: 0.76rem;">
-                    <i class="bi bi-person-plus-fill"></i> បន្ថែមសិស្សថ្មី
+                <a href="{{ route('students.create') }}" class="btn btn-primary-action btn-sm" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; border-radius: 8px;">
+                    <i class="bi bi-plus-lg me-1"></i>+ បន្ថែមសិស្ស
                 </a>
             @else
-                <a href="{{ route('attendance.index') }}" class="btn btn-primary-action btn-sm shadow-sm" style="padding: 0.25rem 0.65rem; font-size: 0.76rem;">
-                    <i class="bi bi-calendar2-check-fill"></i> កត់ត្រាវត្តមាន
+                <a href="{{ route('attendance.index') }}" class="btn btn-primary-action btn-sm" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; border-radius: 8px;">
+                    <i class="bi bi-calendar2-check-fill me-1"></i>+ កត់ត្រាវត្តមាន
                 </a>
             @endif
         </div>
@@ -277,118 +239,74 @@
              ADMINISTRATIVE DASHBOARD
         ========================================================= --}}
 
-        {{-- ROW 1: KEY PERFORMANCE INDICATORS (COMPACT) --}}
-        <div class="row g-2 mb-2">
+        {{-- ROW 1: KEY PERFORMANCE INDICATORS (SPACIOUS SHADCN/UI SUMMARY METRIC CARDS) --}}
+        <div class="row g-3 mb-4">
             {{-- Students --}}
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="dash-kpi-card kpi-blue">
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                            <span class="text-dark fw-bold" style="font-size: 0.86rem;">សិស្សសរុប</span>
-                            <div class="dash-icon-box" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
-                                <i class="bi bi-people-fill"></i>
-                            </div>
-                        </div>
-                        <div class="dash-stat-value mb-1" id="stat-total-students">{{ number_format($totalStudents) }}</div>
-                        <div class="d-flex align-items-center gap-1 flex-wrap">
-                            <span class="badge" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-check-circle-fill me-1"></i>{{ number_format($activeStudents) }} កំពុងសិក្សា
-                            </span>
-                            <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle" style="font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                {{ number_format($inactiveStudents) }} អសកម្ម
-                            </span>
+                <div class="dash-kpi-card p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.86rem; color: #64748b; font-weight: 500;">សិស្សសរុប</span>
+                        <div class="dash-icon-box" style="background: #eff6ff; color: #2563eb;">
+                            <i class="bi bi-people-fill"></i>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mt-1.5 pt-1 border-top" style="font-size: 0.75rem;">
-                        <a href="{{ route('students.index') }}" class="text-muted text-decoration-none d-inline-flex align-items-center gap-1 text-truncate" title="សិស្សដែលមិនទាន់បានចុះឈ្មោះក្នុងឆ្នាំសិក្សា">
-                            <span>គ្មានឆ្នាំ៖</span>
-                            <strong class="{{ $studentsWithoutEnrollmentCount > 0 ? 'text-warning' : 'text-dark' }}">{{ number_format($studentsWithoutEnrollmentCount) }}</strong>
-                        </a>
-                        <a href="{{ route('students.index') }}" class="text-muted text-decoration-none d-inline-flex align-items-center gap-1 text-truncate" title="សិស្សដែលមិនទាន់បានចាត់ចូលថ្នាក់">
-                            <span>គ្មានថ្នាក់៖</span>
-                            <strong class="{{ $studentsWithoutClassCount > 0 ? 'text-danger' : 'text-dark' }}">{{ number_format($studentsWithoutClassCount) }}</strong>
-                        </a>
+                    <div class="dash-stat-value mb-1" id="stat-total-students">{{ number_format($totalStudents) }}</div>
+                    <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top text-muted" style="font-size: 0.78rem; border-color: #f1f5f9 !important;">
+                        <span class="text-dark fw-medium">{{ number_format($activeStudents) }} កំពុងសិក្សា</span>
+                        <span>{{ number_format($inactiveStudents) }} អសកម្ម</span>
                     </div>
                 </div>
             </div>
 
             {{-- Active Students / New & Returning Enrollments --}}
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="dash-kpi-card kpi-emerald">
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                            <span class="text-dark fw-bold" style="font-size: 0.86rem;">ការចុះឈ្មោះសកម្ម</span>
-                            <div class="dash-icon-box" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
-                                <i class="bi bi-person-check-fill"></i>
-                            </div>
-                        </div>
-                        <div class="dash-stat-value mb-1" id="stat-active-enrollments">{{ number_format($activeEnrollments) }}</div>
-                        <div class="d-flex align-items-center gap-1 flex-wrap">
-                            <a href="{{ route('students.index', ['student_type' => 'new']) }}" class="badge text-decoration-none" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-sparkles me-1"></i>{{ number_format($newStudentsCount) }} សិស្សថ្មី
-                            </a>
-                            <a href="{{ route('students.index', ['student_type' => 'returning']) }}" class="badge text-decoration-none" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-arrow-repeat me-1"></i>{{ number_format($returningStudentsCount) }} សិស្សបន្ត
-                            </a>
+                <div class="dash-kpi-card p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.86rem; color: #64748b; font-weight: 500;">ការចុះឈ្មោះសកម្ម</span>
+                        <div class="dash-icon-box" style="background: #f0fdf4; color: #16a34a;">
+                            <i class="bi bi-person-check-fill"></i>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mt-1.5 pt-1 border-top text-muted" style="font-size: 0.75rem;">
-                        <span>ឆ្នាំសិក្សា</span>
-                        <span class="fw-semibold text-dark text-truncate">{{ $activeYear?->name ?? 'បច្ចុប្បន្ន' }}</span>
+                    <div class="dash-stat-value mb-1" id="stat-active-enrollments">{{ number_format($activeEnrollments) }}</div>
+                    <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top text-muted" style="font-size: 0.78rem; border-color: #f1f5f9 !important;">
+                        <a href="{{ route('students.index', ['student_type' => 'new']) }}" class="text-decoration-none" style="color: #16a34a; font-weight: 500;">
+                            +{{ number_format($newStudentsCount) }} សិស្សថ្មី
+                        </a>
+                        <span class="text-truncate">{{ $activeYear?->name ?? 'បច្ចុប្បន្ន' }}</span>
                     </div>
                 </div>
             </div>
 
             {{-- Classes & Academics --}}
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="dash-kpi-card kpi-amber">
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                            <span class="text-dark fw-bold" style="font-size: 0.86rem;">ថ្នាក់រៀនទាំងអស់</span>
-                            <div class="dash-icon-box" style="background: rgba(232, 168, 56, 0.15); color: #d97706;">
-                                <i class="bi bi-diagram-3-fill"></i>
-                            </div>
-                        </div>
-                        <div class="dash-stat-value mb-1" id="stat-total-classes">{{ number_format($totalClasses) }}</div>
-                        <div class="d-flex align-items-center gap-1 flex-wrap">
-                            <span class="badge bg-light text-dark border" style="font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-book me-1 text-muted"></i>{{ number_format($totalSubjects) }} មុខវិជ្ជា
-                            </span>
-                            <span class="badge bg-light text-dark border" style="font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-link-45deg me-1 text-muted"></i>{{ number_format($totalClassSubjects) }} មុខវិជ្ជាតាមថ្នាក់
-                            </span>
+                <div class="dash-kpi-card p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.86rem; color: #64748b; font-weight: 500;">ថ្នាក់រៀនទាំងអស់</span>
+                        <div class="dash-icon-box" style="background: #fffbeb; color: #d97706;">
+                            <i class="bi bi-diagram-3-fill"></i>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mt-1.5 pt-1 border-top text-muted" style="font-size: 0.75rem;">
-                        <span>រចនាសម្ព័ន្ធ</span>
-                        <a href="{{ route('classes.index') }}" class="text-decoration-none fw-semibold text-truncate ms-1" style="color: var(--gold-dark, #b45309);">គ្រប់គ្រងថ្នាក់ &rarr;</a>
+                    <div class="dash-stat-value mb-1" id="stat-total-classes">{{ number_format($totalClasses) }}</div>
+                    <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top text-muted" style="font-size: 0.78rem; border-color: #f1f5f9 !important;">
+                        <span>{{ number_format($totalSubjects) }} មុខវិជ្ជា</span>
+                        <a href="{{ route('classes.index') }}" class="text-decoration-none fw-medium" style="color: #d97706;">គ្រប់គ្រងថ្នាក់ &rarr;</a>
                     </div>
                 </div>
             </div>
 
             {{-- Staff / Employees --}}
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="dash-kpi-card kpi-purple">
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                            <span class="text-dark fw-bold" style="font-size: 0.86rem;">បុគ្គលិក &amp; គ្រូបង្រៀន</span>
-                            <div class="dash-icon-box" style="background: rgba(139, 92, 246, 0.1); color: #7c3aed;">
-                                <i class="bi bi-briefcase-fill"></i>
-                            </div>
-                        </div>
-                        <div class="dash-stat-value mb-1" id="stat-total-employees">{{ number_format($totalEmployees) }}</div>
-                        <div class="d-flex align-items-center gap-1 flex-wrap">
-                            <span class="badge" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                <i class="bi bi-check-circle-fill me-1"></i>{{ number_format($activeEmployees) }} កំពុងបម្រើការ
-                            </span>
-                            <span class="badge bg-light text-dark border" style="font-size: 0.74rem; padding: 0.15rem 0.45rem;">
-                                {{ number_format($totalTeacherAssignments) }} ចាត់តាំង
-                            </span>
+                <div class="dash-kpi-card p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span style="font-size: 0.86rem; color: #64748b; font-weight: 500;">បុគ្គលិក &amp; គ្រូបង្រៀន</span>
+                        <div class="dash-icon-box" style="background: #faf5ff; color: #9333ea;">
+                            <i class="bi bi-briefcase-fill"></i>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mt-1.5 pt-1 border-top text-muted" style="font-size: 0.75rem;">
-                        <span>បុគ្គលិក</span>
-                        <a href="{{ route('employees.index') }}" class="text-decoration-none fw-semibold text-truncate ms-1" style="color: #7c3aed;">បញ្ជីបុគ្គលិក &rarr;</a>
+                    <div class="dash-stat-value mb-1" id="stat-total-employees">{{ number_format($totalEmployees) }}</div>
+                    <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top text-muted" style="font-size: 0.78rem; border-color: #f1f5f9 !important;">
+                        <span>{{ number_format($activeEmployees) }} កំពុងបម្រើការ</span>
+                        <a href="{{ route('employees.index') }}" class="text-decoration-none fw-medium" style="color: #9333ea;">បញ្ជីបុគ្គលិក &rarr;</a>
                     </div>
                 </div>
             </div>

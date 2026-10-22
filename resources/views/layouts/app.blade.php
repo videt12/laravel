@@ -48,34 +48,34 @@
             --color-brand-900: #78350f;
 
             /* ── Brand Semantic Shortcuts ───────────────────────── */
-            --gold:         #f3b63a;
-            --gold-dark:    #d97706;
-            --gold-text:    #181b20;
+            --gold:         #f5bb41;
+            --gold-dark:    #eab308;
+            --gold-text:    #18181b;
             --gold-light:   #fef3c7;
-            --gold-subtle:  rgba(243, 182, 58, 0.15);
+            --gold-subtle:  rgba(245, 187, 65, 0.15);
 
             /* ── កន្លែងកែពណ៌ Sidebar (របារម៉ឺនុយខាងឆ្វេង - Deep Charcoal) ─────────────── */
-            --sidebar-bg:             #181b20; /* ពណ៌ផ្ទៃ Sidebar ទាំងមូល (Deep Charcoal ទំនើប និងមានរបៀប) */
-            --sidebar-header:         #181b20; /* ពណ៌ក្បាល Sidebar ខាងលើដែលមាន Logo */
-            --sidebar-border:         #262a33; /* ពណ៌បន្ទាត់ខណ្ឌ Sidebar */
-            --sidebar-text:           #9ca3af; /* ពណ៌អក្សរ Menu ធម្មតា (Muted Slate) */
+            --sidebar-bg:             #18181b; /* ពណ៌ផ្ទៃ Sidebar ទាំងមូល (Dark Charcoal #18181B) */
+            --sidebar-header:         #18181b; /* ពណ៌ក្បាល Sidebar ខាងលើដែលមាន Logo */
+            --sidebar-border:         #27272a; /* ពណ៌បន្ទាត់ខណ្ឌ Sidebar */
+            --sidebar-text:           #94a3b8; /* ពណ៌អក្សរ Menu ធម្មតា (Muted Slate) */
             --sidebar-text-hover:     #ffffff; /* ពណ៌អក្សរពេលដាក់ Mouse លើ */
             --sidebar-item-hover:     rgba(255, 255, 255, 0.06); /* ពណ៌ផ្ទៃពេលដាក់ Mouse លើ Menu */
-            --sidebar-active-bg:      #f3b63a; /* ពណ៌ផ្ទៃ Menu ដែលកំពុងជ្រើសរើស (Golden-Yellow លេចធ្លោ) */
-            --sidebar-active-text:    #181b20; /* ពណ៌អក្សរ Menu ដែលកំពុងជ្រើសរើស (Dark Charcoal ងាយស្រួលមើល) */
-            --sidebar-section-text:   #64748b; /* ពណ៌ចំណងជើងផ្នែក */
+            --sidebar-active-bg:      #f5bb41; /* ពណ៌ផ្ទៃ Menu ដែលកំពុងជ្រើសរើស (Solid Warm Yellow #F5BB41) */
+            --sidebar-active-text:    #18181b; /* ពណ៌អក្សរ Menu ដែលកំពុងជ្រើសរើស (Dark Charcoal) */
+            --sidebar-section-text:   #71717a; /* ពណ៌ចំណងជើងផ្នែក */
             --sidebar-width:          260px;
             --sidebar-collapsed-width: 68px;
 
             /* ── Topbar & Footer ────────────────────────────────── */
             --topbar-height:  60px;
             --topbar-bg:      #ffffff;
-            --topbar-border:  #e5e7eb;
+            --topbar-border:  #e2e8f0;
             --footer-bg:      #ffffff;
-            --footer-border:  #e5e7eb;
+            --footer-border:  #e2e8f0;
 
-            /* ── App Surfaces (ផ្ទៃខាងក្រោយទំព័រ - Soft Off-White) ──────── */
-            --app-bg:       #f8f9fa; /* ផ្ទៃខាងក្រោយទំព័រទាំងមូល (Soft Off-White ស្រាល ស្រួលមើល មិនចាំងភ្នែក) */
+            /* ── App Surfaces (ផ្ទៃខាងក្រោយទំព័រ - Soft Light Slate) ──────── */
+            --app-bg:       #f8fafc; /* ផ្ទៃខាងក្រោយទំព័រទាំងមូល (#F8FAFC) */
             --surface:      #ffffff; /* ពណ៌ផ្ទៃ Card ពណ៌ស */
             --surface-raised: #ffffff;
 
@@ -133,9 +133,102 @@
         }
 
         /* ─────────────────────────────────────────────────────────────
-           2. BASE & LAYOUT STRUCTURE
+           2. BASE & LAYOUT STRUCTURE (STRICT STATIC & SHADCN UX/UI)
         ───────────────────────────────────────────────────────────── */
-        *, *::before, *::after { box-sizing: border-box; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            transition: none !important;
+            animation: none !important;
+        }
+
+        :hover, :focus, :active {
+            transform: none !important;
+        }
+
+        .modal.fade, .modal.fade .modal-dialog, .collapse, .collapsing {
+            transition: none !important;
+        }
+
+        /* Flat instant background changes on hover (#F9FAFB) */
+        .dropdown-item:hover,
+        .dropdown-item:focus,
+        .table tbody tr:hover,
+        .data-table tbody tr:hover,
+        .table-row-hover:hover,
+        .nav-tabs .nav-link:hover,
+        .list-group-item-action:hover {
+            background-color: #f9fafb !important;
+            color: #0f172a !important;
+        }
+
+        /* Clean Modern Spacious White Cards (shadcn/ui style) */
+        .card,
+        .dash-card,
+        .data-card {
+            background-color: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+        }
+
+        /* Primary Action Buttons: Solid Warm Amber/Yellow (#F59E0B) with dark text (#111827) */
+        .btn-primary,
+        .btn-primary-action,
+        .btn-gold {
+            background-color: #f59e0b !important;
+            border: 1px solid #f59e0b !important;
+            color: #111827 !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+        }
+        .btn-primary:hover,
+        .btn-primary-action:hover,
+        .btn-gold:hover,
+        .btn-primary:focus,
+        .btn-primary-action:focus,
+        .btn-gold:focus,
+        .btn-primary:active,
+        .btn-primary-action:active,
+        .btn-gold:active {
+            background-color: #d97706 !important;
+            border-color: #d97706 !important;
+            color: #111827 !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        /* Numbered pagination with amber active page button */
+        .pagination {
+            margin-bottom: 0 !important;
+            gap: 4px;
+        }
+        .pagination .page-item .page-link {
+            color: #475569 !important;
+            border: 1px solid #e2e8f0 !important;
+            background-color: #ffffff !important;
+            border-radius: 6px !important;
+            padding: 0.35rem 0.75rem !important;
+            font-size: 0.85rem !important;
+            font-weight: 500 !important;
+            box-shadow: none !important;
+        }
+        .pagination .page-item .page-link:hover {
+            background-color: #f9fafb !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #f59e0b !important;
+            border-color: #f59e0b !important;
+            color: #111827 !important;
+            font-weight: 700 !important;
+        }
+        .pagination .page-item.disabled .page-link {
+            color: #94a3b8 !important;
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+        }
 
         html {
             font-size: 16.5px; /* Base 16.5px: អក្សរខ្មែររីកធំល្មមសមសួនទូទាំងប្រព័ន្ធ ងាយស្រួលមើល មិនចង្អៀតជើងអក្សរ */
@@ -2397,6 +2490,157 @@
         .flatpickr-input.is-invalid {
             border-color: #dc2626 !important;
             box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15) !important;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SHADCN-INSPIRED CLEAN, SPACIOUS, STATIC UX/UI SYSTEM
+           Strict zero animations, pure white cards, Warm Amber (#F59E0B)
+           ═══════════════════════════════════════════════════════════════ */
+        .app-main-wrapper,
+        .app-main-wrapper *,
+        .app-content,
+        .card,
+        .data-card,
+        .toolbar-card,
+        .kpi-card,
+        .btn,
+        .table,
+        .table tr,
+        .table td,
+        .table th,
+        .dropdown-menu,
+        .dropdown-item,
+        .modal,
+        .modal-dialog,
+        .modal-content,
+        .nav-tabs,
+        .tab-pane,
+        .form-control,
+        .form-select,
+        .badge {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+
+        /* Instant flat hover backgrounds without lift, movement or scaling */
+        .table tbody tr:hover,
+        .data-table tbody tr:hover,
+        .table-row-hover:hover {
+            background-color: #f9fafb !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus {
+            background-color: #f9fafb !important;
+            color: #0f172a !important;
+        }
+
+        /* Pure white cards with 1px border (#E2E8F0) and 12px rounded corners */
+        .card,
+        .data-card,
+        .toolbar-card,
+        .dash-card,
+        .dash-kpi-card,
+        .stat-card,
+        .kpi-card {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        .card:hover,
+        .data-card:hover,
+        .dash-card:hover,
+        .dash-kpi-card:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Primary Action Buttons: Solid Warm Amber/Yellow (#F59E0B) with dark/black text (#111827) */
+        .btn-primary-action,
+        .btn-gold,
+        .btn-primary {
+            background: #f59e0b !important;
+            border: 1px solid #f59e0b !important;
+            color: #111827 !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        .btn-primary-action:hover,
+        .btn-gold:hover,
+        .btn-primary:hover,
+        .btn-primary-action:focus,
+        .btn-gold:focus,
+        .btn-primary:focus {
+            background: #d97706 !important;
+            border-color: #d97706 !important;
+            color: #111827 !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        /* Clean Outline Action Buttons */
+        .btn-outline-white,
+        .btn-outline-secondary,
+        .btn-outline-action {
+            background-color: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            color: #334155 !important;
+            font-weight: 500 !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+        }
+        .btn-outline-white:hover,
+        .btn-outline-secondary:hover,
+        .btn-outline-action:hover {
+            background-color: #f9fafb !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+
+        /* Numbered pagination with amber active button */
+        .pagination {
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            margin-bottom: 0 !important;
+        }
+        .pagination .page-item.active .page-link,
+        .pagination .page-link.active,
+        .page-square.active {
+            background-color: #f59e0b !important;
+            border-color: #f59e0b !important;
+            color: #111827 !important;
+            font-weight: 700 !important;
+            border-radius: 6px !important;
+            box-shadow: none !important;
+        }
+        .pagination .page-link {
+            color: #334155 !important;
+            border: 1px solid #e2e8f0 !important;
+            background-color: #ffffff !important;
+            border-radius: 6px !important;
+            padding: 0.35rem 0.75rem !important;
+            font-size: 0.84rem !important;
+            transition: none !important;
+            box-shadow: none !important;
+        }
+        .pagination .page-link:hover {
+            background-color: #f9fafb !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+        .pagination .page-item.disabled .page-link {
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+            color: #94a3b8 !important;
+            opacity: 0.6 !important;
         }
     </style>
 
