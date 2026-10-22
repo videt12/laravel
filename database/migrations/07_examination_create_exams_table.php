@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('exam_type_id')->nullable();
+            $table->unsignedBigInteger('academic_year_id')->nullable();
+            $table->unsignedBigInteger('school_term_id')->nullable();
+            $table->string('name')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
