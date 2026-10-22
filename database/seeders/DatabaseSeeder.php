@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
 
             // ─── LAYER 4: Employees & Staff Data ──────────────────────
             EmployeesSampleSeeder::class,
+
+            // ─── LAYER 5: Students Sample Data ────────────────────────
+            StudentsSampleSeeder::class,
         ]);
     }
 }
