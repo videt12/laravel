@@ -1,6 +1,7 @@
 FROM serversideup/php:8.3-fpm-nginx
 
 ENV AUTORUN_ENABLED=true \
+    AUTORUN_LARAVEL_MIGRATION_SKIP_DB_CHECK=true \
     SSL_MODE=off \
     PHP_OPCACHE_ENABLE=1
 
