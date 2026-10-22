@@ -228,9 +228,6 @@
             <table class="data-table align-middle w-100" style="border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="width: 44px; text-align: center;">
-                            <input type="checkbox" class="form-check-input" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;" title="ជ្រើសរើសទាំងអស់">
-                        </th>
                         <th>ឈ្មោះបុគ្គលិក</th>
                         <th>លេខសម្គាល់</th>
                         <th>ផ្នែក / ដេប៉ាតឺម៉ង់</th>
@@ -270,11 +267,6 @@
                         $textColor = $isAct ? '#15803d' : ($isLeave ? '#b45309' : '#475569');
                     @endphp
                     <tr class="table-row-hover">
-                        {{-- Checkbox --}}
-                        <td style="text-align: center;">
-                            <input type="checkbox" class="form-check-input" style="border-radius: 4px; border-color: #cbd5e1; cursor: pointer;">
-                        </td>
-
                         {{-- Employee Avatar + Name (Compact 36px circular avatar like student) --}}
                         <td>
                             <div class="d-flex align-items-center gap-2.5">
