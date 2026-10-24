@@ -4,11 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class GradeScalesSeeder extends Seeder
 {
     public function run(): void
     {
+        if (! Schema::hasTable('grade_scales') || ! Schema::hasColumn('grade_scales', 'grade')) {
+            $this->command?->warn('grade_scales table or grade column missing. Skipping seeding.');
+            return;
+        }
+
         // Standard A-F grading scale (common in international schools)
         $scales = [
             ['name' => 'ល្អប្រសើរ',  'min_percentage' => 90.00, 'max_percentage' => 100.00, 'grade' => 'A+', 'gpa_point' => 4.00],

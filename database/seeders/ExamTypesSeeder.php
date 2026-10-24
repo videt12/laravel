@@ -4,11 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ExamTypesSeeder extends Seeder
 {
     public function run(): void
     {
+        if (! Schema::hasTable('exam_types') || ! Schema::hasColumn('exam_types', 'name')) {
+            $this->command?->warn('exam_types table or name column missing. Skipping seeding.');
+            return;
+        }
+
         $types = [
             ['name' => 'តេស្តប្រចាំមេរៀន',           'description' => 'ការវាយតម្លៃខ្លីៗលើមេរៀននីមួយៗ'],
             ['name' => 'ការប្រឡងពាក់កណ្តាលឆមាស',        'description' => 'ការប្រឡងនៅពាក់កណ្តាលឆមាសសិក្សា'],
